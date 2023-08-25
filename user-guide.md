@@ -18,7 +18,7 @@ Harvard Museum of Natural History
 
 ---
 
-1  Introduction
+#  Introduction
 
 In the early days of Amateur Packet Radio, it was necessary to use a “Terminal Node Controller” (TNC)
 with specialized hardware. Those days are gone.  You can now get better results at lower cost by
@@ -54,30 +54,7 @@ such as Outpost PM.
 
 Starting with version 1.6, FX.25 forward error correction (FEC) is supported.
 
-Page 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1.1  FX.25 - Forward Error Correction (FEC)
+## FX.25 - Forward Error Correction (FEC)
 
 The AX.25 frame, used by APRS and Amateur Packet Radio, is not very tolerant of low quality radio links.
 The sender adds a 16 bit “Frame Check Sequence” (FCS) computed from the rest of the frame.  The
@@ -166,29 +143,7 @@ This can be used with all of your favorite applications such as APRSIS32,  UI-Vi
 YAAC,  UISS,  Linux AX25,  SARTrack,  RMS Express, Outpost PM, and many others.    Imagine the
 possibilities for low power transmitters or much more reliable Emergency Communications!
 
-Page 2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2  Features
+# Features
 
 GPS Receiver,
 Weather Station,
@@ -390,7 +345,7 @@ Page 5
 
 
 
-3  Connection to Radio
+# Connection to Radio
 
 Receive Audio In:
 
@@ -532,7 +487,7 @@ Page 7
 
 
 
-3.1  Don’t have a serial port?
+## 3.1  Don’t have a serial port?
 
 Maybe you do but don’t know about it.
 
@@ -543,7 +498,7 @@ parallel printer port displayed in the Device Manager:
 The connectors exist on the motherboard.  It was only necessary to add appropriate cables to bring
 them out to the rear panel.
 
-3.2  For Best Results
+## 3.2  For Best Results
 
 For receiving:
 
@@ -661,7 +616,7 @@ Page 9
 
 
 
-4  Installation & Operation – Microsoft Windows XP or later
+# 4  Installation & Operation – Microsoft Windows XP or later
 
 If using Linux, skip section 4 and proceed to section 5.
 If using OS X, skip section 4 and proceed to section 6.
@@ -731,7 +686,7 @@ Page 10
 
 Look for the new direwolf.exe icon on your desktop.
 
-4.1  Run Dire Wolf
+## 4.1  Run Dire Wolf
 
 Double click on the desktop icon:
 
@@ -802,7 +757,7 @@ computers.  You could have a Linux computer in the “shack” running Dire Wolf
 could connect to it from a Windows Laptop, running APRSIS 32, in another part of the house.  In this
 case you would specify the name or address of the first computer instead of using “localhost.”
 
-4.2  Select better font
+## 4.2  Select better font
 
 You might need to change the font for best results.  Right-click on the title bar and pick Properties from
 the pop-up menu.      Select the Font tab.   I like Consolas, because it is clean and easy to read but you
@@ -831,12 +786,12 @@ the “-u”  (lower case u) command line option.
 
 For more details, see section called UTF-8 Characters.
 
-4.3  AGW TCPIP socket interface
+## 4.3  AGW TCPIP socket interface
 
 Dire Wolf provides a server function with the “AGW TCPIP Socket Interface” on default port 8000.  Up to
 3 different client applications can connect at the same time.
 
-4.3.1  APRSISCE/32
+### 4.3.1  APRSISCE/32
 
 1.  First, start up Dire Wolf.
 2.  Run APRSISCE/32.
@@ -872,7 +827,7 @@ Page 14
 
 
 
-4.3.2  Ui-View
+### 4.3.2  Ui-View
 
 1.  First, start up Dire Wolf.
 2.  Run UI-View32
@@ -881,7 +836,7 @@ Page 14
 5.  Take defaults of localhost and 8000.  Click on OK.
 6.  Click on OK for Comms Setup.
 
-4.3.3  YAAC (Yet Another APRS Client)
+### 4.3.3  YAAC (Yet Another APRS Client)
 
 1.  First, start up Dire Wolf.
 2.  Run YAAC
@@ -897,7 +852,7 @@ the same computer.
 
 configured.
 
-4.3.4  SARTrack
+### 4.3.4  SARTrack
 
 1.  First, start up Dire Wolf.
 2.  Run SARTrack.
@@ -928,7 +883,7 @@ Page 15
 
 
 
-4.4  Kiss TNC emulation – serial port
+## 4.4  Kiss TNC emulation – serial port
 
 Dire Wolf can act like a packet radio TNC using the KISS protocol by serial port.
 
@@ -942,7 +897,7 @@ port.
 
 Here are detailed configuration steps for a couple popular applications.
 
-4.4.1  APRSISCE/32
+### 4.4.1  APRSISCE/32
 
 1.  First start up Dire Wolf.
 2.  Run APRSISCE/32.
@@ -959,7 +914,7 @@ seems to be fine. Keep defaults of Party:None, Data:8, and Stop:1
 
 8.  Finally click on “Accept.”.
 
-4.4.2  UI-View32
+### 4.4.2  UI-View32
 
 1.  First, start up Dire Wolf.
 2.  Run UI-View32
@@ -968,7 +923,7 @@ seems to be fine. Keep defaults of Party:None, Data:8, and Stop:1
 5.  Clear all of the “Into KISS” and “Exit KISS” fields then click the OK button.
 6.  Click on OK for Comms Setup.
 
-4.4.3  YAAC (Yet Another APRS Client)
+### 4.4.3  YAAC (Yet Another APRS Client)
 
 1.  First, start up Dire Wolf.
 2.  Run YAAC
@@ -998,13 +953,13 @@ Page 16
 
 9.  For Command to enter KISS mode, pick KISS-only.
 
-4.5  Kiss TNC emulation – network
+## 4.5  Kiss TNC emulation – network
 
 Dire Wolf can also use the KISS protocol over a network connection with default port 8001.
 
 Here are detailed configuration steps for a couple popular applications.
 
-4.5.1  Winlink / RMS Express
+### 4.5.1  Winlink / RMS Express
 
 1.  First start up Dire Wolf.
 2.  Run Winlink Express.
@@ -1018,7 +973,7 @@ In the “Packet … Session” window, click on “Settings.”
 Be sure model is set to NORMAL.  ACKMODE will cause an error.
 Change the host/port appropriately if Dire Wolf and Winlink are running on different computers.
 
-4.5.2  APRSISCE/32
+### 4.5.2  APRSISCE/32
 
 7.  First start up Dire Wolf.
 8.  Run APRSISCE/32.
@@ -1066,7 +1021,7 @@ This is usually harmless.
 
 This is for a KISS-only TNC without a command interpreter.  This is the preferred setting.
 
-4.6  Build Dire Wolf from source on Windows (optional)
+## 4.6  Build Dire Wolf from source on Windows (optional)
 
 The Windows version contains prebuilt executable files so you don’t need to build it from source.  If you
 want to build it from source, here is how to do it.
@@ -1194,7 +1149,7 @@ Page 19
 
 
 
-5  Installation & Operation – Linux
+# 5  Installation & Operation – Linux
 
 Depending on your particular operating system, you might be able to install direwolf with “yum install”
 or “apt-get install.”   The packaging process will lag behind so you would probably end up with an
@@ -1203,7 +1158,7 @@ outdated version.   If you want the most recent version you will have to build f
 Special considerations for the Raspberry Pi are covered in a separate document.   If you are using the
 Raspberry Pi, or other similar single board computer, see separate “Raspberry Pi APRS” document.
 
-5.1  Install Prerequisites
+## 5.1  Install Prerequisites
 
 A standard operating system install will probably have the gcc compiler and “make” pre-installed.  Clang
 can also be used as an alternative to gcc.
@@ -1269,7 +1224,7 @@ Page 20
 
 
 
-5.1.1  Optional Step:  hamlib support
+### 5.1.1  Optional Step:  hamlib support
 
 Dire Wolf can use “hamlib” for more flexible PTT control.   Most people will not need this.  It can be
 complicated and problematic.  Skip this section unless you absolutely need this option.
@@ -1302,7 +1257,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 You will probably want to put this in your ~/.profile, or similar, file that gets run when you log in.
 
-5.2  Download Dire Wolf source code
+## 5.2  Download Dire Wolf source code
 
 Follow these steps to clone the git repository and checkout the desired version.
 
@@ -1345,7 +1300,7 @@ Page 21
 
  git checkout dev
 
-5.3  Start Build & Install
+## 5.3  Start Build & Install
 
 Note that version 1.6 is different than earlier versions.  It now uses “cmake” for greater portability
 across different platforms.  First create a directory for building outside of the source tree.
@@ -1366,7 +1321,7 @@ cmake -DUNITTEST=1 ..
 
 cmake -DCMAKE_BUILD_TYPE=DEBUG ..
 
-5.4  Finish build and install
+## 5.4  Finish build and install
 
 make –j4
 
@@ -1550,7 +1505,7 @@ If you are installing from a DEB  or RPM package,  /usr/bin will probably be use
 /usr/local/bin.   You should find the sample “direwolf.conf” file along with the documentation.  Copy it
 to your home directory or other desired location.
 
-5.5  Select UTF-8 character set
+## 5.5  Select UTF-8 character set
 
 For best results, you will want to be using the UTF-8 character set.   Verify this by examining the LANG
 environment variable.
@@ -1586,7 +1541,7 @@ fr_CH.utf8
 
  See section called UTF-8 Characters for more details.
 
-5.6  Run Dire Wolf
+## 5.6  Run Dire Wolf
 
 Run “direwolf” from the command line.
 
@@ -1594,13 +1549,13 @@ The rest of this section describes how to use Dire Wolf with other Linux packet 
 Xastir.  If you are not interested in using it with some other application at this time, skip ahead to
 section 7, Basic Operation.
 
-5.7  AGW TCPIP socket interface
+## 5.7  AGW TCPIP socket interface
 
 Dire Wolf provides a server function with the “AGW TCPIP Socket Interface” on default port 8000.  Up to
 3 different client applications can attach at the same time.   You can increase the number by modifying
 this line in source file server.c:    #define MAX_NET_CLIENTS 3
 
-5.7.1  Xastir
+### 5.7.1  Xastir
 
 1.  Run “direwolf” from a bash shell window.
 2.  Run Xastir from another window.
@@ -1618,7 +1573,7 @@ You might notice that the “Configure AGWPE” option for “Digipeat?” is gr
 protocol does not have the ability to set the “has been repeated” bits in the “via” fields of the AX.25
 protocol.  You can overcome this restriction by using the KISS TNC interface.
 
-5.8  Kiss TNC emulation – serial port
+## 5.8  Kiss TNC emulation – serial port
 
 Dire Wolf can act like a packet radio TNC speaking the KISS protocol over a pseudo terminal.
 
@@ -1671,7 +1626,7 @@ device number making it difficult for automatic connection by other applications
 problematic in other ways.   Use the AGW or KISS network interface if your application supports
 it.
 
-5.8.1  Xastir
+### 5.8.1  Xastir
 
 1.  Run “direwolf -p” from a bash shell window.
 2.  Run Xastir from another window.
@@ -1686,7 +1641,7 @@ it.
 8.  Click the “Close” button.
 9.  Watch stations appear on the map.
 
-5.8.2  Linux AX25
+### 5.8.2  Linux AX25
 
 Dire Wolf can be used with Linux AX25 instead of a physical TNC.  First install ax25-tools.  On Debian /
 Ubuntu / Raspbian, it might be as simple as:
@@ -1803,7 +1758,7 @@ might see something like this for a ping command to one of the 44.x.x.x addresse
   010:  cd 00 03 00 cc 07 04 00 01 ae 84 64 9e a6 b4 1e  ...........d....
   020:  2c 38 04 76 00 00 00 00 00 00 00 2c 38 04 78     ,8.v.......,8.x
 
-5.8.2.1  Unexpected transmissions
+#### 5.8.2.1  Unexpected transmissions
 
 Why might you transmitting apparent trash when no beacons were configured?  The issue is that if you
 enable a TCP/IP address on your Linux ax? interface, broadcasting programs like Samba, Avahi (Bonjour),
@@ -1814,7 +1769,7 @@ broadcast traffic before it hits the ax? interface.
 You can find a lot of good information on Linux AX.25 here:
 http://www.trinityos.com/HAM/CentosDigitalModes/hampacketizing-centos.html
 
-5.9  Automatic Start Up After Reboot
+## 5.9  Automatic Start Up After Reboot
 
 You might want your TNC / application server / digipeater to start up automatically after a reboot.  This
 often causes confusion as there are many ways to do this.   You will find some discussions in the forums
@@ -1919,7 +1874,7 @@ Page 29
 
 
 
-6  Macintosh OS X
+# 6  Macintosh OS X
 
 A port to the Macintosh was provided by Robert, KK5VD for version 1.3.  This was updated a little for
 using “cmake” with direwolf 1.6.
@@ -1935,7 +1890,7 @@ version)  Development/Command line tools.
 Installation of Macports package manager is required as the dependencies within the makefile
 are structured for it.
 
-6.1  Install Xcode/Command line tools.
+## 6.1  Install Xcode/Command line tools.
 
  Xcode can be found on Apple’s Developer website.  You will need an ID and password to gain access.
 
@@ -1960,7 +1915,7 @@ sudo xcode-select -s /Library/Developer/CommandLineTools
 
 At the prompt enter your password. (You must have admin rights).
 
-6.2  Install Macports
+## 6.2  Install Macports
 
 Install macports package manager from this URL:   https://www.macports.org/install.php
 
@@ -1992,7 +1947,7 @@ Page 30
 
 
 
-6.3  Install Support tools and PortAudio Library.
+## 6.3  Install Support tools and PortAudio Library.
 
 From the command line, enter the following:
 
@@ -2018,7 +1973,7 @@ cmake
 
 of the library. Not sure why we want this.
 
-6.4  Compiling Direwolf.
+## 6.4  Compiling Direwolf.
 
 From the command line, get the source code:
 
@@ -2079,7 +2034,7 @@ Page 31
 
 
 
-6.5  Read the instructions to configure direwolf.conf file.
+## 6.5  Read the instructions to configure direwolf.conf file.
 
 The configuration file is located in either the current directory path or the HOME directory.
 
@@ -2147,7 +2102,7 @@ Page 32
 
 
 
-6.6  Running direwolf.
+## 6.6  Running direwolf.
 
 From the command line enter.
 
@@ -2160,13 +2115,13 @@ i.e.   ~/direwolf.conf
 There are a number of command line parameter available to the user.  These are listed later in this User
 Guide.
 
-6.7  Read the rest of the User Guide.
+## 6.7  Read the rest of the User Guide.
 
 This should answer most of your questions.
 
 If something is missing or unclear post a question on the discussion group.
 
-6.8  In case of difficulties
+## 6.8  In case of difficulties
 
 If you are having Mac-specific issues, post your question to this discussion group:
 
@@ -2195,7 +2150,7 @@ Page 33
 
 
 
-7  Basic Operation
+# 7  Basic Operation
 
 Dire Wolf is not an interactive application.  It has no graphical user interface.  It is meant to be a
 replacement for a physical TNC used by other applications.  It has a dumb terminal output so you can
@@ -2204,7 +2159,7 @@ watch what is going on for troubleshooting.
 The exact appearance will vary depending on the version you are using.  Some of these illustrations
 might be from an earlier version and look slightly different than the current version.
 
-7.1  Start up configuration information
+## 7.1  Start up configuration information
 
 You should see something like this for the Windows version:
 
@@ -2237,7 +2192,7 @@ It starts with:
   A reminder that serial port KISS is off by default.
   Port numbers for use by client applications.
 
-7.2  Information for receiving and transmitting
+## 7.2  Information for receiving and transmitting
 
 Different types of information are color coded:
 
@@ -2438,7 +2393,7 @@ The second line is the location and optional speed and direction of travel.
 
 The final line has any comment or weather information.
 
-7.3  Periodic audio device statistics
+## 7.3  Periodic audio device statistics
 
 This can be a useful troubleshooting tool if packets are not being decoded as expected.   Is received
 audio getting to the decoder?  Is the audio interface producing the proper sample rate?
@@ -2581,7 +2536,7 @@ Page 42
 
 
 
-8  Data Rates
+# 8  Data Rates
 
 Packet radio can be sent over many different speeds and modulation methods.  Here is a brief overview
 that might help clear up some of the confusion.
@@ -2590,7 +2545,7 @@ The AX.25 and APRS specifications say nothing about the type of modem.  In pract
 the most common for VHF / UHF FM.   9600 baud is also standardized, widely available, and gaining in
 popularity.
 
-8.1  Bits per Second (bps) vs. Baud
+## 8.1  Bits per Second (bps) vs. Baud
 
 The terms “Bits per Second” (bps) and Baud are often used interchangeably because they are often the
 same number.
@@ -2600,7 +2555,7 @@ shift keying a “symbol” represents a single bit so the numbers are the same.
 modulation techniques we can send multiple bits at the same time.  In this case, bits per second will be
 some multiple of the Baud.
 
-8.2  1200 bps
+## 8.2  1200 bps
 
 This is the original method from when packet radio got started about 30 years ago and still the most
 popular.  It is based on the Bell 202 standard which switches between 1200 and 2200 Hz tones to
@@ -2608,7 +2563,7 @@ represent the two signal states.  This is called Audio Frequency Shift Keying (A
 implement, and should work with any transceiver designed for voice.    It isn’t very fussy about the audio
 amplifier passband characteristics so you can simply use the microphone and speaker connections.
 
-8.3  300 bps
+## 8.3  300 bps
 
 Below 28 MHz, we are legally limited to 300 baud data (here, maybe different in other countries).  HF
 operation typically uses AFSK with a difference of 200 Hz between the two tones.  When AFSK is sent
@@ -2645,7 +2600,7 @@ Others… ?
 
 Google for “hf aprs” for many discussions on this topic.
 
-8.4  9600 bps
+## 8.4  9600 bps
 
 Rather than converting the digital data to audio, it is also possible to use the digital signal for direct FSK
 on the RF carrier.  Here are some early designs from the previous century.
@@ -2748,7 +2703,7 @@ Instead of a nice horizontal line, it droops back to the center because the lowe
 You can go faster if your radio and soundcard have enough bandwidth.   For more discussion, see
 related document   Going-beyond-9600-baud.pdf.
 
-8.5  2400 bps
+## 8.5  2400 bps
 
 There are different – and incompatible – ways to get 2400 bits per second through a voice radio.
 
@@ -2799,7 +2754,7 @@ Dire Wolf version 1.6 now compatible with the MFJ-2400 and possibly the others m
 
 For more information, see the accompanying document, 2400-4800-PSK-for-APRS-Packet-Radio.pdf.
 
-8.6  4800 bps
+## 8.6  4800 bps
 
 There are even more ways to get 4800 bits/second.
 
@@ -2839,7 +2794,7 @@ Page 46
 
 For more information, see the accompanying document, 2400-4800-PSK-for-APRS-Packet-Radio.pdf.
 
-8.7  AIS Reception - new in 1.6
+## 8.7  AIS Reception - new in 1.6
 
 AIS is an international system for tracking ships.  It uses VHF FM Marine Radio channels:
 
@@ -2964,7 +2919,7 @@ Page 48
 
 
 
-9  Configuration File & command line options
+# 9  Configuration File & command line options
 
 The default configuration provides standard 1200 baud AFSK reception and will be adequate for many
 people.  Those desiring more features and flexibility can change the operation by editing the
@@ -3003,7 +2958,7 @@ But this not equivalent because device names are case sensitive.
 
 PTT /dev/TTYs0 RTS
 
-9.1  Audio Device
+## 9.1  Audio Device
 
 Often the system’s primary, maybe only, audio device is used.
 
@@ -3167,7 +3122,7 @@ Page 50
 
 
 
-9.1.1  Audio Device Selection – All Platforms
+### 9.1.1  Audio Device Selection – All Platforms
 
 A radio channel (or pair of channels when using stereo) normally uses the same physical interface for
 both input (receive) and output (transmit).   In this case, it can be listed once, in the ADEVICE
@@ -3206,7 +3161,7 @@ standard input.
 In both cases, the audio streams must be 16 bit signed little endian.  You must make sure that the
 number of samples per second agree for the digital audio source and in the Dire Wolf configuration.
 
-9.1.2  Audio Device selection - Windows
+### 9.1.2  Audio Device selection - Windows
 
 When Dire Wolf starts up, it displays the available audio devices.
 
@@ -3259,7 +3214,7 @@ Many people will simply use the default device and won’t have to worry about t
 
 Mono operation (one channel per device) is assumed if not specified.
 
-9.1.3  Audio Device selection – Linux ALSA
+### 9.1.3  Audio Device selection – Linux ALSA
 
 Linux ALSA audio devices are much more flexible and therefore more complicated and confusing.  Here
 is the simplified version that will be appropriate in most cases.
@@ -3435,7 +3390,7 @@ Page 54
 
 You might need to use "sudo alsactl restore" to make sure proper sound levels are always restored.
 
-9.1.4  Audio Device selection – Mac OS X
+### 9.1.4  Audio Device selection – Mac OS X
 
 The Macintosh version uses Port Audio.   The audio device names may contain spaces.  If they do, the
 parts with spaces must be quoted so we now which spaces are part of the names and which spaces
@@ -3445,7 +3400,7 @@ ADEVICE  "USB Audio Codec:6"  "USB Audio Codec:5"
 
 When Dire Wolf starts up, you should see a list of the audio devices available.
 
-9.1.5  Audio Device properties
+### 9.1.5  Audio Device properties
 
 Two options are available.  They apply to the most recent ADEVICEn command.
 
@@ -3475,7 +3430,7 @@ allowing use of two radio channels on one soundcard.
 People find “ACHANNELS” confusing because it is too similar to “CHANNEL.”   Would it be better to use
 something more distinct such as “STEREO?”
 
-9.1.6  Use with Software Defined Radios
+### 9.1.6  Use with Software Defined Radios
 
 Page 55
 
@@ -3506,7 +3461,7 @@ Page 55
 When using software defined radios (SDR), the audio will be coming from another application rather
 than a “soundcard.”
 
-9.1.6.1  gqrx
+#### 9.1.6.1  gqrx
 
 Gqrx (2.3 and later) has the ability to send streaming audio through a UDP socket to another application
 for further processing.   As explained in http://gqrx.dk/doc/streaming-audio-over-udp, select the
@@ -3538,7 +3493,7 @@ direwolf -n 1 -r 48000 -b 16 udp:7355
 Note that these command line options apply only to the first audio device (ADEVICE0) and the first
 channel (CHANNEL 0).
 
-9.1.6.2  rtl_fm
+#### 9.1.6.2  rtl_fm
 
 Other SDR applications might produce audio on stdout so it is convenient to pipe into the next
 application.  In this example, the final “-“ means read from stdin.
@@ -3708,7 +3663,7 @@ The companion document,  Raspberry-Pi-SDR-IGate.pdf , goes into more detail abou
 error for the cheaper devices and how to deal with it.  Most of the information applies to other Linux
 systems, not just the Raspberry Pi.
 
-9.1.6.3  SDR#
+#### 9.1.6.3  SDR#
 
 The SDR# website doesn’t seem to have any documentation on how to use the software.  They just
 point to a Google search:
@@ -3905,7 +3860,7 @@ The lines of interest have been highlighted in red.
 
 You should now be able to decode the packets you hear.
 
-9.1.6.4  Gnu Radio – multiple simultaneous channels
+#### 9.1.6.4  Gnu Radio – multiple simultaneous channels
 
 Here is a great tip from the forum, posted by N6BA.   Thanks, Jeff!!!
 
@@ -4032,7 +3987,7 @@ Page 64
 
 
 
-9.1.6.5  SDR Troubleshooting
+#### 9.1.6.5  SDR Troubleshooting
 
 If you can hear packets but they are not being decoded, try adding “-a 10” to the command line.  This
 will print out the audio sample rate and level each 10 seconds.   In this example,  we see that audio is
@@ -4092,7 +4047,7 @@ Page 65
 
 
 
-9.2  Radio channel configuration
+## 9.2  Radio channel configuration
 
 As mentioned above you can have up to six radio channels.   Specify options for each channel like this:
 
@@ -4104,7 +4059,7 @@ CHANNEL 1
 
 Each of the following MYCALL, MODEM, PTT, and so on, applies to the most recent CHANNEL command.
 
-9.2.1  Radio channel – MYCALL
+### 9.2.1  Radio channel – MYCALL
 
 Multiple radio channels can use the same or different station identifiers.  This is required for beaconing
 or digipeating.  Example:
@@ -4114,7 +4069,7 @@ MYCALL  WB2OSZ-5
 The AX.25 specification requires that the call is a maximum of 6 upper case letters and digits.   The
 substation id (SSID), if specified, must be in the range of 1 to 15.
 
-9.2.2  Radio channel - Modem configuration , general form
+### 9.2.2  Radio channel - Modem configuration , general form
 
 Each radio channel can be configured separately for different speeds and modem properties.   The
 general form of the configuration option is:
@@ -4293,7 +4248,7 @@ V26B is compatible with MFJ-
 Note:  The @ and + options are mutually exclusive.  Both can’t be used at the same time on the same
 channel.
 
-9.2.3  Radio channel - Modem configuration  for 1200 baud
+### 9.2.3  Radio channel - Modem configuration  for 1200 baud
 
 The default configuration is 1200 baud, AFSK with 1200 & 2200 Hz tones for VHF FM use.   If you omit
 the configuration, the default is the same as using either one of these:
@@ -4331,7 +4286,7 @@ Both send and receive must use the same speed and modulation type.  In special s
 satellite, you might want to receive 9600 baud and transmit 1200 baud.  In this case you would need to
 use two different channels, one for transmit, and one for receive.
 
-9.2.4  Radio channel - Modem configuration  for 300 baud HF
+### 9.2.4  Radio channel - Modem configuration  for 300 baud HF
 
 The following are equivalent suitable configurations for 300 baud HF SSB operation using the popular
 1600 / 1800 Hz tone pair.
@@ -4418,7 +4373,7 @@ de-emphasis that causes the two tone amplitudes to be way out of balance.
 Running several demodulators in parallel can consume a lot of CPU time.  You will probably want to use
 the “/n” option in this case to reduce the audio sample rate and CPU load.
 
-9.2.5  Radio channel - Modem configuration  for 9600 baud
+### 9.2.5  Radio channel - Modem configuration  for 9600 baud
 
 K9NG / G3RUH style baseband with scrambling is used with there are no AFSK tones specified:
 
@@ -4474,7 +4429,7 @@ the signal so it is not usable.
 
 For more information on this mode, see  Going-Beyond-9600-baud.pdf.
 
-9.2.6  Radio channel - Modem configuration  for 2400 bps
+### 9.2.6  Radio channel - Modem configuration  for 2400 bps
 
 K9NG / G3RUH style baseband with scrambling is used with there are no AFSK tones specified:
 
@@ -4486,7 +4441,7 @@ MODEM 2400 V26B
 
 For more details on this mode, see  2400-4800-PSK-for-APRS-Packet-Radio.pdf.
 
-9.2.7  Radio Channel - Allow frames with bad CRC
+### 9.2.7  Radio Channel - Allow frames with bad CRC
 
 Normally we want to reject any received frame if the CRC is not perfect.   Dire Wolf can optionally try to
 fix a small number of corrupted bits.   “Fix” is probably too strong of a word.  It’s really guessing  and
@@ -4567,7 +4522,7 @@ Only error-free frames are digipeated or passed along to an APRTS-IS server.  Pr
 corrupt data would not be acting responsibly.  Note that these frames are passed along to attached
 applications.  If they pass along data to someone else, it could be corrupt.
 
-9.2.8  Radio channel – DTMF Decoder
+### 9.2.8  Radio channel – DTMF Decoder
 
 A DTMF (“Touch Tone”) decoder can be enabled, for the current channel, with this command:
 
@@ -4577,7 +4532,7 @@ You can confirm that the option is selected from the message at application star
 
 Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, C+, 44100 sample rate, DTMF decoder enabled.
 
-9.2.9  Radio Channel – Push to Talk (PTT)
+### 9.2.9  Radio Channel – Push to Talk (PTT)
 
 There are up to five different methods available for activating your transmitter.
 
@@ -4632,7 +4587,7 @@ Note: PTT not configured for channel 0. (Ignore this if using VOX.)
 You don’t need to configure an output control line when using VOX so just ignore the informational
 note.
 
-9.2.9.1  PTT with serial port RTS or DTR
+#### 9.2.9.1  PTT with serial port RTS or DTR
 
 To use a serial port (either built-in or a USB to RS232 adapter cable), use an option of this form:
 
@@ -4708,7 +4663,7 @@ PTT  COM1  RTS
 PTT  COM1  -DTR
 PTT  /dev/ttyUSB0  RTS
 
-9.2.9.2  PTT with General Purpose I/O (GPIO)
+#### 9.2.9.2  PTT with General Purpose I/O (GPIO)
 
 On Linux you can use General Purpose I/O (GPIO) pins if available.  This is mostly applicable to a
 microprocessor board, such as a Raspberry Pi or BeagleBone, not a general purpose PC.  Precede the pin
@@ -4722,7 +4677,7 @@ PTT  GPIO  25
 
 There are more details in the separate Raspberry Pi APRS document.
 
-9.2.9.3  PTT with Parallel Printer Port
+#### 9.2.9.3  PTT with Parallel Printer Port
 
 The old fashioned parallel printer port can also be used on Linux.  In this case, use LPT, followed by an
 optional “-“ to mean inverted, and the data bit number.   This works only with the primary parallel
@@ -4734,7 +4689,7 @@ Examples:
 PTT  LPT  0
 PTT  LPT  -2
 
-9.2.9.4  PTT using hamlib
+#### 9.2.9.4  PTT using hamlib
 
 If the Linux version was built to use hamlib, you can also use this form for greater flexibility:
 
@@ -4812,7 +4767,7 @@ This would be a good place to go with questions:  http://sourceforge.net/p/hamli
 Here is an example of where the serial port data rate had to be set explicitly:
 https://groups.io/g/RaspberryPi-4-HamRadio/topic/75478708
 
-9.2.9.4.1  Hamlib PTT Example:  Use RTS line of serial port.
+#### 9.2.9.4.1  Hamlib PTT Example:  Use RTS line of serial port.
 
 Of course, it would be a lot easier to use the built-in functionality for this simple case.  This is just an
 exercise on our journey to being able to use the flexibility for more interesting cases.
@@ -4898,7 +4853,7 @@ PTT  RIG  2  localhost:4532
 The “2” is very important.  It means communicate with the instance of “rigctld” that we already started
 up.  In this case it is running on the same host but it could be running on a different computer.
 
-9.2.9.5  PTT with C-Media CM108/CM119 GPIO
+#### 9.2.9.5  PTT with C-Media CM108/CM119 GPIO
 
 The C-Media CM108, CM119, and similar chips, used in many USB-audio adapters, have varying numbers
 of general purpose input output (GPIO) pins.   These are sometimes connected to push buttons or LEDs.
@@ -5092,7 +5047,7 @@ it explicitly.
 This available only for Linux.  It is an optional feature, included at build time if the needed files are
 found.
 
-9.2.9.5.1  Getting permission to access /dev/hidraw
+#### 9.2.9.5.1  Getting permission to access /dev/hidraw
 
 Normally, all of /dev/hidraw* are accessible only by root.
 
@@ -5160,7 +5115,7 @@ crw------- 1 root root  247, 1 Oct  6 19:24 /dev/hidraw1
 crw------- 1 root root  247, 2 Oct  6 19:24 /dev/hidraw2
 crw------- 1 root root  247, 3 Oct  6 19:24 /dev/hidraw3
 
-9.2.10  Radio Channel – Data Carrier Detect  (DCD)
+### 9.2.10  Radio Channel – Data Carrier Detect  (DCD)
 
 The carrier detect signal can be sent to any of the output locations available for PTT.  The same serial
 port can be used for both PTT and DCD.   For example:
@@ -5172,7 +5127,7 @@ In this case, you could connect an LED to the serial port like this:
 
 Pin 5 (GND)    ----    (cathode) LED (anode)    ----    680 ohm resistor    ----     Pin 4 (DTR)
 
-9.2.11  Radio Channel – Connected Packet Indicator  (CON)
+### 9.2.11  Radio Channel – Connected Packet Indicator  (CON)
 
 A third indicator is active when connected to another station.   Again, the same serial port can be used
 for two different functions.   For example:
@@ -5185,7 +5140,7 @@ PTT  GPIO  25
 DCD  GPIO  24
 CON  GPIO  23
 
-9.2.12  Radio Channel – Transmit Inhibit Input
+### 9.2.12  Radio Channel – Transmit Inhibit Input
 
 Page 78
 
@@ -5224,7 +5179,7 @@ TXINH  GPIO  -17
 
 As with PTT, minus in front of the GPIO number means invert the signal.
 
-9.2.13  Radio Channel – Transmit timing
+### 9.2.13  Radio Channel – Transmit timing
 
 Transmit timing is determined by 6 parameters which can be different for each channel.  The defaults
 are:
@@ -5444,7 +5399,7 @@ Page 80
 
 
 
-9.2.13.1  Should I use wired PTT or VOX?
+#### 9.2.13.1  Should I use wired PTT or VOX?
 
 It might be tempting to use the VOX built into your transceiver and avoid the extra circuitry for the PTT
 signal.  Is this a good idea?
@@ -5560,7 +5515,7 @@ The SignaLink USB has a built in VOX circuit but it is adjustable into an approp
 down to the minimum (fully counterclockwise).   According to the documentation, this should turn off
 the transmitter around 15 or 30 milliseconds after the transmit audio has ended.
 
-9.2.13.2  Frame Priority and KISS Protocol
+#### 9.2.13.2  Frame Priority and KISS Protocol
 
 The AX.25 protocol spec defines two priorities for transmission of frames.
 
@@ -5615,7 +5570,7 @@ It’s not clear if something similar should be attempted for non-APRS AX.25 fra
 to apply some heuristic for control vs. information frames but we might make the situation worse by
 sending them out of the original order.
 
-9.3  Logging of received packets
+## 9.3  Logging of received packets
 
 Rather than saving the raw, sometimes rather cryptic and unreadable, format, direwolf parses the
 myriad of APRS formats into their properties and saves them in CSV format for easy reading and later
@@ -5663,7 +5618,7 @@ Frequency
 Some would prefer to simply log the raw packets.  In this case, the included “kissutil” application can be
 used.
 
-9.3.1  Daily Log Files
+### 9.3.1  Daily Log Files
 
 Specify the directory where log files should be written.  Use “.” to use the current working directory.
 Examples:
@@ -5692,7 +5647,7 @@ current date.  The file format is described later in this section.
 
 You can do the same thing with the “-l” (lower case L) command line option.
 
-9.3.2  Single Log File
+### 9.3.2  Single Log File
 
 Specify the file location, including any directory if not current working directory.    Examples:
 
@@ -5708,12 +5663,12 @@ The file can get awful large and many people like to manage it with the “logro
 a new file based on size or time.  The file is kept open between writes so be sure to use the
 “copytruncate” option.
 
-9.4  Client application interface
+## 9.4  Client application interface
 
 Different interfaces are provided for client applications such as APRSISCE/32, UI-View32, Xastir, APRS-
 TW, YAAC, SARTrack, AX.25 for Linux, RMS Express, and many others.
 
-9.4.1  AGWPE network protocol
+### 9.4.1  AGWPE network protocol
 
 In most case, Dire Wolf can be used as a drop in replacement for AGWPE.  By default, it listens on
 network port 8000.   This can be changed with a command resembling:
@@ -5772,7 +5727,7 @@ specifying 0 for the port number:
 
 AGWPORT  0
 
-9.4.2  Network TCP/IP KISS
+### 9.4.2  Network TCP/IP KISS
 
 The KISS protocol can be used with a TCP port so Dire Wolf and the client application can be running on
 different computers.  The default is:
@@ -5788,7 +5743,7 @@ The TCP KISS port can be disabled by specifying 0:
 
 KISSPORT  0
 
-9.4.3  Serial port KISS  -  Windows or Linux
+### 9.4.3  Serial port KISS  -  Windows or Linux
 
 A configuration option like this:
 
@@ -5842,7 +5797,7 @@ Page 85
 
 
 
-9.4.4  Serial port KISS with polling
+### 9.4.4  Serial port KISS with polling
 
 This is intended for use with Bluetooth where the device can appear and disappear when the remote
 client opens and closes the link.
@@ -5852,7 +5807,7 @@ SERIALKISSPOLL  /dev/rfcomm0
 The included document, Bluetooth-KISS-TNC.pdf , describes how to use this in detail
 Only a single SERIALKISS or SERIALKISSPOLL can be used at the same time.
 
-9.4.5
+### 9.4.5
 
  Pseudo Terminal KISS  -  Linux  only
 
@@ -5862,7 +5817,7 @@ command line.
 A “pseudo terminal” is created, providing a virtual KISS TNC.  The Linux chapter,  “KISS TNC emulation –
 serial port” section, provides some examples of how to use this with some popular applications.
 
-9.4.6  KISS “Set Hardware” command  (new in 1.5)
+### 9.4.6  KISS “Set Hardware” command  (new in 1.5)
 
 The KISS protocol is very simple.  The client can send a few different commands to set the TNC transmit
 timing and there is a command to transmit a frame.
@@ -6037,7 +5992,7 @@ Page 87
 
 
 
-9.5  APRS Digipeater operation
+## 9.5  APRS Digipeater operation
 
 This section describes digipeating for APRS operation.  Traditional connected mode digipeating is
 described in another section.
@@ -6058,7 +6013,7 @@ possible for a multi-port digipeater to link multiple radio channels.  Packets r
 be retransmitted on different channels.   Each to/from channel combination can have its own filtering
 rules to determine what is allowed.
 
-9.5.1  The Standard “TNC-2” Monitoring Format
+### 9.5.1  The Standard “TNC-2” Monitoring Format
 
 First we need to understand what the standard display format is telling us.  There is a variable length
 address part and an information part.
@@ -6212,7 +6167,7 @@ Page 89
 As we will see later, some implementations are not well behaved so we really don’t know where the
 packet travelled.
 
-9.5.2  What Gets Repeated?
+### 9.5.2  What Gets Repeated?
 
 Clearly a digipeater should not retransmit everything it hears.  If it did that, anything that was heard on
 the channel would keep bouncing back and forth between all of the available digipeaters.   First the
@@ -6251,7 +6206,7 @@ source station, to you.
 Two different old TNC manuals mentioned nothing about duplicate suppression for UIDIGI, as they do
 for UITRACE, so they might clutter up the radio channel with unnecessary duplicates of the same thing.
 
-9.5.3  The New n-N Paradigm
+### 9.5.3  The New n-N Paradigm
 
 In the early days of APRS, digipeater aliases of RELAY and WIDE were used.  This is obsolete, since
 around 2004, and all uses of them should have been removed long ago.  So let’s not talk about them any
@@ -6325,7 +6280,7 @@ There doesn’t seem to be a way to specify more than a single prefix.
 The traditional digipeater configuration commands are inadequate for APRS after 2004.   Newer
 implementations have come up with different approaches for more flexibility.
 
-9.5.4  Duplicate Suppression
+### 9.5.4  Duplicate Suppression
 
 If we are not careful, digipeaters could get completely out of control.  An original packet might get heard
 by a dozen digipeaters and retransmitted by each of them.  A larger growing ring of digipeaters hears
@@ -6373,7 +6328,7 @@ seconds.  A digipeater must remember everything it transmits and not transmit th
 seconds.  The comparison involves only the source, destination, and information part.  In other words,
 the varying via path is ignored when checking to see if two packets are the same.
 
-9.5.5  Digipeater - Configuration Details
+### 9.5.5  Digipeater - Configuration Details
 
 Rather than clinging to the past, and mimicking inadequate configuration options from 30 years ago,
 Dire Wolf avoids these limitations and allows very flexible configuration options to handle a wide variety
@@ -6507,7 +6462,7 @@ FILTER  0  1  t/p & b/W2UB
 
 Complete details are in the Packet Filtering section.
 
-9.5.6  Digipeater - Typical configuration
+### 9.5.6  Digipeater - Typical configuration
 
 Enable digipeating by editing the configuration file (direwolf.conf) and modifying the two lines that look
 similar to this:
@@ -6592,7 +6547,7 @@ If you wanted a “fill-n” digi, that responded to only WIDE1-1, you could use
 
 DIGIPEAT 0 0 ^WIDE1-1$ ^WIDE1-1$
 
-9.5.7  Digipeater – example 2 – routing between two states.
+### 9.5.7  Digipeater – example 2 – routing between two states.
 
 In this hypothetical example, we are on top of a tall hill between Massachusetts and New Hampshire.
 
@@ -6639,7 +6594,7 @@ Similarly we want anything for NH to be digipeated only to radio channel 1.
 DIGIPEAT 0 1 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^NH[1-7]-[1-7]$
 DIGIPEAT 1 1 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^NH[1-7]-[1-7]$
 
-9.5.8  Digipeater algorithm
+### 9.5.8  Digipeater algorithm
 
 If the first unused digipeater field, in the received packet, matches the first pattern, the original
 digipeater field is replaced by MYCALL of the destination channel.
@@ -6677,7 +6632,7 @@ expect to encounter this.   If the address count was all used up, we would expec
 bit to be set.  As we will see later, a few people are still using defective software, from 1997, which
 results in this situation.
 
-9.5.9  APRS Digipeater - Compared to other implementations
+### 9.5.9  APRS Digipeater - Compared to other implementations
 
 Based on observations, a couple other popular implementations always insert their call rather than
 replacing when the hop count is all used up.  Example:
@@ -6867,7 +6822,7 @@ WIDEn-0.  Example:
 
 Of course, this is just a guess and could be wrong.
 
-9.5.10  Preemptive Digipeating
+### 9.5.10  Preemptive Digipeating
 
 Normally the digipeater function looks only at the first unused item in the digipeater list. The
 preemptive option allows processing of any unused field, not just the first one, if my call or an alias
@@ -6955,14 +6910,14 @@ examining the address field and use this path to return frames.
 The DROP and MARK options would violate this principle.   The used digipeater addresses should
 accurately reflect the path taken.
 
-9.5.11  The Ultimate APRS Digipeater
+### 9.5.11  The Ultimate APRS Digipeater
 
 http://www.aprs.org/digi-ultimate.html describes the “Ultimate APRS Digipeater” with 3 radios and
 different rules for forwarding packets from one channel to another.   It’s no longer necessary to lament
 that, “such a digipeater does not yet exist.”   It’s available now.    Using the digipeating rules described
 above, and packet filtering in the next section, you can do all of this and more.
 
-9.5.12  Viscous Digipeating
+### 9.5.12  Viscous Digipeating
 
 The normal mode of operation is that all digipeaters will transmit at the same time.  Other stations
 should receive only the strongest one due to the FM capture effect.
@@ -7054,7 +7009,7 @@ Page 100
 
 
 
-9.6  Packet Filtering for APRS
+## 9.6  Packet Filtering for APRS
 
 In some rare unusual situations, it might be desirable for a digipeater or Internet Gateway to pass along
 some types of packets and block others.
@@ -7097,7 +7052,7 @@ FILTER  0  0  ( t/t & b/WB2OSZ ) | ( t/o & ! r/42.6/-71.3/50 )
 
 It’s not necessary to put quotes around the filter expression even though it contains spaces.
 
-9.6.1  Logical Operators
+### 9.6.1  Logical Operators
 
 Page 101
 
@@ -7152,7 +7107,7 @@ This is the same as the rule for multiplying and adding.  When evaluating the ar
 
 When in doubt, use parentheses to make the order more explicit.
 
-9.6.2  Filter Specifications
+### 9.6.2  Filter Specifications
 
 The filter specifications are composed of a lower case letter, the punctuation character to be used as a
 field separator, and parameters.  These two are equivalent:
@@ -7179,7 +7134,7 @@ are NOT equivalent.
 All Filter Specifications must be followed by a space.  This is so we can distinguish between special
 characters that are part of the filter or a logical operator.
 
-9.6.2.1  Wildcarding
+#### 9.6.2.1  Wildcarding
 
 Page 102
 
@@ -7235,7 +7190,7 @@ b/W2UB/W2UB-*
 
 This will match only that callsign (implied SSID of zero) or that callsign followed by any SSID.
 
-9.6.2.2  Range Filter
+#### 9.6.2.2  Range Filter
 
 r/lat/lon/dist
 
@@ -7255,7 +7210,7 @@ operator to also allow all types other than position and object:
 
 FILTER  0  0  r/42.6/-71.3/50 | ( ! t/po )
 
-9.6.2.3  Budlist Filter
+#### 9.6.2.3  Budlist Filter
 
 b/call1/call2…
 
@@ -7264,7 +7219,7 @@ is allowed.
 
 When combined with the “!” (not) operator, it can be used to reject packets from specified calls.
 
-9.6.2.4  Object Filter
+#### 9.6.2.4  Object Filter
 
 o/obj1/obj2…
 
@@ -7300,7 +7255,7 @@ Page 103
 
 Allow objects and items whose name matches one of them listed.   Wildcarding is allowed.
 
-9.6.2.5  Type Filter
+#### 9.6.2.5  Type Filter
 
 t/poimqcstuhnw
 
@@ -7364,7 +7319,7 @@ a Message.
 
 first 3 characters of the source match the first 3 characters of the addressee.
 
-9.6.2.6  Symbol Filter
+#### 9.6.2.6  Symbol Filter
 
 Position and object reports have two characters representing the Icon.  The first is the table and possibly
 an overlay.  The second is the symbol from the table.
@@ -7566,7 +7521,7 @@ s:/:/
 Waypoint Destination.
 Either Red Dot or Waypoint Destination.
 
-9.6.2.7  Digipeater Filter
+#### 9.6.2.7  Digipeater Filter
 
 d/digi1/digi2…
 
@@ -7579,20 +7534,20 @@ FILTER 0 0 ! d/*
 That means, when digipeating from channel 0 to channel 0 allow packets only if they have not been
 digipeated through some other station.
 
-9.6.2.8  Via digipeater unused Filter
+#### 9.6.2.8  Via digipeater unused Filter
 
 v/digi1/digi2…
 
 Allow packets that have any listed digipeaters that don’t have the “has-been-used” flag set.  Wildcarding
 is allowed.
 
-9.6.2.9  Group Message Filter
+#### 9.6.2.9  Group Message Filter
 
 g/call1/call2…
 
 Allow “message” packets with any of the listed addressees.   Wildcarding is allowed.
 
-9.6.2.10  Unproto Filter
+#### 9.6.2.10  Unproto Filter
 
 u/unproto1/unproto2…
 
@@ -7639,7 +7594,7 @@ Page 106
 
 
 
-9.6.2.11  Individual Message Filter
+#### 9.6.2.11  Individual Message Filter
 
 i/time
 i/time/hops
@@ -7710,7 +7665,7 @@ Page 107
 
 
 
-9.6.3  SATgate example
+### 9.6.3  SATgate example
 
 Suppose you wanted to run a SATgate to forward anything either from some station called "RS0ISS" or
 anything digipeated by it.  That's easy.  The filter could look like:
@@ -7777,7 +7732,7 @@ Page 108
 
 
 
-9.6.4  Troubleshooting
+### 9.6.4  Troubleshooting
 
 Packet filtering operation can be examined by using “-df” on the command line.  Each time a filter
 expression is evaluated, the result is displayed like this:
@@ -7811,7 +7766,7 @@ Page 109
 
 
 
-9.7  Frame Regeneration
+## 9.7  Frame Regeneration
 
 For certain special situations, it is also possible to retransmit AX.25 frames exactly the way they were
 received.
@@ -7899,7 +7854,7 @@ Page 110
 
 
 
-9.8  GPS Interface
+## 9.8  GPS Interface
 
 Your location, from a GPS receiver, can be used in a tracker beacon described in the following Beaconing
 section.  There are two types of interface available:
@@ -7907,7 +7862,7 @@ section.  There are two types of interface available:
   Direct connect to serial or USB port.  Available on all platforms.
   GPSD server.  Available only on Linux.  This allows multiple applications to share one receiver.
 
-9.8.1  Direct connect to GPS receiver
+### 9.8.1  Direct connect to GPS receiver
 
 Use the GPSNMEA configuration option with the device name.  This might be a serial port or a USB
 device that looks like a serial port.  The standard baud rate of 4800 is used.  Examples:
@@ -7942,7 +7897,7 @@ Advantages:  Simple configuration.  Available on all platforms.
 
 Disadvantage:  GPS receiver can’t be shared by multiple applications.
 
-9.8.2  GPSD Server
+### 9.8.2  GPSD Server
 
 Page 111
 
@@ -8002,7 +7957,7 @@ the receiver.  They receive location information boiled down to a common message
 The accompanying document,  Raspberry-Pi-APRS-Tracker.pdf,  goes into more detail.  The same
 general principles apply to other types of Linux systems.
 
-9.8.3  Waypoint Sentence Generation
+### 9.8.3  Waypoint Sentence Generation
 
 APRS Position and Object Reports can be converted to NMEA Sentences for display on the AvMap G5 /
 G6 or other mapping devices or applications.  The configuration file item has the following format:
@@ -8087,7 +8042,7 @@ $PKWDWPL,131356,V,4236.7700,N,07119.0400,W,0.0,339.0,160616,32.0,WQ2H-
 
 Look at the comments in the source file  waypoint.c  for an explanation of the sentences.
 
-9.9  Beaconing
+## 9.9  Beaconing
 
 Dire Wolf has several configuration commands for setting up periodic transmissions.
 
@@ -8104,7 +8059,7 @@ IBEACON
 - IGate status
 - Tracker beacon with GPS location
 
-9.9.1  Position & Object Beacons
+### 9.9.1  Position & Object Beacons
 
 Two configuration commands are available for periodic beacons to announce yourself or other things in
 your region with fixed positions.
@@ -8698,7 +8653,7 @@ in last 24 hours, rain 0.20 since midnight, humidity 61, barometer 29.98, ""
 The  symbols-new.txt  file is still evolving.  You can download the latest from
 http://www.aprs.org/symbols/symbols-new.txt
 
-9.9.2  Custom Beacon
+### 9.9.2  Custom Beacon
 
 For unusual situations, or if you enjoy composing obscure APRS packets by hand, the custom beacon
 type is available.
@@ -8879,7 +8834,7 @@ Page 120
 
 See “APRS Telemetry Toolkit” documentation for more examples for COMMENTCMD and INFOCMD.
 
-9.9.3
+### 9.9.3
 
 IGate StatusBeacon
 
@@ -9090,7 +9045,7 @@ Page 122
 
 UPL_CNT and DNL_CNT are unique to this software.
 
-9.9.4  Tracker Beacon
+### 9.9.4  Tracker Beacon
 
 Information from a GPS receiver can be used to report the location of a moving entity.
 
@@ -9111,7 +9066,7 @@ In this case, the FREQ options can be used to indicate that you are listening to
 
 TBEACON  SYMBOL=car  FREQ=146.955  OFFSET=-0.600  TONE=74.4
 
-9.9.5  SmartBeaconingTM
+### 9.9.5  SmartBeaconingTM
 
 A fixed transmission schedule might not be ideal.  If you are moving quickly, you might want to send
 position updates more quickly.  If sitting still, there is no reason to transmit very often.  Sending
@@ -9178,7 +9133,7 @@ discussions and recommendations.
 http://www.hamhud.net/hh2/smartbeacon.html
 http://info.aprs.net/index.php?title=SmartBeaconing
 
-9.10 Internet Gateway (IGate)
+## 9.10 Internet Gateway (IGate)
 
 Dire Wolf can serve as a gateway between the radio network and servers on the Internet.  This allows
 information to be retrieved from locations such as http://aprs.fi or http://findu.com.  Information can
@@ -9187,7 +9142,7 @@ optionally be relayed from the servers, through your station, and on to the radi
 More detailed information can be found in the separate document called Successful-APRS-IGate-
 Operation.pdf
 
-9.10.1  IGate - Select server and log in
+### 9.10.1  IGate - Select server and log in
 
 First you need to specify the name of a Tier 2 server.  The current preferred way is to use one of these
 regional rotate addresses:
@@ -9244,7 +9199,7 @@ passcode.  For example:
 IGSERVER  noam.aprs2.net
 IGLOGIN  WB2OSZ-5  123456
 
-9.10.2  IGate – Configure transmit
+### 9.10.2  IGate – Configure transmit
 
 If you want to transmit information from the servers, you need to specify two additional pieces of
 information:  the radio channel and the via path for the packet header.  Examples:
@@ -9305,7 +9260,7 @@ Page 125
 
 
 
-9.10.3  IGate – Sending directly to server
+### 9.10.3  IGate – Sending directly to server
 
 If you want your station to appear at  http://findu.com   or  http://aprs.fi , you need to send a beacon
 advertising your position.    If you send it over the radio, another IGate client station needs to hear you
@@ -9323,7 +9278,7 @@ PBEACON sendto=IG delay=0:30 every=60:00 symbol="igate"
 
 overlay=T lat=42^37.14N long=071^20.83W
 
-9.10.4  IGate – Client-side filtering
+### 9.10.4  IGate – Client-side filtering
 
 After setting an appropriate “server-side” filter with “IGFILTER,” the server might send more than you
 want, creating excessive clutter on the radio channel.  It is possible to apply another stage of filtering in
@@ -9415,7 +9370,7 @@ Page 126
 
 
 
-9.10.5  SATgate mode
+### 9.10.5  SATgate mode
 
 If we hear a packet directly and the same one digipeated, we send both to  APRS IS.  (RF>IS  duplicate
 suppression was removed in version 1.5).   The Server keeps the first one and the duplicate digipeated
@@ -9438,7 +9393,7 @@ You can find more discussion here:  http://www.tapr.org/pipermail/aprssig/2016-J
 Of course some other IGate probably send the original promptly so this could just be an exercise in
 futility.
 
-9.10.6  IGate Debugging Options
+### 9.10.6  IGate Debugging Options
 
 To see more of what is going on behind the scenes, use one of these debugging options on the
 command line:
@@ -9492,7 +9447,7 @@ Page 127
 About 10 seconds after it was heard, the original packet is released from the waiting area.  It is a
 duplicate so it is dropped.
 
-9.10.7  Log Everything Going In and Out
+### 9.10.7  Log Everything Going In and Out
 
 There are many command line options available to customize the information seen for troubleshooting.
 
@@ -9570,7 +9525,7 @@ Page 129
 
 
 
-9.11 APRStt Gateway
+## 9.11 APRStt Gateway
 
 The APRStt Gateway function allows a user, equipped with only a DTMF (“touch tone”) pad, to enter
 information into the global APRS network.  Various configuration options determine how the touch tone
@@ -9600,13 +9555,13 @@ Page 130
 
 
 
-9.12 Transmitting Speech
+## 9.12 Transmitting Speech
 
 There are many software applications that will convert text to speech.  Dire Wolf can utilize these to
 transmit information with a synthesized voice.  At the end of this section we have a simple application
 that listens for DTMF (“Touch Tone”) sequences and responds with voice.   The possibilities are endless!
 
-9.12.1  Install Text-to-Speech Software
+### 9.12.1  Install Text-to-Speech Software
 
 First we need to install some software to convert text to speech.  Googling around reveals some good
 lists of alternatives available.
@@ -9638,7 +9593,7 @@ Red Hat / Fedora / CentOS Linux:
 
 T.B.D. ?
 
-9.12.2  Configuration
+### 9.12.2  Configuration
 
 Next we need a little script to run the text-to-speech application with the desired options.   Dire Wolf
 will invoke this script with two command line arguments:
@@ -9710,7 +9665,7 @@ one possible way you could use this to announce an event:
 
 CBEACON dest=SPEECH info=”Club meeting tonight at 7 pm.”
 
-9.12.3  Sample Application: ttcalc
+### 9.12.3  Sample Application: ttcalc
 
 Here is a simple application that can be used as a starting point for developing you own applications.
 This listens for DTMF (“Touch Tone”) sequences and responds with voice.
@@ -9770,7 +9725,7 @@ Connected to AGW client application 0...
 This is not a very useful application.  It is provided as a simple example to be used as a starting point for
 your innovation applications.
 
-9.13 Transmitting Morse Code
+## 9.13 Transmitting Morse Code
 
 When the destination field is set to “MORSE” the information part is sent in Morse Code.  Under some
 circumstances you might want to use this to meet station identification requirements.  If an SSID is
@@ -9780,7 +9735,7 @@ WPM.
 CBEACON dest=MORSE info=”de WB2OSZ/R.”
 CBEACON dest=MORSE-10 info=”de WB2OSZ/R.”
 
-9.14 Transmitting DTMF Tones
+## 9.14 Transmitting DTMF Tones
 
 When the destination field is set to “DTMF” the information part is sent as DTMF tones, commonly
 called touch tones.  If an SSID is specified, it is the number of tones per second.  Minimum 1, maximum
@@ -9818,7 +9773,7 @@ Page 133
 
 
 
-9.15 Logging
+## 9.15 Logging
 
 Simple, yet versatile, logging is available by specifying –l (lower case L) on the command line or using the
 LOGDIR option in the configuration file.  In either case, specify the directory (folder) where log files
@@ -9958,7 +9913,7 @@ each day.   The log file has the name yyyy-mm-dd.log,  where yyyy-mm-dd is the c
 Data, in this convenient form, can be imported into a spreadsheet or fed into other conversion
 applications to obtain the desired subset and format.
 
-9.15.1  Conversion to GPX format
+### 9.15.1  Conversion to GPX format
 
 A sample application is included for converting a log file to GPX format.  The source code can be used as
 the starting point for other custom converters.
@@ -9990,7 +9945,7 @@ Page 135
 
 
 
-9.16 Command Line Options
+## 9.16 Command Line Options
 
 Command line options can be used to specify the configuration file location or override some of the
 settings in the configuration file.  Case is significant.  Pay careful attention to upper and lower case.
@@ -10324,7 +10279,7 @@ Page 138
 
 
 
-10 AX.25 Connected Mode – New in version 1.4
+# 10 AX.25 Connected Mode – New in version 1.4
 
 APRS uses only a small part of the AX.25 protocol dealing with Unnumbered Information (UI) frames.
 The sender does not know if anyone actually received the information.  Another type of Amateur Packet
@@ -10341,7 +10296,7 @@ With the former, you just send something and don’t know if it got there.  In t
 information should get there in the right order.  Any pieces missing, due to an imperfect radio link, are
 automatically resent and assembled into the correct order.
 
-10.1 AX.25 Protocol Versions.
+## 10.1 AX.25 Protocol Versions.
 
 The AX.25 version 2.0 protocol specification was published in 1984.
 
@@ -10368,7 +10323,7 @@ sending again with 1.  The sending station would have to send 1, 2, 3, 4, 5, 6 a
 With version 2.2, the receiving station would ask for a resend of only 1.  The term for this is “Selective
 Reject” (SREJ).
 
-10.1.1  Compatibility with Older Version
+### 10.1.1  Compatibility with Older Version
 
 Dire Wolf implements version 2.2.   There are a lot of 20 year old TNCs still in use and we need to
 maintain compatibility with version 2.0.
@@ -10411,7 +10366,7 @@ Unnumbered Acknowledge response
 Disconnected Mode response
 Frame Reject response (never sent by v2.2)
 
-10.1.2  AX.25 v2.0 Connection Sequence
+### 10.1.2  AX.25 v2.0 Connection Sequence
 
 Originating station
 
@@ -10430,7 +10385,7 @@ Accept the connection.
 Or
 Refuse the connection.
 
-10.1.3  AX.25 v2.2 Connection Sequence
+### 10.1.3  AX.25 v2.2 Connection Sequence
 
 In this case, we use SABME rather than SABM to request Extended mode.
 
@@ -10451,7 +10406,7 @@ Accept the connection.
 Or
 Refuse the connection.
 
-10.1.4  AX.25 v2.2 to v2.0 Connection Sequence
+### 10.1.4  AX.25 v2.2 to v2.0 Connection Sequence
 
 Now we consider the case where the originating station requests Extended mode but the destination
 station is running an older version.
@@ -10559,7 +10514,7 @@ supposed to work.
 The V20 configuration option can be used to list stations known to understand only v2.0.  Only
 the v2.0 protocol will be used when trying to connect to addresses in this list.
 
-10.1.5  UI Frames and the “-q d” command line option
+### 10.1.5  UI Frames and the “-q d” command line option
 
 Page 141
 
@@ -10601,7 +10556,7 @@ distracting clutter.
 The decoding of UI frame contents can be disabled by using the “-q d” or “-qd” command line option.  It
 is equivalent with or without the space in the middle.
 
-10.2 Connected Packet Operation
+## 10.2 Connected Packet Operation
 
 Dire Wolf is not an interactive application.  It doesn’t have a graphical display.  You can’t type into it as
 you would with a traditional hardware TNC.  The connected packet functionality is available only thru
@@ -10619,7 +10574,7 @@ issues with the others.
 
 Dire Wolf has a built-in digipeater capability described later.
 
-10.3 Configuration file items for connected mode packet
+## 10.3 Configuration file items for connected mode packet
 
 Several configuration options are available for fine tuning operation.  In most cases, the defaults should
 be fine.  Most of these have the same names and meanings as in many other popular TNCs.
@@ -10730,7 +10685,7 @@ PTT  GPIO  25
 DCD  GPIO  24
 CON  GPIO  23
 
-10.3.1  Enable Connected Mode Digipeater
+### 10.3.1  Enable Connected Mode Digipeater
 
 Digipeater configuration is achieved with commands of the form:
 
@@ -10827,7 +10782,7 @@ Notice the leading C on this option to distinguish it from the APRS digipeater.
 
 Restart Dire Wolf so it will read the modified configuration file.
 
-10.4 Digipeater Packet Filtering for Connected Packet
+## 10.4 Digipeater Packet Filtering for Connected Packet
 
 You might want to configure a digipeater to retransmit or ignore frames depending on the addresses
 involved.
@@ -10892,7 +10847,7 @@ Page 144
 
 It’s not necessary to put quotes around the filter expression even though it contains spaces.
 
-10.4.1  Logical Operators
+### 10.4.1  Logical Operators
 
 The individual filter specifications return a true or false value depending whether the current frame
 satisfies the condition.  These results can be combined into larger expressions to for very flexible
@@ -10908,7 +10863,7 @@ Logical AND.  Result is true if both arguments are true.
 Logical NOT.  This inverts the value of the following part.
 Parentheses are used for grouping.
 
-10.4.2  Filter Specifications
+### 10.4.2  Filter Specifications
 
 The filter specifications are composed of a lower case letter, the punctuation character to be used as a
 field separator, and parameters.  These two are equivalent:
@@ -10923,7 +10878,7 @@ Everything is case sensitive.  This means that upper and lower case are not equi
 All Filter Specifications must be followed by a space.  This is so we can distinguish between special
 characters that are part of the filter or a logical operator.
 
-10.4.2.1  Wildcarding
+### 10.4.2.1  Wildcarding
 
 All of the filters in this section allow the “*” character at the end of a string to mean match anything
 here.  This operates on character strings without any knowledge of the callsign-SSID syntax.  If you
@@ -10938,7 +10893,7 @@ b/W2UB/W2UB-*
 
 This will match only that callsign (implied SSID of zero) or that callsign followed by any SSID.
 
-10.4.2.2  Budlist Filter  (source address)
+#### 10.4.2.2  Budlist Filter  (source address)
 
 b/call1/call2…
 
@@ -10982,19 +10937,19 @@ Page 145
 Allow all packets from the specified calls.  These must be exact matches including the SSID.
 When combined with the “!” (not) operator, it can be used to reject packets from specified calls.
 
-10.4.2.3  Digipeater Filter
+#### 10.4.2.3  Digipeater Filter
 
 d/digi1/digi2…
 
 Allow packets that have been repeated by any of the listed digipeaters.
 
-10.4.2.4  Via digipeater unused Filter
+#### 10.4.2.4  Via digipeater unused Filter
 
 v/digi1/digi2…
 
 Allow packets that have any listed digipeaters that don’t have the “has-been-used” flag set.
 
-10.4.2.5  Unproto Filter  (destination address)
+#### 10.4.2.5  Unproto Filter  (destination address)
 
 u/call1/call2…
 
@@ -11019,9 +10974,9 @@ Page 146
 
 
 
-11 Advanced Topics - Windows
+# 11 Advanced Topics - Windows
 
-11.1 Install com0com (optional)
+## 11.1 Install com0com (optional)
 
 Many Windows packet radio applications can communicate with a physical TNC connected to a serial
 port, as illustrated below.
@@ -11223,9 +11178,9 @@ Page 150
 
 
 
-12 Receive Performance
+# 12 Receive Performance
 
-12.1 WA8LMF TNC Test CD
+## 12.1 WA8LMF TNC Test CD
 
 See separate document, with similar name.
 
@@ -11248,7 +11203,7 @@ Important:  Some demodulators perform poorly when there is a significant imbalan
 the amplitude of the two tones.  That is why it is important to consider decode performance for
 Track 2 as well as Track 1 which is easier.
 
-12.2 Evolution
+## 12.2 Evolution
 
 Over the years, I’ve experimented with various types of demodulators and combinations of tuning
 parameter tradeoffs.    Sometimes, a certain configuration is better in some cases, but not so good in
@@ -11397,7 +11352,7 @@ Page 152
 
 
 
-12.3 One Bad Apple Don’t Spoil the Whole Bunch…  (“FIX_BITS” option)
+## 12.3 One Bad Apple Don’t Spoil the Whole Bunch…  (“FIX_BITS” option)
 
 There is an old proverb, “One bad apple spoils the barrel,” which applies to AX.25 frames used for APRS
 and traditional packet radio.  Each frame contains a 16 bit frame check sequence (FCS) used for error
@@ -11763,9 +11718,9 @@ Page 157
 
 
 
-13 UTF-8 characters
+# 13 UTF-8 characters
 
-13.1 Background
+## 13.1 Background
 
 AX.25, like most other computer communication, uses the ASCII character set.  ASCII was developed in
 the 1960’s and has a total of 94 printable characters.  This didn’t keep people happy for very long.  As
@@ -11809,7 +11764,7 @@ terminal emulator to change internal character codes into viewable images.  Some
 emulators don’t understand UTF-8.  Others might have the capability but need special configuration
 settings.
 
-13.2 Microsoft Windows
+## 13.2 Microsoft Windows
 
 The Microsoft Windows “Command Prompt” has a default of “Raster Fonts.”  This has a very limited set
 of characters available.   Select one of the other two.
@@ -11892,7 +11847,7 @@ Page 159
 
 
 
-13.3 Linux
+## 13.3 Linux
 
 UTF-8 is usually the default on newer systems but there might be cases where you need to set the LANG
 environment variable.
@@ -11930,7 +11885,7 @@ Page 160
 Linux has many flavors and an overabundance of terminal emulators so we can’t cover all the
 possibilities here.  Google for something like linux terminal utf-8 for more help.
 
-13.4 Debugging
+## 13.4 Debugging
 
 The “-d u” command line option turns on debugging for messages containing non-ASCII characters.
 
@@ -11961,7 +11916,7 @@ bytes:  ce b5 ce bb ce bb ce b7 ce bd ce b9 ce ba ce ac.
 
 This extra line appears only when non-ASCII characters are present.
 
-13.5 Configuration File
+## 13.5 Configuration File
 
 To transmit non-ASCII characters in a beacon, use the same hexadecimal notation used to display
 received packets.  For example,
@@ -11991,22 +11946,22 @@ Page 162
 
 
 
-14 Other Included Applications
+# 14 Other Included Applications
 
 The “direwolf” software TNC package includes several other related applications.   “man” pages are
 available in the Linux version.
 
-14.1 aclients –  Test program for side-by-side TNC performance comparison
+## 14.1 aclients –  Test program for side-by-side TNC performance comparison
 
 aclients is used to compare how well different TNCs decode AX.25 frames at the same time.  The
 Receive Performance section contains a couple examples.
 
-14.2 atest - Decode AX.25 frames from an audio file
+## 14.2 atest - Decode AX.25 frames from an audio file
 
 atest  is  a  test  application  which  decodes AX.25 frames from an audio recording.  This provides an
 easy way to test Dire Wolf decoding performance much quicker than normal real-time.
 
-14.3 cm108 – Display USB Audio adapters and corresponding PTT devices.
+## 14.3 cm108 – Display USB Audio adapters and corresponding PTT devices.
 
 Many of the USB Audio adapters have unused general purpose input output (GPIO) pins inside.  Some
 products use one of these to activate the push to talk (PTT) control.
@@ -12021,7 +11976,7 @@ The audio part and the GPIO part show up different Linux devices.   The relation
 not obvious.  The included “cm108” will display that information.  For more information, see section
 called “PTT with C-Media CM108/CM119 GPIO.”
 
-14.4 decode_aprs - Convert APRS raw data to human readable form
+## 14.4 decode_aprs - Convert APRS raw data to human readable form
 
 decode_aprs is useful for understanding sometimes obscure APRS packets and finding errors.
 
@@ -12111,14 +12066,14 @@ position 1.
 
 *** The origin and journey of this packet should receive some scrutiny. ***
 
-14.5 gen_packets - Generate audio file for AX.25 frames
+## 14.5 gen_packets - Generate audio file for AX.25 frames
 
 gen_packets is a test application which converts text to AX.25 audio for testing packet decoders.
 
 It is very flexible allowing a wide range of audio sample rates, data speeds, and AFSK tones.  It will even
 generate the scrambled signals commonly used for 9600 baud operation.
 
-14.6 kissutil – KISS TNC troubleshooting and Application Interface
+## 14.6 kissutil – KISS TNC troubleshooting and Application Interface
 
 People often ask:
 
@@ -12129,7 +12084,7 @@ Obviously, we have both the KISS and AGW interfaces used by many applications.  
 significant amount of effort to develop the client application side of these interfaces.  “kissutil” provides
 a simple file-based interface between a KISS TNC and user supplied applications.
 
-14.6.1  Interactive mode
+### 14.6.1  Interactive mode
 
 The interactive mode is useful for troubleshooting or logging raw packets.  By default, kissutil tries to
 connect to a TCP KISS TNC on the same host with port 8001.  A different TNC can be specified with the
@@ -12211,7 +12166,7 @@ h (hardware-specific)
 
 Lines may be preceded by the form "[9]" to specify a channel other than the default 0.
 
-14.6.2   Save received frames to files
+### 14.6.2   Save received frames to files
 
 When the -o (output) option is specified, each received frame will be stored in its own file in the
 specified directory.   The file name is based on the date and time.  For example,
@@ -12222,7 +12177,7 @@ $ kissutil -o REC
 Another application can check the directory contents periodically.  Files can be read, processed, and
 deleted.
 
-14.6.3  Transmit frames from files.
+### 14.6.3  Transmit frames from files.
 
 The “-f” option can be used to transmit files in the specified directory.  For example,
 
@@ -12235,7 +12190,7 @@ the TNC.  Files are deleted after they are processed.
 
 Other applications, wishing to transmit something, simply create files in that directory.
 
-14.6.4  Receive time stamps
+### 14.6.4  Receive time stamps
 
 Time stamps can be added to the received frames by using the “-T” option followed by a “strftime”
 format string as described here:
@@ -12286,7 +12241,7 @@ The time stamp will then appear after the channel number like this:
 
 [0 01:42:20 UTC] W1XM-15>APOT30:T#094,227,273,228,153,178,00000000
 
-14.6.5  Verbose  option
+### 14.6.5  Verbose  option
 
 Finally we have the “-v” (verbose) option to display the KISS format in each direction.
 
@@ -12295,11 +12250,11 @@ From KISS TNC:
   010:  ae 92 88 8a 62 40 e0 96 62 9c a4 9e 40 e1 03 f0  ....b@..b...@...
   020:  27 62 3d 44 6c 20 1c 68 2f 5d 3d 0d c0           'b=Dl .h/]=..
 
-14.7 ll2utm, utm2ll – Convert between Latitude/Longitude & UTM Coordinates
+## 14.7 ll2utm, utm2ll – Convert between Latitude/Longitude & UTM Coordinates
 
 These are explained in the separate APRStt Implementation Notes.
 
-14.8 log2gpx - Convert Dire Wolf log files to GPX format
+## 14.8 log2gpx - Convert Dire Wolf log files to GPX format
 
 A sample application is included for converting a log file to GPX format.  The source code can be used as
 the starting point for other custom converters.
@@ -12343,11 +12298,11 @@ Page 167
 The GPX file can be uploaded to many popular mapping applications such as Google maps or
 OpenStreetMap.
 
-14.9 text2tt, tt2text – Convert between text and APRStt tone sequences
+## 14.9 text2tt, tt2text – Convert between text and APRStt tone sequences
 
 These are explained in the separate APRStt Implementation Notes.
 
-15 Questions & Feedback
+# 15 Questions & Feedback
 
 https://groups.io/g/direwolf    is the best place to ask questions and share information with other users.
 You might find your questions have already been answered here.
