@@ -1,14 +1,21 @@
+---
+title: Dire Wolf User Guide
+numberedsections: true
+---
+
 # Dire Wolf User Guide
 
-Decoded  
-  Information from  
-    Radio  
+```
+Decoded
+  Information from
+    Radio
       Emissions for
 
-Windows  
-  Or  
-    Linux  
+Windows
+  Or
+    Linux
       Fans
+```
 
 ![Canis Dirus (Dire Wolf), Harvard Museum of Natural History](images/image-000.png)
 
@@ -16,601 +23,253 @@ Windows
 
 #  Introduction
 
-In the early days of Amateur Packet Radio, it was necessary to use a “Terminal Node Controller” (TNC)
-with specialized hardware. Those days are gone.  You can now get better results at lower cost by
-connecting your radio to the “soundcard” interface of a computer and using software to decode the
-signals.
+In the early days of Amateur Packet Radio, it was necessary to use a “Terminal Node Controller” (TNC) with specialized hardware. Those days are gone. You can now get better results at lower cost by connecting your radio to the “soundcard” interface of a computer and using software to decode the signals.
 
-Why settle for mediocre receive performance
-from a 1980's technology TNC with an old
-modem chip?   Dire Wolf decodes over 1000
-error-free frames from the WA8LMF TNC Test
-CD, leaving all the hardware TNCs, and first
-generation "soundcard" modems, behind in the
-dust.
+Why settle for mediocre receive performance from a 1980's technology TNC with an old modem chip?   Dire Wolf decodes over 1000 error-free frames from the WA8LMF TNC Test CD, leaving all the hardware TNCs, and first generation "soundcard" modems, behind in the dust.
 
-Dire Wolf is a modern software replacement for
-the old 1980's style TNC built with special
-hardware.
+Dire Wolf is a modern software replacement for the old 1980's style TNC built with special hardware.
 
-Without any additional software, it can perform
-as:
+Without any additional software, it can perform as:
 
- - APRS GPS Tracker
- - Digipeater
- - Internet Gateway (IGate)
- - APRStt gateway
+- APRS GPS Tracker
+- Digipeater
+- Internet Gateway (IGate)
+- APRStt gateway
 
-It can also be used as a virtual TNC for other applications such as APRSIS32,  Xastir,  APRS-TW,
-YAAC,  UISS,  Linux AX25,  SARTrack,  RMS Express, Packet Compressed Sensing Imaging (pCSI),and many
-others.  Both KISS and AGW network protocols are supported for use by applications.
+It can also be used as a virtual TNC for other applications such as [APRSIS32],  [Xastir],  [APRS-TW], [YAAC],  [UISS],  [Linux AX25],  [SARTrack],  [RMS Express], [Packet Compressed Sensing Imaging (pCSI)][pcsi], and many others. Both KISS and AGW network protocols are supported for use by applications.
 
-Starting with version 1.4, AX.25 version 2.2 connected mode is also supported for use with applications
-such as Outpost PM.
+Starting with version 1.4, AX.25 version 2.2 connected mode is also supported for use with applications such as [Outpost PM].
 
 Starting with version 1.6, FX.25 forward error correction (FEC) is supported.
 
+[aprsis32]: http://aprsisce.wikidot.com/
+[xastir]: http://xastir.org/index.php/Main_Page
+[aprs-tw]: http://aprstw.blandranch.net/
+[yaac]: http://www.ka2ddo.org/ka2ddo/YAAC.html
+[uiss]: http://users.belgacom.net/hamradio/uiss.htm
+[linux ax25]: http://www.linux-ax25.org/wiki/Main_Page
+[sartrack]: http://www.sartrack.co.nz/index.html
+[rms express]: http://www.winlink.org/RMSExpress
+[pcsi]: https://maqifrnswa.github.io/PCSI/
+[outpost pm]: http://www.outpostpm.org/index.php
+
 ## FX.25 - Forward Error Correction (FEC)
 
-The AX.25 frame, used by APRS and Amateur Packet Radio, is not very tolerant of low quality radio links.
-The sender adds a 16 bit “Frame Check Sequence” (FCS) computed from the rest of the frame.  The
-receiving end recomputes the FCS and discards the frame if there is a mismatch.
+The AX.25 frame, used by APRS and Amateur Packet Radio, is not very tolerant of low quality radio links. The sender adds a 16 bit “Frame Check Sequence” (FCS) computed from the rest of the frame. The receiving end recomputes the FCS and discards the frame if there is a mismatch.
 
 All it takes is a single bad bit to ruin the entire frame.
 
-Back on 2006, the Stensat Group came up with a clever way to add Reed-Solmon  Forward Error
-Correction (FEC) to AX.25 while maintaining complete backward compatibility with existing equipment.
+Back on 2006, the Stensat Group came up with a clever way to add Reed-Solmon  Forward Error Correction (FEC) to AX.25 while maintaining complete backward compatibility with existing equipment.
 
-For more than a decade this remained in the realm of satellite operation.   Now that it is available in
-general purpose software TNCs, such as Dire Wolf and UZ7HO Soundmodem, it is very easy to add to
-existing APRS and other Packet Radio communication.
+For more than a decade this remained in the realm of satellite operation. Now that it is available in general purpose software TNCs, such as Dire Wolf and UZ7HO Soundmodem, it is very easy to add to existing APRS and other Packet Radio communication.
 
-d
-e
-v
-i
-e
-c
-e
-r
+<!-- image removed -->
 
-s
-e
-m
-a
-r
-f
+Depending on the FX.25 mode, up to 32 corrupted bytes (yes, bytes, not bits) can be corrected in a frame. Regular AX.25 fails if even a single bit gets corrupted. **FX.25 keeps going strong long after regular AX.25 is completely useless.**
 
-f
-o
-r
-e
-b
-m
-u
-N
-
-1000
-
-900
-
-800
-
-700
-
-600
-
-500
-
-400
-
-300
-
-200
-
-100
-
-AX.25
-
-FX.25 16
-
-FX.25 32
-
-FX.25 64
-
-1.E-05
-
-1.E-04
-
-1.E-03
-
-1.E-02
-
-Bit Error Rate
-
-0
-1.E-01
-
-Depending on the FX.25 mode, up to 32 corrupted bytes (yes, bytes, not bits) can be corrected in a
-frame.   Regular AX.25 fails if even a single bit gets corrupted.   FX.25 keeps going strong long after
-regular AX.25 is completely useless.
-
-This can be used with all of your favorite applications such as APRSIS32,  UI-View32,  Xastir,  APRS-TW,
-YAAC,  UISS,  Linux AX25,  SARTrack,  RMS Express, Outpost PM, and many others.    Imagine the
-possibilities for low power transmitters or much more reliable Emergency Communications!
+This can be used with all of your favorite applications such as APRSIS32,  UI-View32,  Xastir,  APRS-TW, YAAC,  UISS,  Linux AX25,  SARTrack,  RMS Express, Outpost PM, and many others. Imagine the possibilities for low power transmitters or much more reliable Emergency Communications!
 
 # Features
 
-GPS Receiver,
-Weather Station,
-Telemetry Data
+<!-- iamge removed -->
 
-aprs.fi
-findu.com
+Dire Wolf includes:
 
-APRS-IS
-Servers
+- **Beaconing, Tracker, Telemetry Toolkit.**
 
-Applications
+  Send periodic beacons to provide information to others.  The location can be provided by a GPS receiver.  Build your own telemetry applications with the toolkit.
 
-Attached by serial
+- **APRStt Gateway.**
 
-port, TCP/IP,
-or Bluetooth
+  Very few hams have portable equipment for APRS but nearly everyone has a handheld radio that can send DTMF tones.  APRStt allows a user, equipped with only DTMF (commonly known as Touch Tone) generation capability, to enter information into the global APRS data network.  Responses can be sent by Morse Code or synthesized speech.
 
-Beaconing
-& Tracker
+- **Digipeaters for APRS and traditional Packet Radio.**
 
-Digipeater
+  Extend the range of other stations by re-transmitting their signals. Unmatched flexibility for cross band repeating and filtering to limit what is retransmitted.
 
-KISS
-Interface
+- **Internet Gateway (IGate).**
 
-AGW Net.
-Interface
+  IGate stations allow communication between disjoint radio networks by allowing some content to flow between them over the Internet.
 
-APRStt
-Gateway
+- **AX.25 v2.2 Link Layer.**
 
-Internet
-Gateway
+  When using traditional connected mode packet radio, the sending station TNC wants acknowledgements from the receiving station and automatically resends any missing frames.  Frames are delivered reliably in the proper sequence.
 
-AX.25 v2.2
-Link Layer
+- **KISS Interface (TCP/IP, serial port, Bluetooth).**
 
-AX.25 &
-FX.25  (FEC)
-protocols
+- **AGW network Interface (TCP/IP).**
 
-DTMF
-In & Out
-
-Morse Code
-Generator
-
-300, 1200, 2400,
-9600 bps. AIS, and
-other Modems
-
-Speech
-Synthesizer
-
-Future …
-
-Traditional Radios  &  S.D.R.
-
-Page 3
-
-
-
-
-
-
-
-
-
-
-
-Dire Wolf includes:
-
-  Beaconing, Tracker, Telemetry Toolkit.
-
-Send periodic beacons to provide information to others.  The location can be
-provided by a GPS receiver.  Build your own telemetry applications with the
-toolkit.
-
-  APRStt Gateway.
-
-Very few hams have portable equipment for APRS but nearly everyone has a
-handheld radio that can send DTMF tones.  APRStt allows a user, equipped with
-only DTMF (commonly known as Touch Tone) generation capability, to enter
-information into the global APRS data network.  Responses can be sent by
-Morse Code or synthesized speech.
-
-  Digipeaters for APRS and traditional Packet Radio.
-
-Extend the range of other stations by re-transmitting their signals. Unmatched
-flexibility for cross band repeating and filtering to limit what is retransmitted.
-
-  Internet Gateway (IGate).
-
-IGate stations allow communication between disjoint radio networks by
-allowing some content to flow between them over the Internet.
-
-  AX.25 v2.2 Link Layer.
-
-When using traditional connected mode packet radio, the sending station TNC
-wants acknowledgements from the receiving station and automatically resends
-any missing frames.  Frames are delivered reliably in the proper sequence.
-
-  KISS Interface (TCP/IP, serial port, Bluetooth).
-  AGW network Interface (TCP/IP).
-
-Dire Wolf can be used as a virtual TNC for applications such
-as   APRSIS32,  Xastir, APRS-TW,YAAC, UISS, Linux  AX25, SARTrack, RMS Express,
-Outpost PM, and many others.
+  Dire Wolf can be used as a virtual TNC for applications such as   APRSIS32,  Xastir, APRS-TW,YAAC, UISS, Linux  AX25, SARTrack, RMS Express, Outpost PM, and many others.
 
 Radio Interfaces:
 
-  Uses computer’s “soundcard” and digital signal processing.
+- **Uses computer’s “soundcard” and digital signal processing.**
 
-Lower cost and better performance than specialized hardware.
+  Lower cost and better performance than specialized hardware.
 
-  Standard 300, 1200, 2400, & 9600 bps modems and more.
+- **Standard 300, 1200, 2400, & 9600 bps modems and more.**
 
-Decodes more than 1000 error-free frames from WA8LMF TNC Test CD.
-New in version 1.6: AIS reception.
-  DTMF (“Touch Tone”) Decoding and Encoding.
-  Speech Synthesizer & Morse code generator.
+  Decodes more than 1000 error-free frames from WA8LMF TNC Test CD. New in version 1.6: AIS reception.
 
-Transmit human understandable messages.
+- **DTMF (“Touch Tone”) Decoding and Encoding.**
 
-  Compatible with Software Defined Radios such as gqrx, rtl_fm, and SDR#.
-  Concurrent operation with up to 3 soundcards and 6 radios.
+- **Speech Synthesizer & Morse code generator.**
+
+  Transmit human understandable messages.
+
+- **Compatible with Software Defined Radios such as gqrx, rtl_fm, and SDR#.**
+
+- **Concurrent operation with up to 3 soundcards and 6 radios.**
 
 Portable & Open Source:
 
-Page 4
-
-
-
-
-
-
-
-
-
-
-
-  Runs on Windows, Linux (PC/laptop, Raspberry Pi, etc.), BSD, Mac OSX.
+- **Runs on Windows, Linux (PC/laptop, Raspberry Pi, etc.), BSD, Mac OSX.**
 
 Software and documentation can be found here:
 
-Main page -- Scroll down to README section - https://github.com/wb2osz/direwolf/
+- Main page -- Scroll down to README section - <https://github.com/wb2osz/direwolf/>
 
-Releases -- https://github.com/wb2osz/direwolf/releases
+- Releases -- <https://github.com/wb2osz/direwolf/releases>
 
-Documentation for most recent stable release --
+- Documentation for most recent stable release -- <https://github.com/wb2osz/direwolf/tree/master/doc>
 
-https://github.com/wb2osz/direwolf/tree/master/doc
+- Documentation for most recent (unstable) development version  -- <https://github.com/wb2osz/direwolf/tree/dev/doc>
 
-Documentation for most recent (unstable) development version  --
-https://github.com/wb2osz/direwolf/tree/dev/doc
+- Wiki  --  <https://github.com/wb2osz/direwolf/wiki>
 
-Wiki  --  https://github.com/wb2osz/direwolf/wiki
-
-See the CHANGES.md file for revision history.
-
-Page 5
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+See the `CHANGES.md` file for revision history.
 
 # Connection to Radio
 
-Receive Audio In:
+- **Receive Audio In:**
 
-For receiving all you need to do is connect your receiver speaker to the “Line In” or microphone
-jack on your computer.
+  For receiving all you need to do is connect your receiver speaker to the “Line In” or microphone jack on your computer.
 
-If you are using a laptop, with a built-in microphone, you could probably just set it near your
-radio’s speaker in a quiet setting.
+  If you are using a laptop, with a built-in microphone, you could probably just set it near your radio’s speaker in a quiet setting.
 
-Transmit Audio Out:
+- **Transmit Audio Out:**
 
-If you want to transmit, you will need to get audio from the computer to the microphone input
-of your transceiver.
+  If you want to transmit, you will need to get audio from the computer to the microphone input of your transceiver.
 
-PTT signal to activate transmitter:
+- **PTT signal to activate transmitter:**
 
-Many alternatives are available:
+  Many alternatives are available:
 
-(a)  RTS signal from RS-232 serial port.
+  * RTS signal from RS-232 serial port.
 
-This is the traditional method but newer computers don’t have them anymore.  You
-could use USB to RS-232 adapter cable if you want to use this method.  Don’t connect it
-directly to your radio!!!  You need a transistor switch or opto-isolator.  Some sample
-circuits are referenced later in this section.
+    This is the traditional method but newer computers don’t have them anymore.  You could use USB to RS-232 adapter cable if you want to use this method.  Don’t connect it directly to your radio!!!  You need a transistor switch or opto-isolator.  Some sample circuits are referenced later in this section.
 
-(b)  General Purpose I/O pins.
+  * General Purpose I/O pins.
 
-Small single board computers, such as the Raspberry Pi, have GPIO pins which are well
-suited for PTT control and a data carrier detect (DCD) LED indicator.  The  Raspberry-Pi-
-APRS.pdf   file contains more details.
+    Small single board computers, such as the Raspberry Pi, have GPIO pins which are well suited for PTT control and a data carrier detect (DCD) LED indicator.  The  Raspberry-Pi- APRS.pdf   file contains more details.
 
-(c)  VOX circuit.
+  * VOX circuit.
 
-This will turn on the transmitter when transmit audio is present.   The  SignaLink USB
-uses this technique.  Be sure to turn the Delay control all the way down (counter
-clockwise) so the transmitter is turned off quickly after the transmit audio stops.  Many
-homebrew designs are also available.
+    This will turn on the transmitter when transmit audio is present.   The  SignaLink USB uses this technique.  Be sure to turn the Delay control all the way down (counter clockwise) so the transmitter is turned off quickly after the transmit audio stops.  Many homebrew designs are also available.
 
-(d)  VOX built in to radio.
+  * VOX built in to radio.
 
-Generally not a good idea.  The VOX circuits are designed for voice operation and will
-keep the transmitter on about a half second after the transmit audio has ended.  This is
-much too long.  Others will probably start transmitting after your transmit audio has
-stopped but your transmitter is still on.
+    Generally not a good idea.  The VOX circuits are designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended.  This is much too long.  Others will probably start transmitting after your transmit audio has stopped but your transmitter is still on.
 
-For an explanation, see the section called, “Radio Channel – Transmit Timing.”
+    For an explanation, see the section called, “Radio Channel – Transmit Timing.”
 
-Page 6
+  * GPIO pins inside of USB Audio adapters.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(e)  GPIO pins inside of USB Audio adapters.
-
-The C-Media CM108 and CM119 chips are very popular for USB to Audio adapters.  They
-have GPIO pins that we can use for the PTT signal.   This is a very tidy solution because
-everything goes through a single USB cable.   Dire Wolf version 1.5 adds support which
-makes these very easy to use.
+    The C-Media CM108 and CM119 chips are very popular for USB to Audio adapters.  They have GPIO pins that we can use for the PTT signal.   This is a very tidy solution because everything goes through a single USB cable.   Dire Wolf version 1.5 adds support which makes these very easy to use.
 
 At this time, I’m aware of four commercial products using this technique:
 
-  DINAH                     https://hamprojects.info/dinah/
-  DMK URI                 http://www.dmkeng.com/URI_Order_Page.htm
-  RB-USB RIM           http://www.repeater-builder.com/products/usb-rim-lite.html
-  RA-35
-   http://www.masterscommunications.com/products/radio-adapter/ra35.html
+- DINAH <https://hamprojects.info/dinah/>
+- DMK URI <http://www.dmkeng.com/URI_Order_Page.htm>
+- RB-USB RIM <http://www.repeater-builder.com/products/usb-rim-lite.html>
+- RA-35 <http://www.masterscommunications.com/products/radio-adapter/ra35.html>
 
 There are several similar homebrew projects:
 
-http://www.qsl.net/kb9mwr/projects/voip/usbfob-119.pdf
-http://rtpdir.weebly.com/uploads/1/6/8/7/1687703/usbfob.pdf
-http://www.repeater-builder.com/projects/fob/USB-Fob-Construction.pdf
-https://irongarment.wordpress.com/2011/03/29/cm108-compatible-chips-
-with-gpio
+- <http://www.qsl.net/kb9mwr/projects/voip/usbfob-119.pdf>
+- <http://rtpdir.weebly.com/uploads/1/6/8/7/1687703/usbfob.pdf>
+- <http://www.repeater-builder.com/projects/fob/USB-Fob-Construction.pdf>
+- <https://irongarment.wordpress.com/2011/03/29/cm108-compatible-chips-with-gpio>
 
 Currently this is implemented for Linux only.
 
-I recommend using some sort of hardware timer to limit transmission time.  Without this, you might end
-up with your transmitter stuck on for a very long time due to a software malfunction.  Alternatively
-some radios have a configurable transmit timeout setting to limit transmission time.
+I recommend using some sort of hardware timer to limit transmission time.  Without this, you might end up with your transmitter stuck on for a very long time due to a software malfunction.  Alternatively some radios have a configurable transmit timeout setting to limit transmission time.
 
-There are many ham radio “soundcard” applications and others have documented this type of interface
-extensively so I won’t duplicate the effort.  Many homebrew plans and commercial products are
-available.  A few random examples:
+There are many ham radio “soundcard” applications and others have documented this type of interface extensively so I won’t duplicate the effort.  Many homebrew plans and commercial products are available.  A few random examples:
 
-  http://wa8lmf.net/ham/tonekeyer.htm#NEW
-  http://www.ebay.com/itm/EASY-DIGI-USB-Sound-Card-Interface-NO-MORE-USB-RS232-
+- <http://wa8lmf.net/ham/tonekeyer.htm#NEW>
+- <http://www.ebay.com/itm/EASY-DIGI-USB-Sound-Card-Interface-NO-MORE-USB-RS232-ADAPTERS-/221668996763>
+- <https://sites.google.com/site/kh6tyinterface/>
+- <http://www.qsl.net/wm2u/interface.html>
+- <http://zs1i.blogspot.com/2010/02/zs1i-soundcard-interface-ii-project.html>
+- <http://www.kb3kai.com/tnc/soft-tnc.pdf>
+- <http://www.dunmire.org/projects/DigitalCommCenter/soundmodem/mySoundCardInterface.png>
 
-ADAPTERS-/221668996763
+Google for something like ham radio sound card interface or ham radio digital mode interface to find others.
 
-  https://sites.google.com/site/kh6tyinterface/
-  http://www.qsl.net/wm2u/interface.html
-  http://zs1i.blogspot.com/2010/02/zs1i-soundcard-interface-ii-project.html
-  http://www.kb3kai.com/tnc/soft-tnc.pdf
-
-
-http://www.dunmire.org/projects/DigitalCommCenter/soundmodem/mySoundCardInterface.png
-
-Google for something like ham radio sound card interface or ham radio digital mode interface to find
-others.
-
-Page 7
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 3.1  Don’t have a serial port?
+## Don’t have a serial port?
 
 Maybe you do but don’t know about it.
 
-My new computer didn’t have a serial port on the back.  This was a disappointment because I still have
-some useful gadgets that use a good old fashioned RS-232 port.  I was surprised to see a serial port and
-parallel printer port displayed in the Device Manager:
+My new computer didn’t have a serial port on the back.  This was a disappointment because I still have some useful gadgets that use a good old fashioned RS-232 port.  I was surprised to see a serial port and parallel printer port displayed in the Device Manager:
+
+<!-- image removed -->
 
 The connectors exist on the motherboard.  It was only necessary to add appropriate cables to bring
 them out to the rear panel.
 
-## 3.2  For Best Results
+## For Best Results
 
 For receiving:
 
-
+- Leave squelch open.
 
-Leave squelch open.
+  Squelch delay will cut off the start of transmissions.  You won’t hear the weak ones at all.
 
-Squelch delay will cut off the start of transmissions.  You won’t hear the weak ones at all.
+  (<https://illruminations.com/2014/01/15/baofeng-packet-radio-adventures/>)
 
-( https://illruminations.com/2014/01/15/baofeng-packet-radio-adventures/ )
+- Turn off any battery saver feature.
 
-  Turn off any battery saver feature.
+  This feature powers the receiver on and off rapidly to extend battery life.  You will miss the beginning of transmissions that come during the power down part of the cycle.
 
-This feature powers the receiver on and off rapidly to extend battery life.  You will miss the
-beginning of transmissions that come during the power down part of the cycle.
+- Turn off any “dual watch” feature.
 
-  Turn off any “dual watch” feature.
-
-This is actually one receiver scanning between two frequencies, not two independent receivers.
+  This is actually one receiver scanning between two frequencies, not two independent receivers.
 
 For transmitting:
 
-Page 8
+- Set proper transmit audio level.
 
+  Too low, you won’t be heard.  Too high will cause distortion and make decoding less likely.
 
+  Most of us don’t have the test equipment to set the deviation level around 3 or 3.5 KHz so we need to listen to other signals and set ours around the average of what others are sending.
 
+- Avoid use of VOX built into your transceiver.
 
+  This is designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended.  This is much too long.  Others will probably start transmitting before you stop.
 
+  For an explanation, see the section called, “Radio Channel – Transmit Timing.”
 
+- If using the Signalink USB, turn the delay down to the minimum (fully counterclockwise).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  Set proper transmit audio level.
-
-Too low, you won’t be heard.  Too high will cause distortion and make decoding less likely.
-
-Most of us don’t have the test equipment to set the deviation level around 3 or 3.5 KHz so we
-need to listen to other signals and set ours around the average of what others are sending.
-
-  Avoid use of VOX built into your transceiver.
-
-This is designed for voice operation and will keep the transmitter on about a half second after
-the transmit audio has ended.  This is much too long.  Others will probably start transmitting
-before you stop.
-
-For an explanation, see the section called, “Radio Channel – Transmit Timing.”
-
-
-
-If using the Signalink USB, turn the delay down to the minimum (fully counterclockwise).
-
-According to the documentation, this should turn off the transmitter around 15 or 30
-milliseconds after the transmit audio has ended.
+  According to the documentation, this should turn off the transmitter around 15 or 30 milliseconds after the transmit audio has ended.
 
 Mobile Rigs:
 
-Transceivers designed for mobile use often have a 6 pin mini-DIN “data” connector designed
-specifically for connection to an external modem.  If available, use this instead of the speaker and
-microphone connections.  This connection has flatter audio response.  Adjusting the volume control
-won’t change the receive audio level going in to the software modem.
+Transceivers designed for mobile use often have a 6 pin mini-DIN “data” connector designed specifically for connection to an external modem.  If available, use this instead of the speaker and microphone connections.  This connection has flatter audio response.  Adjusting the volume control won’t change the receive audio level going in to the software modem.
 
 The next 3 sections contain information specific to different operating systems.  Proceed to the
 corresponding one for your situation.
 
-(4)  Windows XP or later
-(5)  Linux
-(6)  Macintosh OS X
+<!-- add section links -->
+
+-  Windows XP or later
+-  Linux
+-  Macintosh OS X
 
 After installing on your particular operating system, continue with section 7, Basic Operation.
 
-Page 9
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- marker -->
 
 # 4  Installation & Operation – Microsoft Windows XP or later
 
