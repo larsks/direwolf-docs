@@ -1,20 +1,16 @@
-Dire Wolf
-User Guide
+# Dire Wolf User Guide
 
-Decoded
-  Information from
-    Radio
+Decoded  
+  Information from  
+    Radio  
       Emissions for
 
-Windows
-  Or
-    Linux
+Windows  
+  Or  
+    Linux  
       Fans
 
-Version 1.6  --  October  2020
-
-Canis Dirus (Dire Wolf)
-Harvard Museum of Natural History
+![Canis Dirus (Dire Wolf), Harvard Museum of Natural History](images/image-000.png)
 
 ---
 
