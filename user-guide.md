@@ -1954,51 +1954,21 @@ The lines of interest have been highlighted in red.
 
 You should now be able to decode the packets you hear.
 
-<!-- marker -->
 #### Gnu Radio – multiple simultaneous channels
 
 Here is a great tip from the forum, posted by N6BA.   Thanks, Jeff!!!
 
-https://groups.io/g/direwolf/message/3513
+<https://groups.io/g/direwolf/message/3513>
 
-This is a GnuRadio flow graph that listens on 3 frequencies from a single USB attached SDR
-dongle with the output audio sent over UDP.  GRC file attached, which you'll open in gnuradio-
+This is a GnuRadio flow graph that listens on 3 frequencies from a single USB attached SDR dongle with the output audio sent over UDP.  GRC file attached, which you'll open in gnuradio-companion.  You can then subsequently have it generate the python script (sdr_receiver.py) which can then be run from the command line.  You'll need to setup direwolf.conf as below to listen on the three UDP ports.
 
-Page 62
+For this example, the center frequency is 145MHz with the sample rate (for the dongle) set to ~2MHz.  This will let one listen/tune to frequencies anywhere between 144MHz and 146MHz.
 
+<!-- image missing -->
 
+What I've routinely done is to use GnuRadio (ultimately a python script) for listening to multiple frequencies with a single SDR dongle (assuming they're all within ~2.4MHz of each other).  Then have GnuRadio output that audio over a different UDP port for each frequency.  That enables one to get away with just a single SDR stick, antenna, and Dire Wolf instance.  Then have a Dire Wolf configured something like this:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-companion.  You can then subsequently have it generate the python script (sdr_receiver.py)
-which can then be run from the command line.  You'll need to setup direwolf.conf as below to
-listen on the three UDP ports.
-
-For this example, the center frequency is 145MHz with the sample rate (for the dongle) set to
-~2MHz.  This will let one listen/tune to frequencies anywhere between 144MHz and 146MHz.
-
-What I've routinely done is to use GnuRadio (ultimately a python script) for listening to multiple
-frequencies with a single SDR dongle (assuming they're all within ~2.4MHz of each
-other).  Then have GnuRadio output that audio over a different UDP port for each
-frequency.  That enables one to get away with just a single SDR stick, antenna, and Dire Wolf
-instance.  Then have a Dire Wolf configured something like this:
-
+```
 ================ snip =================
 ..
 ..
@@ -2009,21 +1979,7 @@ ARATE 48000
 ACHANNELS 1
 CHANNEL 0
 MYCALL mycall
-
-Page 63
-
-
-
-
-
-
-
-
-
-
-
-
-MODEM 1200
+MODEM 1200
 FIX_BITS 0
 
 # this might be for frequency 144.340
@@ -2047,49 +2003,25 @@ FIX_BITS 0
 ..
 ..
 ======================
+```
 
-It could make sense to run multiple SDR dongles and antennas if you need to listen on
-frequencies on different bands (VHF vs UHF, etc.) or are too far apart, MHz-wise, to allow the
-cheaper dongles to handle.  A single GnuRadio script could still be used with multiple SDR
-dongles as sources, each set to listen on whatever frequencies you're interested in.  However,
-you'll likely get to a point that you'll be asking Dire Wolf to handle more audio channels (aka
-UDP ports) than it can accommodate without recompiling.  In that case you'll need to modify the
-direwolf.h file and up the number for MAX_ADEVS and recompile:
+It could make sense to run multiple SDR dongles and antennas if you need to listen on frequencies on different bands (VHF vs UHF, etc.) or are too far apart, MHz-wise, to allow the cheaper dongles to handle.  A single GnuRadio script could still be used with multiple SDR dongles as sources, each set to listen on whatever frequencies you're interested in.  However, you'll likely get to a point that you'll be asking Dire Wolf to handle more audio channels (aka UDP ports) than it can accommodate without recompiling.  In that case you'll need to modify the direwolf.h file and up the number for MAX_ADEVS and recompile.
 
 Default is 3 within direwolf.h:
+
+```
 #define MAX_ADEVS 3
+```
 
 Cheers,
 -Jeff
 N6BA
 
-Page 64
+#### SDR Troubleshooting
 
+If you can hear packets but they are not being decoded, try adding "-a 10" to the command line.  This will print out the audio sample rate and level each 10 seconds.   In this example,  we see that audio is being received.  However, I "accidentally" forgot to set the audio sample rate in the Dire Wolf configuration file so it defaults to 44100.    The decoder is expecting 44.1k samples per second, but the actual rate is 48k so the decoding will fail.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### 9.1.6.5  SDR Troubleshooting
-
-If you can hear packets but they are not being decoded, try adding "-a 10" to the command line.  This
-will print out the audio sample rate and level each 10 seconds.   In this example,  we see that audio is
-being received.  However, I "accidentally" forgot to set the audio sample rate in the Dire Wolf
-configuration file so it defaults to 44100.    The decoder is expecting 44.1k samples per second, but the
-actual rate is 48k so the decoding will fail.
-
+```
 Reading config file sdrsharp.conf
 Available audio input devices for receive (*=selected):
   0: Microphone (Realtek High Defini
@@ -2117,572 +2049,243 @@ ADEVICE0: Sample rate approx. 48.0 k, 0 errors, receive audio level CH0 62
 ADEVICE0: Sample rate approx. 48.1 k, 0 errors, receive audio level CH0 52
 
 ADEVICE0: Sample rate approx. 47.9 k, 0 errors, receive audio level CH0 55
+```
 
-The reported sample rate will vary a little, especially for short collection intervals.  This is because the
-audio samples are transferred in large blocks for efficiency rather than a steady stream of one at a time.
-The last number on the line is the audio level.  It should be somewhere in the range of 10 to 100 when
-hearing static.
+The reported sample rate will vary a little, especially for short collection intervals.  This is because the audio samples are transferred in large blocks for efficiency rather than a steady stream of one at a time. The last number on the line is the audio level.  It should be somewhere in the range of 10 to 100 when hearing static.
 
-Page 65
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 9.2  Radio channel configuration
+## Radio channel configuration
 
 As mentioned above you can have up to six radio channels.   Specify options for each channel like this:
 
-CHANNEL  0
-(options for first (left) or only channel of first device: MYCALL, MODEM, PTT, etc.)
+- `CHANNEL  0`
 
-CHANNEL 1
-(options for second channel if first device is operating in stereo.)
+  (options for first (left) or only channel of first device: MYCALL, MODEM, PTT, etc.)
+
+- `CHANNEL 1`
+
+  (options for second channel if first device is operating in stereo.)
 
 Each of the following MYCALL, MODEM, PTT, and so on, applies to the most recent CHANNEL command.
 
-### 9.2.1  Radio channel – MYCALL
+### Radio channel – MYCALL
 
-Multiple radio channels can use the same or different station identifiers.  This is required for beaconing
-or digipeating.  Example:
+Multiple radio channels can use the same or different station identifiers.  This is required for beaconing or digipeating.  Example:
 
+```
 MYCALL  WB2OSZ-5
+```
 
-The AX.25 specification requires that the call is a maximum of 6 upper case letters and digits.   The
-substation id (SSID), if specified, must be in the range of 1 to 15.
+The AX.25 specification requires that the call is a maximum of 6 upper case letters and digits.   The substation id (SSID), if specified, must be in the range of 1 to 15.
 
-### 9.2.2  Radio channel - Modem configuration , general form
+### Radio channel - Modem configuration , general form
 
-Each radio channel can be configured separately for different speeds and modem properties.   The
-general form of the configuration option is:
+Each radio channel can be configured separately for different speeds and modem properties.   The general form of the configuration option is:
 
+```
 MODEM  speed  [ option ]...
+```
 
 In most cases, you can just specify the speed and take the other defaults.
 
-MODEM  300
-MODEM  1200
-MODEM  9600
-MODEM  AIS
-
--- for HF SSB
--- most common for VHF/UHF
--- needs wider bandwidth audio
--- special case of 9600 for tracking ships
+- `MODEM  300` -- for HF SSB
+- `MODEM  1200` -- most common for VHF/UHF
+- `MODEM  9600` -- needs wider bandwidth audio
+- `MODEM  AIS` -- special case of 9600 for tracking ships
 
 For special situations you can override the defaults with these options:
 
-Form
-mark:space
+<!-- table missing -->
 
-Purpose
-Specify non-default tone
-pair for AFSK modes.
-Use 0:0 to for K9NG/G3RUH
-style baseband.
+*Note:  The @ and + options are mutually exclusive.  Both can't be used at the same time on the same channel.*
 
-Applicable to
-All.
+### Radio channel - Modem configuration  for 1200 baud
 
-Example, Comments
-2130:2230 for AEA/timewave PK-
-232 HF tones.
+The default configuration is 1200 baud, AFSK with 1200 & 2200 Hz tones for VHF FM use.   If you omit the configuration, the default is the same as using either one of these:
 
-Page 66
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-num@offset
-
-/n
-
-Configure ‘num' different
-demodulators with center
-frequencies shifted by
-‘offset' Hz.
-Divide audio sampling
-frequency to reduce CPU
-speed requirement.
-
-A B C D E + -
-
-Pick demodulator version
-and optional multiple
-slicers.
-
-Mostly 300 baud
-on HF SSB.
-
-5@30  could be used to
-compensate for other transmitters
-off frequency.
-
-The multiple
-demodulator
-case, very old
-computer, or
-micrcocomputer.
-
-/2 means use half the normal
-audio sample rate.
-
-On the ARM processor, this
-defaults to /3.  Full sampling speed
-can be restored with /1.
-
-A, B, C, and E are
-for 1200 baud
-AFSK.  D is
-optimized for
-300 baud.
-"+" is applicable
-to 1200 and
-9600.
-
-Do not use for 9600 baud.
-More details in the receive
-performance section.  Short
-answer:  A, B , C  are obsolete.
-
-D is the default for 300 baud.
-
-E+ is the default for 1200 and
-compensates for differences in
-mark/space tone amplitudes.
-
-Different demodulator types
-for 2400 & 4800 bps PSK.
-
-2400 & 4800 bps
-PSK
-
-P Q R S
-T U V W
-
-G3RUH
-
-V26A
-V26B
-
-Force K9NG/G3RUH mode
-when the default modem
-would be different for the
-speed.
-Compatibility with V.26
-alternatives.
-
-The letters are only for AFSK
-modes and do NOT apply to 9600
-baud.
-See separate document, 2400-
-4800-PSK-for-APRS-Pack-
-Radio.pdf  for more details.
-Some satellites use this type of
-encoding at 2400 bits/sec.
-
-2400 bps PSK
-
-V26A is compatible with Dire Wolf
-version < 1.6.
-V26B is compatible with MFJ-
-2400.
-
-Note:  The @ and + options are mutually exclusive.  Both can't be used at the same time on the same
-channel.
-
-### 9.2.3  Radio channel - Modem configuration  for 1200 baud
-
-The default configuration is 1200 baud, AFSK with 1200 & 2200 Hz tones for VHF FM use.   If you omit
-the configuration, the default is the same as using either one of these:
-
+```
 MODEM  1200
+MODEM  1200  1200:2200  E+
+```
 
-Page 67
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-MODEM  1200  1200:2200  E+
-
-The "+" demodulator option compensates for the variety of FM transceiver pre-emphasis / de-emphasis
-mismatch.  The accompanying document  "A-Better-APRS-Packet-Demodulator.pdf" covers this in great
-detail.   This is on by default but you can deactivate it with "-".
+The "+" demodulator option compensates for the variety of FM transceiver pre-emphasis / de-emphasis mismatch.  The accompanying document  "**A-Better-APRS-Packet-Demodulator.pdf**" covers this in great detail.   This is on by default but you can deactivate it with "-".
 
 Demodulator style E+ is the default.
 
-Both send and receive must use the same speed and modulation type.  In special situations, such as a
-satellite, you might want to receive 9600 baud and transmit 1200 baud.  In this case you would need to
-use two different channels, one for transmit, and one for receive.
+Both send and receive must use the same speed and modulation type.  In special situations, such as a satellite, you might want to receive 9600 baud and transmit 1200 baud.  In this case you would need to use two different channels, one for transmit, and one for receive.
 
-### 9.2.4  Radio channel - Modem configuration  for 300 baud HF
+### Radio channel - Modem configuration  for 300 baud HF
 
-The following are equivalent suitable configurations for 300 baud HF SSB operation using the popular
-1600 / 1800 Hz tone pair.
+The following are equivalent suitable configurations for 300 baud HF SSB operation using the popular 1600 / 1800 Hz tone pair.
 
+```
 MODEM  300
 MODEM  300  1600:1800
 MODEM  300  1600:1800  D
+```
 
-When using HF SSB, any mistuning or poor calibration can cause the audio frequencies to shift.  These
-are less likely to be decoded properly.  For this situation, we can configure multiple decoders per
-channel, each tuned to a different pair of audio frequencies.   With this example, we have 7 different
-modems, spaced at 30 Hz apart.
+When using HF SSB, any mistuning or poor calibration can cause the audio frequencies to shift.  These are less likely to be decoded properly.  For this situation, we can configure multiple decoders per channel, each tuned to a different pair of audio frequencies.   With this example, we have 7 different modems, spaced at 30 Hz apart.
 
+```
 MODEM  300  7@30
+```
 
-When the application starts up, the modem configuration is confirmed along with the audio frequencies
-for each.   This should be able to tolerate mistuning of 100 Hz in each direction.
+When the application starts up, the modem configuration is confirmed along with the audio frequencies for each.   This should be able to tolerate mistuning of 100 Hz in each direction.
 
-When multiple modems are configured per channel, a simple spectrum display reveals which decoders
-picked up the signal properly.
+<!-- image missing -->
 
-|
-:
-.
-_
+When multiple modems are configured per channel, a simple spectrum display reveals which decoders picked up the signal properly.
 
-means a frame was received with no error.
-means a frame was received with a single bit error.  (FIX_BITS 1 or higher configured.)
-means a frame was received with multiple errors.  (FIX_BITS 2 or higher configured.)
-means nothing was received on this decoder.
+- `|` means a frame was received with no error.
+- `:` means a frame was received with a single bit error.  (FIX_BITS 1 or higher configured.)
+- `.` means a frame was received with multiple errors.  (FIX_BITS 2 or higher configured.)
+- `_` means nothing was received on this decoder.
 
-Page 68
+Here are some samples and what they mean.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Here are some samples and what they mean.
-
+```
 ___|___
+```
 
 Only the center decoder (e.g. 1600/1800 Hz) was successful.
 
+```
 _|||___
+```
 
-3 different lower frequency modems received it properly.
-Assuming USB operation, the transmitting station is probably a
-little low in frequency.
+3 different lower frequency modems received it properly. Assuming USB operation, the transmitting station is probably a little low in frequency.
 
+```
 ___|||:
+```
 
-3 different higher frequency modems received it with no error.
-The highest one received it with a single bit error.
+3 different higher frequency modems received it with no error. The highest one received it with a single bit error.
 
 Here are some typical signals heard on 10.1476 MHz USB.
 
+<!-- image missing -->
+
 The beginning of the monitor line shows the radio channel and which modem was used.
 
-The "+" option would not be useful for 300 baud HF SSB because we don't have the FM pre-emphasis /
-de-emphasis that causes the two tone amplitudes to be way out of balance.
+The "+" option would not be useful for 300 baud HF SSB because we don't have the FM pre-emphasis / de-emphasis that causes the two tone amplitudes to be way out of balance.
 
-Running several demodulators in parallel can consume a lot of CPU time.  You will probably want to use
-the "/n" option in this case to reduce the audio sample rate and CPU load.
+Running several demodulators in parallel can consume a lot of CPU time.  You will probably want to use the "/n" option in this case to reduce the audio sample rate and CPU load.
 
-### 9.2.5  Radio channel - Modem configuration  for 9600 baud
+### Radio channel - Modem configuration  for 9600 baud
 
 K9NG / G3RUH style baseband with scrambling is used with there are no AFSK tones specified:
 
+```
 MODEM  9600
+MODEM  9600  0:0
+```
 
-Page 69
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-MODEM  9600  0:0
-
-Using the "/n" option would be a very bad idea in this case.  We need the high sample rate to capture
-the high baud rate.
+**Using the "/n" option would be a very bad idea in this case.  We need the high sample rate to capture the high baud rate.**
 
 The demodulator types (A, B, C, ...) are only for the AFSK modes.  They are not applicable to 9600 baud.
 
-The "+" option can also be useful in this case but for a different reason.  There are no tones but a DC
-offset can be introduced with using a software defined radio (SDR).   This will be explained in a later
-update to "A-Better-APRS-Packet-Demodulator."
+The "+" option can also be useful in this case but for a different reason.  There are no tones but a DC offset can be introduced with using a software defined radio (SDR).   This will be explained in a later update to "A-Better-APRS-Packet-Demodulator."
 
-As mentioned in an earlier section, this won't work with the microphone and speaker connection on
-your transceiver.  The audio amplifiers, designed for voice, do not have enough bandwidth and distort
-the signal so it is not usable.
+As mentioned in an earlier section, this won't work with the microphone and speaker connection on your transceiver.  The audio amplifiers, designed for voice, do not have enough bandwidth and distort the signal so it is not usable.
 
-For more information on this mode, see  Going-Beyond-9600-baud.pdf.
+For more information on this mode, see **Going-Beyond-9600-baud.pdf**.
 
-### 9.2.6  Radio channel - Modem configuration  for 2400 bps
+### Radio channel - Modem configuration  for 2400 bps
 
 K9NG / G3RUH style baseband with scrambling is used with there are no AFSK tones specified:
 
-MODEM 2400 V26A
-MODEM 2400 V26B
-
--- compatible with Dire Wolf version < 1.6
--- compatible with MFJ-2400
+- `MODEM 2400 V26A` -- compatible with Dire Wolf version < 1.6
+- `MODEM 2400 V26B` -- compatible with MFJ-2400
 
 For more details on this mode, see  2400-4800-PSK-for-APRS-Packet-Radio.pdf.
 
-### 9.2.7  Radio Channel - Allow frames with bad CRC
+### Radio Channel - Allow frames with bad CRC
 
-Normally we want to reject any received frame if the CRC is not perfect.   Dire Wolf can optionally try to
-fix a small number of corrupted bits.   "Fix" is probably too strong of a word.  It's really guessing  and
-there is no guarantee that it is right.
+Normally we want to reject any received frame if the CRC is not perfect.   Dire Wolf can optionally try to fix a small number of corrupted bits.   "Fix" is probably too strong of a word.  It's really guessing  and there is no guarantee that it is right.
+
+<!-- TODO -->
 
 See section called "One Bad Apple Don't Spoil the Whole Bunch" for more discussion.
 
-Previously it was a global setting that applied to all channels.  In Version 1.2, it applies to the most
-recent CHANNEL so different radio channels can have different settings .
+Previously it was a global setting that applied to all channels.  In Version 1.2, it applies to the most recent CHANNEL so different radio channels can have different settings .
 
 The general format is:
-
+ 
+ ```
 FIX_BITS  effort_level  [ sanity_check ] [PASSALL ]
+```
 
-Where,
+Where:
 
-effort_level  indicates the amount of effort to modify the frame to get a valid CRC.
+- `effort_level`  indicates the amount of effort to modify the frame to get a valid CRC.
 
-0 means no attempt.
-1 means try changing single bits.  (default)
-2 means try changing two adjacent bits.
+  * 0 means no attempt.
+  * 1 means try changing single bits.  (default)
+  * 2 means try changing two adjacent bits.
 
-Page 70
+  Larger values are not recommended because it can take a lot of processing time and there is a high probability of getting bad data.
 
+- `sanity_check`  adds a heuristic to guess whether the fix up attempt was successful.
 
+  * APRS  tests whether it looks like a valid APRS packet.  (default)
+  * AX25  only checks the address part.  Suitable for non-APRS packet.
+  * NONE  bypasses the sanity check.
 
+- `PASSALL`  means allow the frame through after exhausting all fix up attempts.
 
+  Occasionally you might see something resembling a valid packet but most of the Time it will just be random noise.  Examples:
 
+  ```
+  audio level = 45(32/16)   [PASSALL]
+  [0] <0xc0>k<0xe3>)<0x15><0xe5><0xe7>y<0xd6>r<0xeb>Um<0x8a>#
 
+  audio level = 28(23/19)   [PASSALL]
+  [0] <0xa4><0xa6>"<0xa7>f<0xa2><0xa0><0x96>b<0x9a><0x92><0x88>@<0xe4><0x96><0x84>
+  b<0xa0><0x9e><0xa4><0xe4><0xae>b<0x9a><0xa4><0x82>@<0xe0><0xae><0x92><0x84>
+  <0x8a>d@c<0x03><0xf0>'cFwmH'>/=KEN<0x10>FROM COMTOOCOOK,N.H.<0x0d>
+  ```
 
+Only error-free frames are digipeated or passed along to an APRTS-IS server.  Propagating possibly corrupt data would not be acting responsibly.  Note that these frames are passed along to attached applications.  If they pass along data to someone else, it could be corrupt.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Larger values are not recommended because it can take a lot of processing time and
-there is a high probability of getting bad data.
-
-sanity_check  adds a heuristic to guess whether the fix up attempt was successful.
-
-APRS  tests whether it looks like a valid APRS packet.  (default)
-AX25  only checks the address part.  Suitable for non-APRS packet.
-NONE  bypasses the sanity check.
-
-PASSALL  means allow the frame through after exhausting all fix up attempts.
-
-Occasionally you might see something resembling a valid packet but most of the
-Time it will just be random noise.  Examples:
-
-audio level = 45(32/16)   [PASSALL]
-[0] <0xc0>k<0xe3>)<0x15><0xe5><0xe7>y<0xd6>r<0xeb>Um<0x8a>#
-
-audio level = 28(23/19)   [PASSALL]
-[0] <0xa4><0xa6>"<0xa7>f<0xa2><0xa0><0x96>b<0x9a><0x92><0x88>@<0xe4><0x96><0x84>
-b<0xa0><0x9e><0xa4><0xe4><0xae>b<0x9a><0xa4><0x82>@<0xe0><0xae><0x92><0x84>
-<0x8a>d@c<0x03><0xf0>'cFwmH'>/=KEN<0x10>FROM COMTOOCOOK,N.H.<0x0d>
-
-Only error-free frames are digipeated or passed along to an APRTS-IS server.  Propagating possibly
-corrupt data would not be acting responsibly.  Note that these frames are passed along to attached
-applications.  If they pass along data to someone else, it could be corrupt.
-
-### 9.2.8  Radio channel – DTMF Decoder
+### Radio channel – DTMF Decoder
 
 A DTMF ("Touch Tone") decoder can be enabled, for the current channel, with this command:
 
+```
 DTMF
+```
 
 You can confirm that the option is selected from the message at application start up time:
 
+```
 Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, C+, 44100 sample rate, DTMF decoder enabled.
+```
 
-### 9.2.9  Radio Channel – Push to Talk (PTT)
+### Radio Channel – Push to Talk (PTT)
 
 There are up to five different methods available for activating your transmitter.
 
-  Serial port control lines.
-  General Purpose I/O pins. (Linux only)
-  Parallel Printer Port. (Linux only)
-
-"hamlib" (optional, Linux only)
-  GPIO pins of CM108/CM119 chip in USB audio adapter.  (optional, Linux only)
-  VOX (voice operated transmit) – External hardware activates the transmitter when transmit
+- Serial port control lines.
+- General Purpose I/O pins. (Linux only)
+- Parallel Printer Port. (Linux only)
+- "hamlib" (optional, Linux only)
+- GPIO pins of CM108/CM119 chip in USB audio adapter.  (optional, Linux only)
+- VOX (voice operated transmit) – External hardware activates the transmitter when transmit audio is present.
 
-audio is present.
+  Using VOX built in to a transceiver is generally a bad idea.  This is designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended.  This is much too long.  Others will probably start transmitting before you stop.
 
-Page 71
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Using VOX built in to a transceiver is generally a bad idea.  This is designed for voice
-operation and will keep the transmitter on about a half second after the transmit audio
-has ended.  This is much too long.  Others will probably start transmitting before you
-stop.
-
-For an explanation, see the section called, "Radio Channel – Transmit Timing."
+  For an explanation, see the section called, "Radio Channel – Transmit Timing."
 
 When PTT has not been configured, you will see a message like this at start up time:
 
+```
 Note: PTT not configured for channel 0. (Ignore this if using VOX.)
+```
 
-You don't need to configure an output control line when using VOX so just ignore the informational
-note.
+You don't need to configure an output control line when using VOX so just ignore the informational note.
 
-#### 9.2.9.1  PTT with serial port RTS or DTR
+#### PTT with serial port RTS or DTR
+
+<!-- marker -->
 
 To use a serial port (either built-in or a USB to RS232 adapter cable), use an option of this form:
 
