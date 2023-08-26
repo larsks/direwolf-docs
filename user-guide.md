@@ -61,7 +61,7 @@ Back on 2006, the Stensat Group came up with a clever way to add Reed-Solmon  Fo
 
 For more than a decade this remained in the realm of satellite operation. Now that it is available in general purpose software TNCs, such as Dire Wolf and UZ7HO Soundmodem, it is very easy to add to existing APRS and other Packet Radio communication.
 
-<!-- image removed -->
+<!-- image missing -->
 
 Depending on the FX.25 mode, up to 32 corrupted bytes (yes, bytes, not bits) can be corrected in a frame. Regular AX.25 fails if even a single bit gets corrupted. **FX.25 keeps going strong long after regular AX.25 is completely useless.**
 
@@ -211,7 +211,7 @@ Maybe you do but don't know about it.
 
 My new computer didn't have a serial port on the back. This was a disappointment because I still have some useful gadgets that use a good old fashioned RS-232 port. I was surprised to see a serial port and parallel printer port displayed in the Device Manager:
 
-<!-- image removed -->
+<!-- image missing -->
 
 The connectors exist on the motherboard. It was only necessary to add appropriate cables to bring
 them out to the rear panel.
@@ -300,7 +300,7 @@ You should end up with a new folder containing:
 
 In Windows Explorer, right click on `direwolf.exe` and pick **Send To > Desktop** (create shortcut).
 
-<!-- image removed -->
+<!-- image missing -->
 
 Look for the new direwolf.exe icon on your desktop.
 
@@ -308,11 +308,11 @@ Look for the new direwolf.exe icon on your desktop.
 
 Double click on the desktop icon...
 
-<!-- image removed -->
+<!-- image missing -->
 
 ...and you should get a new window similar to this:
 
-<!-- image removed -->
+<!-- image missing -->
 
 It starts with some informational messages in black.
 
@@ -358,7 +358,7 @@ Dire Wolf provides a server function with the "AGW TCPIP Socket Interface" on de
 
 A common complaint is that "messages" are not being sent. It is necessary to enable the messages option in the TNC port configuration.
 
-<!-- image removed -->
+<!-- image missing -->
 
 By default it is off. An attempt to send an APRS "message" does nothing and doesn't produce any sort of warning.
 
@@ -390,7 +390,7 @@ By default it is off. An attempt to send an APRS "message" does nothing and does
 4. If SARTrack and Dire Wolf are running on different computers, enter the address of the host
 where Dire Wolf is running.
 
-    <!-- image removed -->
+    <!-- image missing -->
 
     Later versions of SARTrack now have a special Dire Wolf button.
 
@@ -504,7 +504,7 @@ If you want to generate code for a 32 bit target (i.e. Windows XP), also install
 
 Open a Cygwin command window by double clicking this desktop shortcut.
 
-<!-- image removed -->
+<!-- image missing -->
 
 Edit your `~/.bash_profile` file and add the following:
 
@@ -1128,103 +1128,59 @@ If you are having Mac-specific issues, post your question to this discussion gro
 
 - <https://groups.io/g/direwolf>
 
-<!-- marker -->
+# Basic Operation
 
-# 7  Basic Operation
+Dire Wolf is not an interactive application.  It has no graphical user interface.  It is meant to be a replacement for a physical TNC used by other applications.  It has a dumb terminal output so you can watch what is going on for troubleshooting.
 
-Dire Wolf is not an interactive application.  It has no graphical user interface.  It is meant to be a
-replacement for a physical TNC used by other applications.  It has a dumb terminal output so you can
-watch what is going on for troubleshooting.
+The exact appearance will vary depending on the version you are using.  Some of these illustrations might be from an earlier version and look slightly different than the current version.
 
-The exact appearance will vary depending on the version you are using.  Some of these illustrations
-might be from an earlier version and look slightly different than the current version.
-
-## 7.1  Start up configuration information
+## Start up configuration information
 
 You should see something like this for the Windows version:
 
-It starts off listing the available audio devices.  In this case, we have a cheap USB Audio adapter and the
-others are part of the motherboard.  A device, other than the default, can be specified in the
-configuration file.  Details are in a later section.
+<!-- image missing -->
 
-Page 34
+It starts off listing the available audio devices.  In this case, we have a cheap USB Audio adapter and the others are part of the motherboard.  A device, other than the default, can be specified in the configuration file.  Details are in a later section.
 
+You should see something like this for the Linux version:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-You should see something like this for the Linux version:
+<!-- image missing -->
 
 It starts with:
-  The version number.
-  Audio device(s) being used.
-  Modem configuration.
-  A reminder that serial port KISS is off by default.
-  Port numbers for use by client applications.
 
-## 7.2  Information for receiving and transmitting
+- The version number.
+- Audio device(s) being used.
+- Modem configuration.
+- A reminder that serial port KISS is off by default.
+- Port numbers for use by client applications.
+
+## Information for receiving and transmitting
 
 Different types of information are color coded:
 
-  Black for information.
-  Dark Green for the audio level.  More about this below.
-  Green for received data.   (Note:  Bright green can be very difficult to read with a white
+- **Black** for information.
+- **Dark Green** for the audio level.  More about this below.
+- **Green** for received data.   (Note:  Bright green can be very difficult to read with a white background.  Starting in version 1.6, only dark green will be used.)
+- **Blue** for a decoded version of the raw data.
 
-background.  Starting in version 1.6, only dark green will be used.)
+  The first line contains:
 
-  Blue for a decoded version of the raw data.
+  * the message type (e.g. MIC-E, Position, or Weather)
+  * symbol to be displayed (e.g. Truck, House)
+  * equipment model or software application
+  * MIC-E status (In Service, En Route, Off Duty, ...)
+  * transmitter power, antenna height, gain, and direction.
 
-o  The first line contains:
+  The second line contains:
 
-
-the message type (e.g. MIC-E, Position, or Weather)
-
-symbol to be displayed (e.g. Truck, House)
-  equipment model or software application
-  MIC-E status (In Service, En Route, Off Duty, ...)
-
+  * Latitude & longitude, speed, course (direction in degrees), altitude
+  * The optional third line contains a comment or weather information.
 
-transmitter power, antenna height, gain, and direction.
+- **Magenta** for transmitted data. In this case, each line is preceded by the radio channel and priority.   0 for the first channel, 1 for the second if used.  "H" means high priority for digipeated packets.  "L" is for lower priority packets originating at this station.
 
-o  The second line contains:
+- **Red** for errors.  If a newcomer is wondering why his transmissions are not showing up in other applications, these error messages might provide a clue about the problem.
 
-
-
-Latitude & longitude, speed, course (direction in degrees), altitude
-
-Page 35
-
-
-
-
-
-
-
-
-
-
-
-
-o  The optional third line contains a comment or weather information.
-
-  Magenta for transmitted data.   In this case, each line is preceded by the radio channel and
-
-priority.   0 for the first channel, 1 for the second if used.  "H" means high priority for digipeated
-packets.  "L" is for lower priority packets originating at this station.
-Red for errors.  If a newcomer is wondering why his transmissions are not showing up in other
-applications, these error messages might provide a clue about the problem.
-
-
+<!-- image missing -->
 
 Other common errors are pointed out to help troubleshoot why signals are not interpreted as the
 sender probably expected.
@@ -1232,156 +1188,71 @@ sender probably expected.
 The  APRS specification requires upper case letters for the hemisphere.  Many systems will also
 recognize lower case, but don't bet on it.
 
-Page 36
+<!-- image missing -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-A "Positionless Weather Report" with the data type indicator of "_" requires a minimum of wind and
+A "Positionless Weather Report" with the data type indicator of "`_`" requires a minimum of wind and
 temperature information in a specific format.
 
-Here are some failed attempts to put a degree symbol in the comment.   Trying to use characters from
-Microsoft code page 437 or ISO 8859-1 (Latin 1) are valiant attempts but wrong because APRS uses
-UTF-8 for non-ASCII characters.
+<!-- image missing -->
 
-Some APRS-capable transceivers will recognize a frequency in a standard format.  Press the TUNE button
-and the voice channel will be switched to that frequency.  In the example below, it won't happen
-because the frequency is not in the proper format.
+Here are some failed attempts to put a degree symbol in the comment.   Trying to use characters from Microsoft code page 437 or ISO 8859-1 (Latin 1) are valiant attempts but wrong because APRS uses UTF-8 for non-ASCII characters.
 
-Here is a situation where a repeater is being advertised.   If the "88.5" in the comment had been in the
-proper format, suitably equipped radios would be able to set the PL tone automatically.
+<!-- image missing -->
 
-Page 37
+Some APRS-capable transceivers will recognize a frequency in a standard format.  Press the TUNE button and the voice channel will be switched to that frequency.  In the example below, it won't happen because the frequency is not in the proper format.
 
+<!-- image missing -->
 
+Here is a situation where a repeater is being advertised.   If the "88.5" in the comment had been in the proper format, suitably equipped radios would be able to set the PL tone automatically.
 
+<!-- image missing -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-That's it.  You can't interact with it directly.  Use one of the many APRS / packet radio applications
-designed to interface with a physical TNC.
+That's it.  You can't interact with it directly.  Use one of the many APRS / packet radio applications designed to interface with a physical TNC.
 
 There is quite a bit of information packed in there.
 
-The first line of each group contains the audio level of the station heard.  This number depends on the
-volume level of your receiver and the gain setting of the computer audio input.  The absolute numbers
-have no meaning but the relative values are revealing.
+The first line of each group contains the audio level of the station heard.  This number depends on the volume level of your receiver and the gain setting of the computer audio input.  The absolute numbers have no meaning but the relative values are revealing.
 
 Consider the items circled above.
 
-
-
+<!-- image missing -->
 
-In the first case, we are hearing the original transmission directly.
-In the other two cases, we are hearing the same thing from two different digipeaters.
+- In the first case, we are hearing the original transmission directly.
+- In the other two cases, we are hearing the same thing from two different digipeaters.
 
-Page 38
+Notice that the audio levels vary quite a bit.  If the level is too high, clipping will occur resulting in signal distortion and a much lower chance of being demodulated properly.
 
+Dire Wolf has an automatic gain control and can handle a very wide range of audio signal levels.  Other systems are not as forgiving.
 
+A station using Dire Wolf can monitor the audio levels and advice those which are significantly different than most others.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Notice that the audio levels vary quite a bit.  If the level is too high, clipping will occur resulting in signal
-distortion and a much lower chance of being demodulated properly.
-
-Dire Wolf has an automatic gain control and can handle a very wide range of audio signal levels.  Other
-systems are not as forgiving.
-
-A station using Dire Wolf can monitor the audio levels and advice those which are significantly different
-than most others.
-
--
-
-(Image above needs to be updated for newer version)   The numbers, in parentheses, after the
-audio level are explained in                A-Better-Packet-Demodulator-Part-1-1200-baud.pdf   &
-A-Closer-Look-at-the WA8LMF-TNC-Test-CD.pdf.
+- (Image above needs to be updated for newer version)   The numbers, in parentheses, after the audio level are explained in **A-Better-Packet-Demodulator-Part-1-1200-baud.pdf** & **A-Closer-Look-at-the WA8LMF-TNC-Test-CD.pdf**.
 
 The second line of each group has the raw received data.  It has the following parts:
 
-"[0]" indicates it was received on the first (or only) radio channel.
+- "[0]" indicates it was received on the first (or only) radio channel.
+- The source station.
+- The "destination" which is a misleading name.  For the MIC-E encoding it is part of the location. In most other cases, it identifies the type of device or software application.
+- Digipeaters.  "`*`" indicates it is the station we are actually receiving.
+- Finally the information part of the packet.  Notice that unprintable characters are represented by their hexadecimal representation such as "`<0x1c>`". This is the same convention used by <http://aprs.fi>
 
-
-  The source station.
-  The "destination" which is a misleading name.  For the MIC-E encoding it is part of the location.
+<!-- image missing -->
 
-In most other cases, it identifies the type of device or software application.
+Finally we have decoded information in blue.
 
-  Digipeaters.  "*" indicates it is the station we are actually receiving.
-  Finally the information part of the packet.  notice that unprintable characters are represented
-by their hexadecimal representation such as "<0x1c>".   This is the same convention used by
-http://aprs.fi
-
-Page 39
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Finally we have decoded information in blue.
-
-The first line contains the message type, symbol, and other station attributes such as
-equipment/application type.
+The first line contains the message type, symbol, and other station attributes such as equipment/application type.
 
 The second line is the location and optional speed and direction of travel.
 
 The final line has any comment or weather information.
 
-## 7.3  Periodic audio device statistics
+## Periodic audio device statistics
 
-This can be a useful troubleshooting tool if packets are not being decoded as expected.   Is received
-audio getting to the decoder?  Is the audio interface producing the proper sample rate?
+This can be a useful troubleshooting tool if packets are not being decoded as expected.   Is received audio getting to the decoder?  Is the audio interface producing the proper sample rate?
 
-On the command line, use "-a" followed by the number of seconds between reports.    10 is a good
-number for trouble shooting.  If the interval is too short there will be significant variation in the sample
-rate due to the way the counts are collected.  Example:
+On the command line, use "-a" followed by the number of seconds between reports.    10 is a good number for trouble shooting.  If the interval is too short there will be significant variation in the sample rate due to the way the counts are collected.  Example:
 
+```
 ADEVICE0: Sample rate approx. 44.1 k, 0 errors, receive audio levels CH0 90, CH1 0
 
 Digipeater WIDE2 (probably N3LEE-4) audio level = 40(19/11)   [NONE]   _||||||||
@@ -1391,513 +1262,204 @@ Position, OVERLAY DIGI (green star) w/overlay D, Kantronics KPC-3 rom versions, 
 height=640 3dBi omni
 N 43 45.3300, W 071 27.4800
 /W1, Moultonboro W1CNH-5
-
-Page 40
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ADEVICE0: Sample rate approx. 44.1 k, 0 errors, receive audio levels CH0 112, CH1 0
+ADEVICE0: Sample rate approx. 44.1 k, 0 errors, receive audio levels CH0 112, CH1 0
+```
 
 The parts of the message:
 
-ADEVICE0
+- `ADEVICE0` means it is the first audio device (sound card).  ADEVICE1 for the second, etc.
+- `44.1 k` is the approximate average sample rate during the interval.  If this is off significantly, there is something wrong with the audio input system.  For example,  one time use of a USB hub for an audio adapter caused this to be 42.8 k.  Many samples were getting lost.
+- `CH0  90` shows a audio input is working for channel 0.   If no frames are being decoded, leave the squelch open and set audio input gain so this is somewhere in the 30 to 150 range.
+- `CH1  0` shows that channel 1 has no audio input.  In this case we are running in the audio device in stereo with the right channel disconnected.
 
-means it is the first audio device (sound card).  ADEVICE1 for the second, etc.
-
-44.1 k
-
-CH0  90
-
-is the approximate average sample rate during the interval.  If this is off
-significantly, there is something wrong with the audio input system.  For
-example,  one time use of a USB hub for an audio adapter caused this to
-be 42.8 k.  Many samples were getting lost.
-
-shows a audio input is working for channel 0.   If no frames are being decoded,
-leave the squelch open and set audio input gain so this is somewhere in the
-30 to 150 range.
-
-CH1  0
-
-shows that channel 1 has no audio input.  In this case we are running in
-the audio device in stereo with the right channel disconnected.
-
-You may have noticed that the received packet has an audio level of 40 but the reports in between are
-roughly 2 or 3 times greater.  This is because the noise, with squelch open, is louder than the received
-packets.
+You may have noticed that the received packet has an audio level of 40 but the reports in between are roughly 2 or 3 times greater.  This is because the noise, with squelch open, is louder than the received packets.
 
 If you are getting insufficient audio, check the cabling and the audio input gain.
 
 If using Linux, run "alsamixer" and look for the microphone, or line input.    "MM" indicates it is muted.
 
-Select it by using the  and  keys.    Press the ‘m" key to unmute it.   The "MM" should change to
-"00."
+<!-- image missing -->
 
-Page 41
+Select it by using the `<-` and `->` keys.    Press the "m" key to unmute it. The "MM" should change to "00."
 
+<!-- image missing -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Then use the ↑ key to increase the gain.
+Then use the ↑ key to increase the gain.
 
 You want any auto gain control to be off.
 
-"MM" indicates that it is off.  If you see "00" instead, use the  and  keys to select it and press
-"M" to toggle it.
+<!-- image missing -->
 
-Page 42
+"MM" indicates that it is off.  If you see "00" instead, use the `<-` and `->` keys to select it and press "M" to toggle it.
 
+# Data Rates
 
+Packet radio can be sent over many different speeds and modulation methods.  Here is a brief overview that might help clear up some of the confusion.
 
+The AX.25 and APRS specifications say nothing about the type of modem.  In practice, 1200 baud AFSK is the most common for VHF / UHF FM.   9600 baud is also standardized, widely available, and gaining in popularity.
 
+## Bits per Second (bps) vs. Baud
 
+The terms "Bits per Second" (bps) and Baud are often used interchangeably because they are often the same number.
 
+Baud refers to the maximum number of "symbols" (signal states) per second.  With two tone frequency shift keying a "symbol" represents a single bit so the numbers are the same.  With more advanced modulation techniques we can send multiple bits at the same time.  In this case, bits per second will be some multiple of the Baud.
 
+## 1200 bps
 
+This is the original method from when packet radio got started about 30 years ago and still the most popular.  It is based on the Bell 202 standard which switches between 1200 and 2200 Hz tones to represent the two signal states.  This is called Audio Frequency Shift Keying (AFSK). It is simple, easy to implement, and should work with any transceiver designed for voice.    It isn't very fussy about the audio amplifier passband characteristics so you can simply use the microphone and speaker connections.
 
+<!-- image missing -->
 
+## 300 bps
 
+Below 28 MHz, we are legally limited to 300 baud data (here, maybe different in other countries).  HF operation typically uses AFSK with a difference of 200 Hz between the two tones.  When AFSK is sent with an SSB transmitter it becomes FSK of the RF signal.
 
-
-
-
-
-
-
-# 8  Data Rates
-
-Packet radio can be sent over many different speeds and modulation methods.  Here is a brief overview
-that might help clear up some of the confusion.
-
-The AX.25 and APRS specifications say nothing about the type of modem.  In practice, 1200 baud AFSK is
-the most common for VHF / UHF FM.   9600 baud is also standardized, widely available, and gaining in
-popularity.
-
-## 8.1  Bits per Second (bps) vs. Baud
-
-The terms "Bits per Second" (bps) and Baud are often used interchangeably because they are often the
-same number.
-
-Baud refers to the maximum number of "symbols" (signal states) per second.  With two tone frequency
-shift keying a "symbol" represents a single bit so the numbers are the same.  With more advanced
-modulation techniques we can send multiple bits at the same time.  In this case, bits per second will be
-some multiple of the Baud.
-
-## 8.2  1200 bps
-
-This is the original method from when packet radio got started about 30 years ago and still the most
-popular.  It is based on the Bell 202 standard which switches between 1200 and 2200 Hz tones to
-represent the two signal states.  This is called Audio Frequency Shift Keying (AFSK). It is simple, easy to
-implement, and should work with any transceiver designed for voice.    It isn't very fussy about the audio
-amplifier passband characteristics so you can simply use the microphone and speaker connections.
-
-## 8.3  300 bps
-
-Below 28 MHz, we are legally limited to 300 baud data (here, maybe different in other countries).  HF
-operation typically uses AFSK with a difference of 200 Hz between the two tones.  When AFSK is sent
-with an SSB transmitter it becomes FSK of the RF signal.
-
-A slight mistuning of the receiver frequency will result in a corresponding difference in the audio tones.
-Dire Wolf can tolerate this mistuning by using multiple demodulators tuned to different audio frequency
-pairs.
+A slight mistuning of the receiver frequency will result in a corresponding difference in the audio tones. Dire Wolf can tolerate this mistuning by using multiple demodulators tuned to different audio frequency pairs.
 
 A few references:
 
-Page 43
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Packet Radio on HF   http://wiki.complete.org/PacketRadioOnHF
-Others... ?
+- Packet Radio on HF <http://wiki.complete.org/PacketRadioOnHF>
+- Others... ?
 
 Google for "hf aprs" for many discussions on this topic.
 
-## 8.4  9600 bps
+## 9600 bps
 
-Rather than converting the digital data to audio, it is also possible to use the digital signal for direct FSK
-on the RF carrier.  Here are some early designs from the previous century.
+Rather than converting the digital data to audio, it is also possible to use the digital signal for direct FSK on the RF carrier.  Here are some early designs from the previous century.
 
-  K9NG
-  G3RUH  - http://www.amsat.org/amsat/articles/g3ruh/109.html
+- K9NG -- need to find link...
+- G3RUH -- <http://www.amsat.org/amsat/articles/g3ruh/109.html>, <http://www.tapr.org/pdf/CNC1988-9600BaudModem-G3RUH.pdf>
+- KD2BD  -- <http://www.amsat.org/amsat/articles/kd2bd/9k6modem/>
 
-- need to find link...
+The audio amplifiers – in both the transmitter and receiver – are designed for voice operation and don't have the necessary bandwidth for digital signals.  Trying to use the microphone and speaker connections will only result in disappointment.
 
-http://www.tapr.org/pdf/CNC1988-9600BaudModem-G3RUH.pdf
+Many of the major brand mobile transceivers have 6 pin mini-DIN "data" connectors that bypass the audio stages.   (I think that name is confusing.  They should be labeled "external modem"  – but nobody asked me for my advice.)   The big 3 manufacturers did something right and standardized the connector. In some cases, configuration settings might impact the signals coming out of this connector so be sure to check your radio manual.
 
-  KD2BD  -http://www.amsat.org/amsat/articles/kd2bd/9k6modem/
+<!-- table missing -->
 
-The audio amplifiers – in both the transmitter and receiver – are designed for voice operation and don't
-have the necessary bandwidth for digital signals.  Trying to use the microphone and speaker connections
-will only result in disappointment.
+Watch out.  The pin numbering is in a non-obvious order. More details:  <http://wa8lmf.net/6-Pin-MiniDin-Data-Connector/>
 
-Many of the major brand mobile transceivers have 6 pin mini-DIN "data" connectors that bypass the
-audio stages.   (I think that name is confusing.  They should be labeled "external modem"  – but nobody
-asked me for my advice.)   The big 3 manufacturers did something right and standardized the connector.
-In some cases, configuration settings might impact the signals coming out of this connector so be sure to
-check your radio manual.
+Commercial VHF/UHF radios usually have an accessory connector, either inside or on the back, with the necessary connections.  Other equipment will need to be modified.  The received signal needs to be taken from the discriminator before amplification stages have the chance to corrupt it.  For transmitting, a direct connection needs to be made into the modulator.  Here are some useful tips for 9600 baud operation:
 
-1
-2
-3
-4
-5
-6
+- <http://www.wb4hfn.com/Resources/9600MAN.TXT>
+- <ftp://ftp.tapr.org/general/9600baud/>
+- <https://groups.io/g/direwolf/topic/34951101>
 
-Transmit audio.  Typ. 1 to 2 Vp-p, 600 Ω
-Ground
-PTT – pull to ground to transmit
-Receive audio for 9600 bps.  Typ. 500 to 600 mVp-p, 10 kΩ
-Receive audio for 1200 bps.  Typ. 200 to 500 mVp-p, 600 Ω
-Squelch – typ.  5V for carrier present, 0 for no carrier.
+Your "soundcard" must also have wide bandwidth.  A 9600 baud signal could contain a 4800 Hz square wave if the right combination of bits is present.
 
-Watch out.  The pin numbering is in a non-obvious order.
-More details:  http://wa8lmf.net/6-Pin-MiniDin-Data-Connector/
+Take a look at the response of a popular chip used in cheap USB Audio adapters: <http://www.hardwaresecrets.com/datasheets/CM108.pdf>. Look in section 9.3.2 of the data sheet and notice that the frequency response is flat, within 1 dB, from roughly 50 Hz to 15 kHz.  This is what we want.  Wide and flat to minimize distortion.
 
-Commercial VHF/UHF radios usually have an accessory connector, either inside or on the back, with the
-necessary connections.  Other equipment will need to be modified.  The received signal needs to be
-taken from the discriminator before amplification stages have the chance to corrupt it.  For transmitting,
-a direct connection needs to be made into the modulator.  Here are some useful tips for 9600 baud
-operation:
+Can you get better results with an expensive higher quality (whatever that means) audio interface?   I don't know.  I've seen some unsubstantiated claims to that effect but no scientific proof from side-by- side comparisons.
 
-http://www.wb4hfn.com/Resources/9600MAN.TXT
-ftp://ftp.tapr.org/general/9600baud/
-https://groups.io/g/direwolf/topic/34951101
+Compare the CM108 frequency response with the SignaLink USB: <http://www.frenning.dk/OZ1PIF_HOMEPAGE/SignaLinkUSB-mods.html>   Response is bumpy and falls off a cliff above 2.5 KHz.   Good for 1200 baud but there is no way this could ever work for 9600 baud.
 
-Page 44
+We also need low frequency response.  VHF/UHF FM receivers usually have a high pass filter, with a cut off of around 300 Hz so the CTCSS tones don't get to the speaker.  This is a disaster for 9600 baud data. The signal below is from the "data" connector PR9 pin of Kenwood mobile rig:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Your "soundcard" must also have wide bandwidth.  A 9600 baud signal could contain a 4800 Hz square
-wave if the right combination of bits is present.
-
-Take a look at the response of a popular chip used in cheap USB Audio adapters:
-http://www.hardwaresecrets.com/datasheets/CM108.pdf    Look in section 9.3.2 of the data sheet and
-notice that the frequency response is flat, within 1 dB, from roughly 50 Hz to 15 kHz.  This is what we
-want.  Wide and flat to minimize distortion.
-
-Can you get better results with an expensive higher quality (whatever that means) audio interface?   I
-don't know.  I've seen some unsubstantiated claims to that effect but no scientific proof from side-by-
-side comparisons.
-
-Compare the CM108 frequency response with the SignaLink USB:
-http://www.frenning.dk/OZ1PIF_HOMEPAGE/SignaLinkUSB-mods.html   Response is bumpy and falls off
-a cliff above 2.5 KHz.   Good for 1200 baud but there is no way this could ever work for 9600 baud.
-
-We also need low frequency response.  VHF/UHF FM receivers usually have a high pass filter, with a cut
-off of around 300 Hz so the CTCSS tones don't get to the speaker.  This is a disaster for 9600 baud data.
-The signal below is from the "data" connector PR9 pin of Kenwood mobile rig:
+<!-- image missing -->
 
 Notice how we have a nice horizontal line where several bits in a row have the same value.
 
 The next graph was captured at the same time from an RS-UV3 where the high pass filter was not
 disabled.
 
+<!-- image missing -->
+
 Instead of a nice horizontal line, it droops back to the center because the lower frequencies are lost.
 
-You can go faster if your radio and soundcard have enough bandwidth.   For more discussion, see
-related document   Going-beyond-9600-baud.pdf.
+You can go faster if your radio and soundcard have enough bandwidth.   For more discussion, see related document **Going-beyond-9600-baud.pdf**.
 
-## 8.5  2400 bps
+## 2400 bps
 
 There are different – and incompatible – ways to get 2400 bits per second through a voice radio.
 
-Page 45
+AFSK could also be used but you'd probably need to get the two tones a little further apart for good results.   I've seen references to ham radio 2400 baud AFSK with 1200/2400 and 1775/3250 tone pairs. That last one would have some trouble getting through the audio stages of most transceivers.
 
+Back in the 1990's there were at least three commercial TNCs that allowed 2400 bits per second with phase shift keying (PSK).
 
+- MFJ-2400 which is an optional board for the MFJ-1270 or MFJ-1274.
+- AEA PK232-2400.
+- Kantronics KPC-2400.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-AFSK could also be used but you'd probably need to get the two tones a little further apart for good
-results.   I've seen references to ham radio 2400 baud AFSK with 1200/2400 and 1775/3250 tone pairs.
-That last one would have some trouble getting through the audio stages of most transceivers.
-
-Back in the 1990's there were at least three commercial TNCs that allowed 2400 bits per second with
-phase shift keying (PSK).
-
-  MFJ-2400 which is an optional board for the MFJ-1270 or MFJ-1274.
-  AEA PK232-2400.
-  Kantronics KPC-2400.
-
-Were they compatible with each other?  I don't know.  If not, that might help explain why 2400 bps
-never gained much popularity.
+Were they compatible with each other?  I don't know.  If not, that might help explain why 2400 bps never gained much popularity.
 
 They all used the EXAR XR-2123 PSK modem chip which implements the V.26 / Bell 201 standard.
 
-Rather than using multiple tones, this uses a single 1800 Hz tone but the phase is shifted to convey data.
-This is called Phase Shift Keying (PSK).  In this case, the phase is shifted in multiples of 90 to send two
-bits at the same time.  The phase changes at a rate of 1200 "symbols" per second. The signal state
-changes at 1200 baud and two bits are sent at once so we end up with 2400 bits per second.
+Rather than using multiple tones, this uses a single 1800 Hz tone but the phase is shifted to convey data. This is called Phase Shift Keying (PSK).  In this case, the phase is shifted in multiples of 90 to send two bits at the same time.  The phase changes at a rate of 1200 "symbols" per second. The signal state changes at 1200 baud and two bits are sent at once so we end up with 2400 bits per second.
+
+<!-- image missing -->
 
 Dire Wolf version 1.6 now compatible with the MFJ-2400 and possibly the others mentioned above.
 
-For more information, see the accompanying document, 2400-4800-PSK-for-APRS-Packet-Radio.pdf.
+For more information, see the accompanying document, **2400-4800-PSK-for-APRS-Packet-Radio.pdf**.
 
-## 8.6  4800 bps
+## 4800 bps
 
 There are even more ways to get 4800 bits/second.
 
-I've heard of people using AFSK with 2400 and 4800 tones but it would be necessary to modify radios for
-greater audio bandwidth.    If you have that bandwidth, you can do better than AFSK.
+I've heard of people using AFSK with 2400 and 4800 tones but it would be necessary to modify radios for greater audio bandwidth.    If you have that bandwidth, you can do better than AFSK.
 
-The Hamilton Area Packet Network "HAPN-T" board pushes the digital signal through the radio in the
-same way we would for 9600 baud operation.  The literature doesn't mention anything about data
-scrambling so it would probably not be compatible with the K9NG/G3RUH scheme.
+The Hamilton Area Packet Network "HAPN-T" board pushes the digital signal through the radio in the same way we would for 9600 baud operation.  The literature doesn't mention anything about data scrambling so it would probably not be compatible with the K9NG/G3RUH scheme.
 
-If we can distinguish between 4 different phases, why not go for 8?  With a few minor modifications, a
-V.27  style demodulator was also implemented.  This uses the same 1800 Hz audio carrier.  It can change
+If we can distinguish between 4 different phases, why not go for 8?  With a few minor modifications, a V.27  style demodulator was also implemented.  This uses the same 1800 Hz audio carrier.  It can change phase 1600 times per second so it is 1600 baud.  The 8 phases can represent 3 bits at a time so we have 1600 x 3 = 4800 bits per second.
 
-Page 46
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-phase 1600 times per second so it is 1600 baud.  The 8 phases can represent 3 bits at a time so we have
-1600 x 3 = 4800 bits per second.
+<!-- image missing -->
 
 For more information, see the accompanying document, 2400-4800-PSK-for-APRS-Packet-Radio.pdf.
 
-## 8.7  AIS Reception - new in 1.6
+## AIS Reception - new in 1.6
 
 AIS is an international system for tracking ships.  It uses VHF FM Marine Radio channels:
 
-  87B
-  88B
+- 87B -- 161.975 MHz
+- 88B -- 162.025 MHz
 
-161.975 MHz
-162.025 MHz
+The radios use 25 kHz channel spacing with a peak deviation of ±5 kHz.  AIS uses HDLC over 9600 bps GMSK.  It is very much like our 9600 bps G3RUH style transmission.
 
-The radios use 25 kHz channel spacing with a peak deviation of ±5 kHz.  AIS uses HDLC over 9600 bps
-GMSK.  It is very much like our 9600 bps G3RUH style transmission.
+Like 9600 bps AX.25, this will not work with the speaker connection because the audio processing stages distort the signal too much.  You will need to use the special "data" connector, available on many mobile rigs, and the received audio output pin with 9 in its name.
 
-Like 9600 bps AX.25, this will not work with the speaker connection because the audio processing stages
-distort the signal too much.  You will need to use the special "data" connector, available on many mobile
-rigs, and the received audio output pin with 9 in its name.
-
-Located about 50 km from the ocean, I'm able to hear many ships with an ordinary 2 meter ham
-transceiver and a vertical antenna on the roof.
+Located about 50 km from the ocean, I'm able to hear many ships with an ordinary 2 meter ham transceiver and a vertical antenna on the roof.
 
 Run direwolf with these command line options:
 
+```
 direwolf -B AIS -r 48000 -T "%H:%M:%S"
+```
 
-"-B" sets the speed.  9600 is for ham radio AX.25 G3RUH.  A special case was added for AIS.
-
-"-r" sets the audio sample rate.  44100 is the default.  I found that 48000 can provide a slight
-benefit for 9600 bps.
-
-"-T" adds a time stamp.
+- "-B" sets the speed.  9600 is for ham radio AX.25 G3RUH.  A special case was added for AIS.
+- "-r" sets the audio sample rate.  44100 is the default.  I found that 48000 can provide a slight benefit for 9600 bps.
+- "-T" adds a time stamp.
 
 The result should contain lines looking something like this:
 
+```
 [0.3 08:51:47] AIS>APDW16:{DA!AIVDM,1,1,,A,15N4cJ`000rrjq@H@0i2hbuN0L0U,0*31
+```
 
 Let's break this down:
 
-Page 47
+- `[0.3 08:51:47]` -- Receiving channel and timestamp.
 
+- `AIS>APDW16` -- The ship identifier won't fit in the source address field so "AIS" is there to indicate the origin.  The destination field indicates the software doing the reception.
 
+- `{DA` -- An information part beginning with "{" indicates user defined data.  D and A indicate Dire Wolf and AIS.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[0.3 08:51:47]
-
-Receiving channel and timestamp.
-
-  AIS>APDW16:
-
-The ship identifier won't fit in the source address field so "AIS" is there to indicate the
-origin.  The destination field indicates the software doing the reception.
-
-
-
-{DA
-
-An information part beginning with "{" indicates user defined data.  D and A indicate
-Dire Wolf and AIS.
-
-
-
-!AIVDM,1,1,,A,15N4cJ`000rrjq@H@0i2hbuN0L0U,0*31
-
-This is what you would get out of a normal AIS receiver.  It is in the same format as the
-NMEA sentences from a GPS receiver.
+- ``!AIVDM,1,1,,A,15N4cJ`000rrjq@H@0i2hbuN0L0U,0*31`` -- This is what you would get out of a normal AIS receiver.  It is in the same format as the NMEA sentences from a GPS receiver.
 
 The sentence contains several comma separated fields including:
 
-The talker and sentence type.
-
--
--  A couple fields we don't care about here.
--  A bit vector represented as a printable character for each group of 6 bits.
--  A checksum at the end.
+- The talker and sentence type.
+- A couple fields we don't care about here.
+- A bit vector represented as a printable character for each group of 6 bits.
+- A checksum at the end.
 
 Numerous applications are available to decode this format.
 
 SARTrack is able to decode this and it displays ships along with APRS data.  They are tabulated in the
 Objects table.
 
-A separate document, AIS-Reception.pdf, goes into a lot more detail.
+A separate document, **AIS-Reception.pdf**, goes into a lot more detail.
 
-Page 48
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- marker -->
 
 # 9  Configuration File & command line options
 
