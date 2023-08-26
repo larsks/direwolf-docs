@@ -2285,396 +2285,202 @@ You don't need to configure an output control line when using VOX so just ignore
 
 #### PTT with serial port RTS or DTR
 
-<!-- marker -->
-
 To use a serial port (either built-in or a USB to RS232 adapter cable), use an option of this form:
 
+```
 PTT  device-name  [-]rts-or-dtr   [  [-]rts-or-dtr ]
+```
 
 For Windows the device name would be COM1, COM2, etc.
 
 For Linux, the device name would probably be something like
 
-
+- `/dev/ttyS0` or `/dev/ttyS1` for a COM port on the PC motherboard, or
 
-
+- `/dev/ttyUSB0` or `/dev/ttyUSB1` for a USB-to-RS232 adapter.  You would also see this for transceivers, like the IC-7100, that have a USB-to-serial converter built in.
 
-/dev/ttyS0 or /dev/ttyS1 for a COM port on the PC motherboard, or
+You can also use the Windows format on Linux.  COM1 is converted to /dev/ttyS0, COM1 is converted to /dev/ttyS1, and so on.  Remember this would apply to a COM port on the motherboard or in a PCI slot.   If USB is involved, the names would be different.
 
-/dev/ttyUSB0 or /dev/ttyUSB1 for a USB-to-RS232 adapter.  You would also see this for
-transceivers, like the IC-7100, that have a USB-to-serial converter built in.
+Normally the higher voltage is used for transmit. Prefix the control line name with "-" to get the opposite polarity.  Some interfaces want RTS and DTR to be driven with opposite polarity to minimize chances of transmitting at the wrong time.  Starting with version 1.2, you can now specify two control lines with the same or opposite polarity.  Example:
 
-You can also use the Windows format on Linux.  COM1 is converted to /dev/ttyS0, COM1 is
-converted to /dev/ttyS1, and so on.  Remember this would apply to a COM port on the motherboard
-or in a PCI slot.   If USB is involved, the names would be different.
-
-Normally the higher voltage is used for transmit. Prefix the control line name with "-" to get the
-opposite polarity.  Some interfaces want RTS and DTR to be driven with opposite polarity to minimize
-chances of transmitting at the wrong time.  Starting with version 1.2, you can now specify two control
-lines with the same or opposite polarity.  Example:
-
+```
 PTT  COM1  RTS  DTR
 PTT  COM1  RTS  -DTR
+```
 
 Alternatively, the RTS and DTR signals from one serial port could control two transmitters.  E.g.
 
+```
 CHANNEL  0
 PTT  COM1  RTS
 CHANNEL  1
-
-Page 72
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-PTT  COM1  DTR
+PTT  COM1  DTR
+```
 
 Examples:
 
+```
 PTT  COM1  RTS
 PTT  COM1  -DTR
 PTT  /dev/ttyUSB0  RTS
+```
 
-#### 9.2.9.2  PTT with General Purpose I/O (GPIO)
+#### PTT with General Purpose I/O (GPIO)
 
-On Linux you can use General Purpose I/O (GPIO) pins if available.  This is mostly applicable to a
-microprocessor board, such as a Raspberry Pi or BeagleBone, not a general purpose PC.  Precede the pin
-number with "-" to invert the signal.
+On Linux you can use General Purpose I/O (GPIO) pins if available.  This is mostly applicable to a microprocessor board, such as a Raspberry Pi or BeagleBone, not a general purpose PC.  Precede the pin number with "-" to invert the signal.
 
+```
 PTT  GPIO  [-]pin-number
+```
 
 Example:
 
+```
 PTT  GPIO  25
+```
 
 There are more details in the separate Raspberry Pi APRS document.
 
-#### 9.2.9.3  PTT with Parallel Printer Port
+#### PTT with Parallel Printer Port
 
-The old fashioned parallel printer port can also be used on Linux.  In this case, use LPT, followed by an
-optional "-" to mean inverted, and the data bit number.   This works only with the primary parallel
-printer port on the motherboard or possibly a PCI card configured to use I/O address 0x378.  It will not
-work with a USB to parallel printer port adapter.
+The old fashioned parallel printer port can also be used on Linux.  In this case, use LPT, followed by an optional "-" to mean inverted, and the data bit number.   This works only with the primary parallel printer port on the motherboard or possibly a PCI card configured to use I/O address 0x378.  It will not work with a USB to parallel printer port adapter.
 
 Examples:
 
+```
 PTT  LPT  0
 PTT  LPT  -2
+```
 
-#### 9.2.9.4  PTT using hamlib
+#### PTT using hamlib
 
 If the Linux version was built to use hamlib, you can also use this form for greater flexibility:
 
+```
 PTT  RIG  model   port  [ rate ]
+```
 
-Where,
+Where:
 
-model
+- `model` -- identifies the type of radio.
 
-identifies the type of radio.
-A rig number, not a name, is required here.
-For example, if you have a Yaesu FT-847, specify 101.
-See  https://github.com/Hamlib/Hamlib/wiki/Supported-Radios  for details.
-Get a list of values by running  "rigctl --list".
+  A rig number, not a name, is required here. For example, if you have a Yaesu FT-847, specify 101. See  <https://github.com/Hamlib/Hamlib/wiki/Supported-Radios>  for details. Get a list of values by running  "rigctl --list".
 
-Page 73
+  2 is used to communicate with "rigctld."
 
+  "AUTO" will try to guess what is connected.
 
+- `port` -- name of serial port connected to radio.
 
+  In the case where model is 2, this would be a host name/address and optional port number.   Default port is 4532
 
+- `rate` -- an optional serial port rate for CAT control.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2 is used to communicate with "rigctld."
-"AUTO" will try to guess what is connected.
-
-port
-
-rate
-
-is name of serial port connected to radio.
-In the case where model is 2, this would be a host name/address
-and optional port number.   Default port is 4532
-
-is an optional serial port rate for CAT control.
-Sometimes you might need to override the hamlib default behavior.
+  Sometimes you might need to override the hamlib default behavior.
 
 Examples:
 
-  Yeasu FT-817 on /dev/ttyUSB0:
-
-  Try to guess what is on /dev/ttyS0:
+- Yeasu FT-817 on /dev/ttyUSB0:
 
-rigctld on localhost:
+  ```
+  PTT RIG 120 /dev/ttyUSB0 9600
+  ```
 
-PTT RIG 120 /dev/ttyUSB0 9600
-PTT RIG 2 localhost:4532
-PTT RIG AUTO /dev/ttyS0
+- Try to guess what is on /dev/ttyS0:
 
-For more details, see   http://sourceforge.net/p/hamlib/wiki/Hamlib/
+  ```
+  PTT RIG 2 localhost:4532
+  ```
 
-FAQ:   http://sourceforge.net/p/hamlib/wiki/FAQ/
+- rigctld on localhost:
 
-This would be a good place to go with questions:  http://sourceforge.net/p/hamlib/discussion/
+  ```
+  PTT RIG AUTO /dev/ttyS0
+  ```
+
+For more details, see  <http://sourceforge.net/p/hamlib/wiki/Hamlib/>.
+
+FAQ:   <http://sourceforge.net/p/hamlib/wiki/FAQ/>
+
+This would be a good place to go with questions:  <http://sourceforge.net/p/hamlib/discussion/>
 
 Here is an example of where the serial port data rate had to be set explicitly:
-https://groups.io/g/RaspberryPi-4-HamRadio/topic/75478708
+<https://groups.io/g/RaspberryPi-4-HamRadio/topic/75478708>
 
-#### 9.2.9.4.1  Hamlib PTT Example:  Use RTS line of serial port.
+#### Hamlib PTT Example:  Use RTS line of serial port.
 
-Of course, it would be a lot easier to use the built-in functionality for this simple case.  This is just an
-exercise on our journey to being able to use the flexibility for more interesting cases.
+Of course, it would be a lot easier to use the built-in functionality for this simple case.  This is just an exercise on our journey to being able to use the flexibility for more interesting cases.
 
 First let's try it manually.  In one terminal window, start up a daemon with the desired configuration.
 
+```
 rigctld -m 1 -p /dev/ttyS0 -P RTS -t 4532
+```
 
-"/dev/ttyS0" is the serial port on the mother board.
-"-m 1" is for the "dummy" backend, not some particular type of radio.
-"-t 4532" is not really necessary because that is the default port.
+- `/dev/ttyS0` is the serial port on the mother board.
+- `-m 1` is for the `dummy` backend, not some particular type of radio.
+- `-t 4532` is not really necessary because that is the default port.
 
 In another window,
 
+```
 echo "\set_ptt 1" | nc localhost 4532
 echo "\set_ptt 0" | nc localhost 4532
 echo "\set_ptt 1" | nc localhost 4532
 echo "\set_ptt 0" | nc localhost 4532
+```
 
-Page 74
+We observe that the RTS control line changed.  Next...
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-We observe that the RTS control line changed.  Next...
-
+```
 rigctl -m 2 -r localhost:4532
 T 1
 T 0
 T 1
 T 0
 q
+```
 
-"-m 2" means talk to "rigctld."
-"-r localhost:4532" indicates where rigctld is running.  You can leave off the ":4532" because that
-is the default port.  You might also see examples with 127.0.0.1 which is equivalent but obscure and
-confusing to those without any networking background.  Actually, it seems you can omit the "-r" option
-entirely  because localhost is the default for rig "model" 2.
+- `-m 2` means talk to "rigctld."
+- `-r localhost:4532` indicates where rigctld is running.  You can leave off the ":4532" because that is the default port.  You might also see examples with 127.0.0.1 which is equivalent but obscure and confusing to those without any networking background.  Actually, it seems you can omit the "-r" option entirely  because localhost is the default for rig "model" 2.
 
-Again, we should observe the RTS line of serial port /dev/ttyS0 changing.  To use this for PTT, put this in
-your Dire Wolf configuration file:
+Again, we should observe the RTS line of serial port /dev/ttyS0 changing.  To use this for PTT, put this in your Dire Wolf configuration file:
 
+```
 PTT  RIG  2  localhost:4532
+```
 
-The "2" is very important.  It means communicate with the instance of "rigctld" that we already started
-up.  In this case it is running on the same host but it could be running on a different computer.
+The "2" is very important.  It means communicate with the instance of "rigctld" that we already started up.  In this case it is running on the same host but it could be running on a different computer.
 
-#### 9.2.9.5  PTT with C-Media CM108/CM119 GPIO
+#### PTT with C-Media CM108/CM119 GPIO
 
-The C-Media CM108, CM119, and similar chips, used in many USB-audio adapters, have varying numbers
-of general purpose input output (GPIO) pins.   These are sometimes connected to push buttons or LEDs.
+The C-Media CM108, CM119, and similar chips, used in many USB-audio adapters, have varying numbers of general purpose input output (GPIO) pins.   These are sometimes connected to push buttons or LEDs.
 
-C-Media
-chip
-pin
+<!-- table missing -->
 
-GPIO
-number
+Some radio interfaces use one of these pins for the push to talk function.   This is a very tidy solution because everything goes thru a single USB cable, rather than having a separate wire for PTT.  Examples:
 
-CM108
+Commercial products:
 
-CM108AH
-CM108B
+- DINAH <https://hamprojects.info/dinah/>
+- DMK URI <http://www.dmkeng.com/URI_Order_Page.htm>
+- RB-USB RIM <http://www.repeater-builder.com/products/usb-rim-lite.html>
+- RA-35 <http://www.masterscommunications.com/products/radio-adapter/ra35.html>
 
-X
-X
-X
-X
-
-X
-
-X
-X
-
-43
-11
-13
-15
-16
-17
-20
-22
-
-1
-2
-3
-4
-5
-6
-7
-8
-
-HS100
-
-CM109
-CM119
-CM119A
-CM119B
-X
-X
-X
-X
-X
-X
-X
-X
-
-Some radio interfaces use one of these pins for the push to talk function.   This is a very tidy solution
-because everything goes thru a single USB cable, rather than having a separate wire for PTT.  Examples:
-
-Page 75
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Commercial products:
-
-  DINAH                     https://hamprojects.info/dinah/
-  DMK URI                 http://www.dmkeng.com/URI_Order_Page.htm
-  RB-USB RIM           http://www.repeater-builder.com/products/usb-rim-lite.html
-  RA-35
- http://www.masterscommunications.com/products/radio-adapter/ra35.html
+<!-- TODO: add digirig -->
 
 Similar homebrew projects:
 
-http://www.qsl.net/kb9mwr/projects/voip/usbfob-119.pdf
-http://rtpdir.weebly.com/uploads/1/6/8/7/1687703/usbfob.pdf
-http://www.repeater-builder.com/projects/fob/USB-Fob-Construction.pdf
-https://irongarment.wordpress.com/2011/03/29/cm108-compatible-chips-with-gpio
+- <http://www.qsl.net/kb9mwr/projects/voip/usbfob-119.pdf>
+- <http://rtpdir.weebly.com/uploads/1/6/8/7/1687703/usbfob.pdf>
+- <http://www.repeater-builder.com/projects/fob/USB-Fob-Construction.pdf>
+- <https://irongarment.wordpress.com/2011/03/29/cm108-compatible-chips-with-gpio>
 
-GPIO 3  (pin 13)  is used in the homebrew designs because it is easier to tack solder a wire to a pin on
-the end.   The commercial products also use the same pin for PTT.
+GPIO 3  (pin 13)  is used in the homebrew designs because it is easier to tack solder a wire to a pin on the end.   The commercial products also use the same pin for PTT.
 
-Here we have an example of 3 C-Media USB adapters, a SignaLink USB, a keyboard, and a mouse.   The
-devices proceeded by ** are eligible for handling transmit/receive audio and PTT all with one
-device.    This came from the included "cm108" application.
+Here we have an example of 3 C-Media USB adapters, a SignaLink USB, a keyboard, and a mouse.   The devices proceeded by ** are eligible for handling transmit/receive audio and PTT all with one device.    This came from the included "cm108" application.
 
+```
         VID  PID   Product                          Sound                  ADEVICE         HID [ptt]
         ---  ---   -------                          -----                  -------         ---------
     **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0c      plughw:1,0      /dev/hidraw0
@@ -2691,1704 +2497,787 @@ device.    This came from the included "cm108" application.
     **  0d8c 0008  C-Media USB Audio Device         /dev/snd/controlC4                     /dev/hidraw6
         413c 2010  Dell USB Keyboard                                                       /dev/hidraw4
         0461 4d15  USB Optical Mouse                                                       /dev/hidraw5
+```
 
-The USB soundcards (/dev/snd/pcm...) have an associated Human Interface Device (HID) corresponding
-to the GPIO pins which are sometimes connected to pushbuttons.  The mapping has no obvious pattern.
+The USB soundcards (/dev/snd/pcm...) have an associated Human Interface Device (HID) corresponding to the GPIO pins which are sometimes connected to pushbuttons.  The mapping has no obvious pattern.
 
+```
 Sound Card 0            HID 1
 Sound Card 1            HID 0
 Sound Card 2            HID 2
 Sound Card 4            HID 6
+```
 
-That would be a confusing and error prone if you had to figure that all out manually.   Dire Wolf version
-1.5 simplifies matters by supporting multiple sound devices and automatically determining the
-corresponding HID for the PTT signal.
+That would be a confusing and error prone if you had to figure that all out manually.   Dire Wolf version 1.5 simplifies matters by supporting multiple sound devices and automatically determining the corresponding HID for the PTT signal.
 
 This new PTT configuration option is now available.
 
-Page 76
+```
+PTT CM108   [ [-]n ] [ dev ]
+```
 
+Where:
 
+- `-` means to invert, i.e. low for transmit.
+- `n` is optional gpio number.  Default is 3.
+- `dev` is optional device such as /dev/hidraw1. Normally this can be determined automatically from the audio device name in the ADEVICE configuration item.
 
+In most cases, you can simply use "PTT CM108."  All of the designs I have found so far, both homebrew and commercial, all use GPIO 3 which is the default.
 
+If you use something like "plughw:2,0" in the ADEVICE configuration, the corresponding PTT HID device name should be determined automatically.   In special situations you will need to figure it out and supply it explicitly.
 
+This available only for Linux.  It is an optional feature, included at build time if the needed files are found.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-PTT CM108   [ [-]n ] [ dev ]
-
-              -              means to invert, i.e. low for transmit.
-              n             is optional gpio number.  Default is 3.
-              dev         is optional device such as /dev/hidraw1.
-                              Normally this can be determined automatically from the audio device name
-
-in the ADEVICE configuration item.
-
-In most cases, you can simply use "PTT CM108."  All of the designs I have found so far, both homebrew
-and commercial, all use GPIO 3 which is the default.
-
-If you use something like "plughw:2,0" in the ADEVICE configuration, the corresponding PTT HID device
-name should be determined automatically.   In special situations you will need to figure it out and supply
-it explicitly.
-
-This available only for Linux.  It is an optional feature, included at build time if the needed files are
-found.
-
-#### 9.2.9.5.1  Getting permission to access /dev/hidraw
+##### Getting permission to access /dev/hidraw
 
 Normally, all of /dev/hidraw* are accessible only by root.
 
+```
 $ ls -l /dev/hidraw*
 crw------- 1 root root 247, 0 Sep 24 09:40 /dev/hidraw0
 crw------- 1 root root 247, 1 Sep 24 09:40 /dev/hidraw1
 crw------- 1 root root 247, 2 Sep 24 09:40 /dev/hidraw2
 crw------- 1 root root 247, 3 Sep 24 09:50 /dev/hidraw3
+```
 
-Unnecessarily running applications as root is generally a bad idea because it makes it too easy to
-accidentally trash your system.  We need to relax the restrictions so ordinary users can use these
-devices.
+Unnecessarily running applications as root is generally a bad idea because it makes it too easy to accidentally trash your system.  We need to relax the restrictions so ordinary users can use these devices.
 
-If all went well with installation, the  /etc/udev/rules.d directory should contain a file called
-99-direwolf-cmedia.rules     containing:
+If all went well with installation, the  /etc/udev/rules.d directory should contain a file called 99-direwolf-cmedia.rules     containing:
 
+```
 SUBSYSTEM=="hidraw", ATTRS{idVendor}=="0d8c", GROUP="audio", MODE="0660"
+```
 
 I used the "audio" group, mimicking the permissions on the sound side of the device.
 
+```
 $ ls -l /dev/snd/pcm*
 crw-rw----+ 1 root audio 116, 16 Sep 24 09:40 /dev/snd/pcmC0D0p
 crw-rw----+ 1 root audio 116, 17 Sep 24 09:40 /dev/snd/pcmC0D1p
 crw-rw----+ 1 root audio 116, 56 Sep 24 09:50 /dev/snd/pcmC1D0c
 crw-rw----+ 1 root audio 116, 48 Sep 29 18:14 /dev/snd/pcmC1D0p
+```
 
 Notes:
 
-  The double equal == is a test for matching.
-
-Page 77
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  The single equal  = is an assignment of a value.  In my limited experience, Debian type systems
-
-can accept either = or := but Red Hat type systems recognize only the = form.
+- The double equal == is a test for matching.
+- The single equal  = is an assignment of a value.  In my limited experience, Debian type systems can accept either = or := but Red Hat type systems recognize only the = form.
 
 If you don't have /etc/udev/rules.d/99-direwolf-cmedia.rules, create it as shown above and reboot.
 
-Now we observe that the /dev/hidraw*, corresponding to the USB-Audio device now has permissions
-that allow us to access it.
+Now we observe that the /dev/hidraw*, corresponding to the USB-Audio device now has permissions that allow us to access it.
 
+```
 $ ls -l /dev/hidraw*
 crw-rw---- 1 root audio 247, 0 Oct  6 19:24 /dev/hidraw0    
 crw------- 1 root root  247, 1 Oct  6 19:24 /dev/hidraw1
 crw------- 1 root root  247, 2 Oct  6 19:24 /dev/hidraw2
 crw------- 1 root root  247, 3 Oct  6 19:24 /dev/hidraw3
+```
 
-### 9.2.10  Radio Channel – Data Carrier Detect  (DCD)
+### Radio Channel – Data Carrier Detect  (DCD)
 
-The carrier detect signal can be sent to any of the output locations available for PTT.  The same serial
-port can be used for both PTT and DCD.   For example:
+The carrier detect signal can be sent to any of the output locations available for PTT.  The same serial port can be used for both PTT and DCD.   For example:
 
+```
 PTT  COM1  RTS
 DCD  COM1  DTR
+```
 
 In this case, you could connect an LED to the serial port like this:
 
-Pin 5 (GND)    ----    (cathode) LED (anode)    ----    680 ohm resistor    ----     Pin 4 (DTR)
+```
+Pin 5 (GND)  ----  (cathode) LED (anode)  ----  680 ohm resistor  ----   Pin 4 (DTR)
+```
 
-### 9.2.11  Radio Channel – Connected Packet Indicator  (CON)
+### Radio Channel – Connected Packet Indicator  (CON)
 
-A third indicator is active when connected to another station.   Again, the same serial port can be used
-for two different functions.   For example:
+A third indicator is active when connected to another station.   Again, the same serial port can be used for two different functions.   For example:
 
+```
 PTT  COM1  RTS
 CON  COM1  DTR
+```
 
 Or you could use GPIO pins like this:
+
+```
 PTT  GPIO  25
 DCD  GPIO  24
 CON  GPIO  23
+```
 
-### 9.2.12  Radio Channel – Transmit Inhibit Input
+### Radio Channel – Transmit Inhibit Input
 
-Page 78
+For the Linux version only, it is possible to have a GPIO control input to prevent transmitting.  This might be used with a squelch signal from the receiver.  A site with multiple radios could use this to give priority to the other radio service when it is active.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-For the Linux version only, it is possible to have a GPIO control input to prevent transmitting.  This might
-be used with a squelch signal from the receiver.  A site with multiple radios could use this to give priority
-to the other radio service when it is active.
-
+```
 TXINH  GPIO  17
 TXINH  GPIO  -17
+```
 
 As with PTT, minus in front of the GPIO number means invert the signal.
 
-### 9.2.13  Radio Channel – Transmit timing
+###  Radio Channel – Transmit timing
 
-Transmit timing is determined by 6 parameters which can be different for each channel.  The defaults
-are:
+Transmit timing is determined by 6 parameters which can be different for each channel.  The defaults are:
 
+```
 DWAIT  0
 SLOTTIME  10
 PERSIST  63
 TXDELAY  30
 TXTAIL  10
 FULLDUP OFF
+```
 
-Carrier Detect
+<!-- image missing -->
 
-PTT
+When a frame is ready for transmission, we first have to wait until the channel is clear.    The technical term for this is Carrier Sense Multiple Access (CSMA).  In plain English, if you want to say something, wait until no one else is speaking.
 
-Transmit Audio
+- First we wait for the DWAIT time.  Normally this is zero.  This is used only for specific situations where the radio can't turn around from receive to transmit fast enough.
 
-Delay
+- For digipeated frames the transmission can begin immediately after the channel is clear.  AX.25 "connected" mode also has a some situations where "expedited" frames go out immediately rather than waiting a random time.
 
-x 10 mSec per unit = 0 mSec.
-x 10 mSec per unit = 100 mSec.
-probability for transmitting after each slottime.
-x 10 mSec per unit = 300 mSec.
-x 10 mSec per unit = 100 mSec.
-Half Duplex.
+- For other frames, SLOTTIME and PERSIST are used to generate a random delay.  This is to minimize the chances of two different stations starting to transmit at the same time.   The process is:
 
-TXDELAY
+  1.  Wait for SLOTTIME.
 
-AX.25  Frame(s)
+  2.  If a random number, in the range of 0 to 255, is less than or equal to PERSIST, start to transmit.  Otherwise go back to step 1.
 
-TXTAIL
+  For the default values, we have delays with the following probabilities:
 
-When a frame is ready for transmission, we first have to wait until the channel is clear.    The technical
-term for this is Carrier Sense Multiple Access (CSMA).  In plain English, if you want to say something,
-wait until no one else is speaking.
+  <!-- table missing -->
 
-  First we wait for the DWAIT time.  Normally this is zero.  This is used only for specific situations
-
-where the radio can't turn around from receive to transmit fast enough.
-
-  For digipeated frames the transmission can begin immediately after the channel is clear.  AX.25
-"connected" mode also has a some situations where "expedited" frames go out immediately
-rather than waiting a random time.
-
-  For other frames, SLOTTIME and PERSIST are used to generate a random delay.  This is to
-minimize the chances of two different stations starting to transmit at the same time.   The
-process is:
-
-Page 79
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(a)  Wait for SLOTTIME.
-
-(b)  If a random number, in the range of 0 to 255, is less than or equal to PERSIST, start to
-
-transmit.  Otherwise go back to step (a).
-
-For the default values, we have delays with the following probabilities:
-
-Delay, mSec
-
-Probability
-
-100
-200
-300
-400
-500
-600
-700
-etc.
-
-.25
-.75 * .25
-.75 * .75 * .25
-.75 * .75 * .75 * .25
-.75 * .75 * .75 * .75 * .25
-.75 * .75 * .75 * .75 * .75 * .25
-.75 * .75 * .75 * .75 * .75 * .75 * .25
-...
-
-= 25%
-= 19%
-= 14%
-= 11%
-= 8%
-= 6%
-= 4%
-
-
-
-If a signal is detected during any of the steps above, we go back to the top and start over.
+- If a signal is detected during any of the steps above, we go back to the top and start over.
 
 The Push to Talk (PTT) control line is asserted.
 
-The data can't be sent immediately because the transmitter takes a little while to stabilize after being
-activated.  The HDLC "flag" pattern (01111110) is sent for a time period of TXDELAY.   For historical
-reasons, going back more than 30 years, the times are in 10 mS units so 30 actually means 300
-milliseconds.  In my testing, I found 200 mS was too short for a typical 2 meter transceiver.  I suggest
-300 mS (value 30) unless you have good reason to think your radio has really fast receive to transmit
-switching.
+The data can't be sent immediately because the transmitter takes a little while to stabilize after being activated.  The HDLC "flag" pattern (01111110) is sent for a time period of TXDELAY.   For historical reasons, going back more than 30 years, the times are in 10 mS units so 30 actually means 300 milliseconds.  In my testing, I found 200 mS was too short for a typical 2 meter transceiver.  I suggest 300 mS (value 30) unless you have good reason to think your radio has really fast receive to transmit switching.
 
-When sending audio out through a "soundcard" there is latency between sending an audio waveform to
-the output device and when the sound comes out.  We can't be sure precisely when the queued up
-sound has been completed so we need to keep the PTT on a little longer.  The HDLC "frame" pattern is
-also sent during this time to keep the channel busy.  A TXTAIL of 10 (x10 mSec = 100 mSec) is probably a
-little on the generous side but better safe than sorry.
+When sending audio out through a "soundcard" there is latency between sending an audio waveform to the output device and when the sound comes out.  We can't be sure precisely when the queued up sound has been completed so we need to keep the PTT on a little longer.  The HDLC "frame" pattern is also sent during this time to keep the channel busy.  A TXTAIL of 10 (x10 mSec = 100 mSec) is probably a little on the generous side but better safe than sorry.
 
-In one case, I saw where a KISS command was setting TXTAIL to 0.  This is asking for trouble.  We might
-turn off the PTT signal just a little bit before the frame as been sent completely.
+In one case, I saw where a KISS command was setting TXTAIL to 0.  This is asking for trouble.  We might turn off the PTT signal just a little bit before the frame as been sent completely.
 
-Setting PERSIST to 255 would remove all randomness.  Transmit would start after a single SLOTTIME.
-You wouldn't want to do this unless you had a dedicated radio channel between two stations.   Anyone
-else trying to get in wouldn't have a chance.
+Setting PERSIST to 255 would remove all randomness.  Transmit would start after a single SLOTTIME. You wouldn't want to do this unless you had a dedicated radio channel between two stations.   Anyone else trying to get in wouldn't have a chance.
 
-For full duplex, we start transmitting immediately without waiting for a clear channel.  Don't use this
-when transmitting and receiving on the same frequency.  You will stomp all over other people's
-transmissions.   Using "FULLDUP ON" is appropriate only when transmitting and receiving on different
-frequencies, such as cross band satellite operation.
+For full duplex, we start transmitting immediately without waiting for a clear channel.  Don't use this when transmitting and receiving on the same frequency.  You will stomp all over other people's transmissions.   Using "FULLDUP ON" is appropriate only when transmitting and receiving on different frequencies, such as cross band satellite operation.
 
-Page 80
+#### Should I use wired PTT or VOX?
 
+It might be tempting to use the VOX built into your transceiver and avoid the extra circuitry for the PTT signal.  Is this a good idea?
 
+- For APRS, the short answer is  NO!
+- For connected mode packet, the short answer is  **NO!!!**
 
+First let's consider the case where we have a wired connection to activate the transmitter.  The transmitter is turned on, we send our digital data as an audio signal, and then turn off the transmitter when the audio is finished.  Another station detects no other signal, waits a random amount of time (usually less than 1/3 of a second), and starts transmitting.
 
+<!-- image missing -->
 
+VOX stands for Voice Operated Transmit.  It is designed for voice which contains small gaps between words and sentences.  It responds quickly when speech begins so it doesn't chop off too much from beginning of the first word.  We don't want the transmitter going on and off for every little gap in speech  so there is a built in delay before turning the transmitter off again.  This is usually referred to as the "VOX delay."   On one popular HT, the default is 500 milliseconds and the minimum setting is 250. Another popular HT doesn't  allow the delay time to be configured and the documentation doesn't mention how long it is.  It would not be unreasonable to assume they picked something around the default time for another brand.
 
+Keeping the transmitter on a half second after the sound ends is fine for voice.  But what about digital data?  We saw in the previous section that another station waiting for a clear channel, will usually transmit less than 1/3 second after it no longer hears another digital signal.
 
+<!-- image missing -->
 
+Using VOX in this case might be easier but, it is:
 
+- Inconsiderate of the community:
 
+  You are interfering with others by sending a quiet carrier, possibly overpowering other stations trying to be heard.
 
+- Bad for APRS:
 
+  In this case, you will probably miss the beginning of the next station transmitting because you haven't switched back to receive yet.
 
+- REALLY BAD for connected mode packet:
 
+  Connected mode uses a rapid back-and-forth exchange to acknowledge that information was received and retry if something gets lost.  It is quite likely that the next frame is a response to something you sent.  If that response frame is lost, your station will keep trying over again and eventually give up.
 
+My recommendation is to avoid using VOX, built into a transceiver, unless you can be sure the transmitter will turn off very soon (e.g. less than 50 mSec.) after the audio signal is no longer present.   If you insist on using VOX, be sure the "VOX delay" setting is at the shortest setting.
 
+The SignaLink USB has a built in VOX circuit but it is adjustable into an appropriate range.  Turn the delay down to the minimum (fully counterclockwise).   According to the documentation, this should turn off the transmitter around 15 or 30 milliseconds after the transmit audio has ended.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### 9.2.13.1  Should I use wired PTT or VOX?
-
-It might be tempting to use the VOX built into your transceiver and avoid the extra circuitry for the PTT
-signal.  Is this a good idea?
-
-  For APRS, the short answer is     NO!
-
-  For connected mode packet, the short answer is      NO!!!
-
-First let's consider the case where we have a wired connection to activate the transmitter.  The
-transmitter is turned on, we send our digital data as an audio signal, and then turn off the transmitter
-when the audio is finished.  Another station detects no other signal, waits a random amount of time
-(usually less than 1/3 of a second), and starts transmitting.
-
-Wired PTT
-
-My Transmit Audio
-
-Digital Data as Audio
-
-Another station
-
-Digital Data as Audio
-
-VOX stands for Voice Operated Transmit.  It is designed for voice which contains small gaps between
-words and sentences.  It responds quickly when speech begins so it doesn't chop off too much from
-beginning of the first word.  We don't want the transmitter going on and off for every little gap in
-speech  so there is a built in delay before turning the transmitter off again.  This is usually referred to as
-the "VOX delay."   On one popular HT, the default is 500 milliseconds and the minimum setting is 250.
-Another popular HT doesn't  allow the delay time to be configured and the documentation doesn't
-mention how long it is.  It would not be unreasonable to assume they picked something around the
-default time for another brand.
-
-Keeping the transmitter on a half second after the sound ends is fine for voice.  But what about digital
-data?  We saw in the previous section that another station waiting for a clear channel, will usually
-transmit less than 1/3 second after it no longer hears another digital signal.
-
-My Transmit Audio
-
-Digital Data as Audio
-
-PTT from VOX
-
-Another station
-
-  VOX delay 
-
-Digital Data as Audio
-
-Page 81
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Using VOX in this case might be easier but, it is:
-
-
-
-Inconsiderate of the community:
-
-You are interfering with others by sending a quiet carrier, possibly overpowering other
-stations trying to be heard.
-
-  Bad for APRS:
-
-In this case, you will probably miss the beginning of the next station transmitting
-because you haven't switched back to receive yet.
-
-  REALLY BAD for connected mode packet:
-
-Connected mode uses a rapid back-and-forth exchange to acknowledge that
-information was received and retry if something gets lost.  It is quite likely that the next
-frame is a response to something you sent.  If that response frame is lost, your station
-will keep trying over again and eventually give up.
-
-My recommendation is to avoid using VOX, built into a transceiver, unless you can be sure the
-transmitter will turn off very soon (e.g. less than 50 mSec.) after the audio signal is no longer present.   If
-you insist on using VOX, be sure the "VOX delay" setting is at the shortest setting.
-
-The SignaLink USB has a built in VOX circuit but it is adjustable into an appropriate range.  Turn the delay
-down to the minimum (fully counterclockwise).   According to the documentation, this should turn off
-the transmitter around 15 or 30 milliseconds after the transmit audio has ended.
-
-#### 9.2.13.2  Frame Priority and KISS Protocol
+#### Frame Priority and KISS Protocol
 
 The AX.25 protocol spec defines two priorities for transmission of frames.
 
-
+- "**Priority**" queue for expedited frames.
 
-"Priority" queue for expedited frames.
+  These are sent as soon as the channel is not busy.    On your screen you will see magenta lines starting with "[nH]," where n is the channel, meaning High priority.  APRS uses this for digipeated frames.
 
-These are sent as soon as the channel is not busy.    On your screen you will see magenta lines
-starting with "[nH]," where n is the channel, meaning High priority.  APRS uses this for
-digipeated frames.
+- "**Normal**" queue.
 
-
+  After the channel is clear, we wait for a random time to reduce chances of a collision.  On your screen you will see magenta lines starting with "[nL]," where n is the channel, meaning Low priority.
 
-"Normal" queue.
+Unfortunately the KISS protocol does not have a way to convey this distinction.  If it looks like the client application is sending an APRS frame, we apply a heuristic to decide.  When a digipeater field has the "has been used" bit set, the frame goes into the high priority queue.  Otherwise it goes in the normal low priority queue.
 
-After the channel is clear, we wait for a random time to reduce chances of a collision.  On your
-screen you will see magenta lines starting with "[nL]," where n is the channel, meaning Low
-priority.
+It's not clear if something similar should be attempted for non-APRS AX.25 frames.  It might be possible to apply some heuristic for control vs. information frames but we might make the situation worse by sending them out of the original order.
 
-Page 82
+## Logging of received packets
 
+Rather than saving the raw, sometimes rather cryptic and unreadable, format, direwolf parses the myriad of APRS formats into their properties and saves them in CSV format for easy reading and later processing.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Unfortunately the KISS protocol does not have a way to convey this distinction.  If it looks like the client
-application is sending an APRS frame, we apply a heuristic to decide.  When a digipeater field has the
-"has been used" bit set, the frame goes into the high priority queue.  Otherwise it goes in the normal
-low priority queue.
-
-It's not clear if something similar should be attempted for non-APRS AX.25 frames.  It might be possible
-to apply some heuristic for control vs. information frames but we might make the situation worse by
-sending them out of the original order.
-
-## 9.3  Logging of received packets
-
-Rather than saving the raw, sometimes rather cryptic and unreadable, format, direwolf parses the
-myriad of APRS formats into their properties and saves them in CSV format for easy reading and later
-processing.
-
-Error correction used.
-
-Time in ISO format.
-Source address – Generally ham callsign.
-Station heard – Either source or digipeater.
-
-- Radio channel .
-- Unix time as integer.
--
--
--
-- Audio level – Useful  to find improperly adjusted transmit audio levels.
--
-- DTI – Data Type Indicator – First character of the Information field.
-- Name for Object or Item.
--
-Symbol
--
-Latitude
--
-Longitude
--
-Speed
+- Radio channel
+- Unix time as integer
+- Time in ISO format
+- Source address – Generally ham callsign
+- Station heard – Either source or digipeater
+- Audio level – Useful to find improperly adjusted transmit audio levels
+- Error correction used
+- DTI – Data Type Indicator – First character of the Information field
+- Name for Object or Item
+- Symbol
+- Latitude
+- Longitude
+- Speed
 - Course
 - Altitude
--
+- Frequency
 - Offset
--
-Tone
--
-System – Software which generated the frame.
--
-Status
--
-Telemetry
+- Tone
+- System – Software which generated the frame
+- Status
+- Telemetry
 - Comment
 
-Frequency
+Some would prefer to simply log the raw packets.  In this case, the included "kissutil" application can be used.
 
-Some would prefer to simply log the raw packets.  In this case, the included "kissutil" application can be
-used.
-
-### 9.3.1  Daily Log Files
+### Daily Log Files
 
 Specify the directory where log files should be written.  Use "." to use the current working directory.
+
 Examples:
 
-Page 83
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-LOGDIR   .
+```
+LOGDIR   .
 LOGDIR   log-files
 LOGDIR  /home/pi/aprslogs
+```
 
-A new log file is started each day.   The log file has the name yyyy-mm-dd.log,  where yyyy-mm-dd is the
-current date.  The file format is described later in this section.
+A new log file is started each day.   The log file has the name yyyy-mm-dd.log,  where yyyy-mm-dd is the current date.  The file format is described later in this section.
 
 You can do the same thing with the "-l" (lower case L) command line option.
 
-### 9.3.2  Single Log File
+### Single Log File
 
 Specify the file location, including any directory if not current working directory.    Examples:
 
+```
 LOGFILE   aprs.log
 LOGFILE   log-files/aprs.log
 LOGFILE   /home/pi/aprslogs/aprs.log
+```
 
 A single file is written.  The file format is described later in this section.
 
 You can do the same thing with the "-L" (upper case L) command line option.
 
-The file can get awful large and many people like to manage it with the "logrotate" utility.  This will start
-a new file based on size or time.  The file is kept open between writes so be sure to use the
-"copytruncate" option.
+The file can get awful large and many people like to manage it with the "logrotate" utility.  This will start a new file based on size or time.  The file is kept open between writes so be sure to use the "copytruncate" option.
 
-## 9.4  Client application interface
+## Client application interface
 
-Different interfaces are provided for client applications such as APRSISCE/32, UI-View32, Xastir, APRS-
-TW, YAAC, SARTrack, AX.25 for Linux, RMS Express, and many others.
+Different interfaces are provided for client applications such as APRSISCE/32, UI-View32, Xastir, APRS- TW, YAAC, SARTrack, AX.25 for Linux, RMS Express, and many others.
 
-### 9.4.1  AGWPE network protocol
+### AGWPE network protocol
 
-In most case, Dire Wolf can be used as a drop in replacement for AGWPE.  By default, it listens on
-network port 8000.   This can be changed with a command resembling:
+In most case, Dire Wolf can be used as a drop in replacement for AGWPE.  By default, it listens on network port 8000.   This can be changed with a command resembling:
 
+```
 AGWPORT  8000
+```
 
-The raw mode (similar to KISS) interface has been available for a long time.  This is fine for all APRS
-applications and some others such as RMS Express.
+The raw mode (similar to KISS) interface has been available for a long time.  This is fine for all APRS applications and some others such as RMS Express.
 
-Some other packet applications, such as Outpost PM, require the AX.25 connected mode.  This has been
-added in version 1.4.   Earlier versions will display an error like this:
+Some other packet applications, such as Outpost PM, require the AX.25 connected mode.  This has been added in version 1.4.   Earlier versions will display an error like this:
 
+```
 Can't process command from AGW client app.
 Connected packet mode is not implemented.
+```
 
-Page 84
+The **ttcalc** sample application uses the AGW network protocol and can be used as a starting point for writing your own applications.
 
+Up to 3 concurrent AGW protocol client applications are allowed at the same time.  You can raise this limit by increasing the value of MAX_NET_CLIENTS, in source file server.c and recompiling.
 
+In a system exposed to the Internet, you might want to disable the port for security reasons.   Do this by specifying 0 for the port number:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The ttcalc sample application uses the AGW network protocol and can be used as a starting point for
-writing your own applications.
-
-Up to 3 concurrent AGW protocol client applications are allowed at the same time.  You can raise this
-limit by increasing the value of MAX_NET_CLIENTS, in source file server.c and recompiling.
-
-In a system exposed to the Internet, you might want to disable the port for security reasons.   Do this by
-specifying 0 for the port number:
-
+```
 AGWPORT  0
+```
 
-### 9.4.2  Network TCP/IP KISS
+### Network TCP/IP KISS
 
-The KISS protocol can be used with a TCP port so Dire Wolf and the client application can be running on
-different computers.  The default is:
+The KISS protocol can be used with a TCP port so Dire Wolf and the client application can be running on different computers.  The default is:
 
+```
 KISSPORT  8001
+```
 
-Up to 3 concurrent TCP KISS client applications are allowed at the same time.  You can raise this limit by
-increasing the value of MAX_NET_CLIENTS, in source file kissnet.c and recompiling.
+Up to 3 concurrent TCP KISS client applications are allowed at the same time.  You can raise this limit by increasing the value of MAX_NET_CLIENTS, in source file kissnet.c and recompiling.
 
 This is new in version 1.5.  Earlier releases allowed only a single TCP KISS client at a time.
 
 The TCP KISS port can be disabled by specifying 0:
 
+```
 KISSPORT  0
+```
 
-### 9.4.3  Serial port KISS  -  Windows or Linux
+### Serial port KISS  -  Windows or Linux
 
 A configuration option like this:
 
+```
 SERIALKISS  COM3  9600
-SERIALKISS  /dev/ttyS0  9600
-SERIALKISS  /dev/ttyUSB0  9600
+SERIALKISS  /dev/ttyS0  9600    # Motherboard serial port
+SERIALKISS  /dev/ttyUSB0  9600  # USB-to-Serial adapter
+```
 
-Motherboard serial port
-USB-to-Serial adapter
+will provide a dumb KISS TNC on the specified serial port at 9600 baud.   You need to provide either a "null modem" cable to another serial port, used by the application, or configure a virtual null modem cable.
 
-will provide a dumb KISS TNC on the specified serial port at 9600 baud.   You need to provide either a
-"null modem" cable to another serial port, used by the application, or configure a virtual null modem
-cable.
-
-(Earlier versions used NULLMODEM command, on Windows only, for this purpose.  That will still be
-accepted for a while for compatibility with old configuration files.)
+(Earlier versions used NULLMODEM command, on Windows only, for this purpose.  That will still be accepted for a while for compatibility with old configuration files.)
 
 See later section, with "com0com" in the title, for an in depth discussion of how this works.
 
-Page 85
+### Serial port KISS with polling
 
+This is intended for use with Bluetooth where the device can appear and disappear when the remote client opens and closes the link.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 9.4.4  Serial port KISS with polling
-
-This is intended for use with Bluetooth where the device can appear and disappear when the remote
-client opens and closes the link.
-
+```
 SERIALKISSPOLL  /dev/rfcomm0
+```
 
-The included document, Bluetooth-KISS-TNC.pdf , describes how to use this in detail
-Only a single SERIALKISS or SERIALKISSPOLL can be used at the same time.
+The included document, Bluetooth-KISS-TNC.pdf , describes how to use this in detail Only a single SERIALKISS or SERIALKISSPOLL can be used at the same time.
 
-### 9.4.5
+### Pseudo Terminal KISS  -  Linux  only
 
-Pseudo Terminal KISS  -  Linux  only
+This feature does not use the configuration file.  Instead it is activated by using the –p option on the command line.
 
-This feature does not use the configuration file.  Instead it is activated by using the –p option on the
-command line.
+A "pseudo terminal" is created, providing a virtual KISS TNC.  The Linux chapter,  "KISS TNC emulation – serial port" section, provides some examples of how to use this with some popular applications.
 
-A "pseudo terminal" is created, providing a virtual KISS TNC.  The Linux chapter,  "KISS TNC emulation –
-serial port" section, provides some examples of how to use this with some popular applications.
+### KISS "Set Hardware" command  (new in 1.5)
 
-### 9.4.6  KISS "Set Hardware" command  (new in 1.5)
-
-The KISS protocol is very simple.  The client can send a few different commands to set the TNC transmit
-timing and there is a command to transmit a frame.
+The KISS protocol is very simple.  The client can send a few different commands to set the TNC transmit timing and there is a command to transmit a frame.
 
 In the other direction, the TNC sends received frames to the client application.
 
-Recognizing that there might be a future need to send other types of information, possibly hardware
-specific, a "set hardware" command is also listed.   Other than the first byte, there is absolutely no
-guidance at what the rest might look like.
+Recognizing that there might be a future need to send other types of information, possibly hardware specific, a "set hardware" command is also listed.   Other than the first byte, there is absolutely no guidance at what the rest might look like.
 
 I'm aware of only two, drastically different, implementations:
 
-
+- fldigi - <http://www.w1hkj.com/FldigiHelp-3.22/kiss_command_page.html>
 
-fldigi - http://www.w1hkj.com/FldigiHelp-3.22/kiss_command_page.html
+  Everything is in human readable in both directions:
 
-Everything is in human readable in both directions:
+  ```
+  COMMAND: [ parameter [ , parameter ... ] ]
+  ```
 
-COMMAND: [ parameter [ , parameter ... ] ]
+  Lack of a parameter, in the client to TNC direction, is a query which should generate a response in the same format.
 
-Lack of a parameter, in the client to TNC direction, is a query which should generate a response
-in the same format.
+  Used by applications, <http://www.w1hkj.com/FldigiHelp/kiss_host_prgs_page.html>.
 
-Used by applications, http://www.w1hkj.com/FldigiHelp/kiss_host_prgs_page.html
+  - BPQ32
+  - UIChar
+  - YAAC
 
-- BPQ32
-- UIChar
-- YAAC
+- mobilinkd - <https://raw.githubusercontent.com/mobilinkd/tnc1/tnc2/bertos/net/kiss.c>
 
-Page 86
+  Single byte with the command / response code, followed by zero or more value bytes.
 
+  Used by applications:
 
+  - APRSdroid
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  mobilinkd - https://raw.githubusercontent.com/mobilinkd/tnc1/tnc2/bertos/net/kiss.c
-
-Single byte with the command / response code, followed by zero or more value bytes.
-
-Used by applications:
-
-- APRSdroid
-
-There are benefits to adopting one of them rather than doing something completely different.  It might
-even be possible to recognize both.  This might allow leveraging of other existing applications.
+There are benefits to adopting one of them rather than doing something completely different.  It might even be possible to recognize both.  This might allow leveraging of other existing applications.
 
 Our implementation will start with the easy to understand human readable format.
 
-An application wants to know how much is in the transmit queue still waiting to be sent.  This can be
-used for throttling of large transmissions and performing some action after the last frame has been sent.
+An application wants to know how much is in the transmit queue still waiting to be sent.  This can be used for throttling of large transmissions and performing some action after the last frame has been sent.
 
 Commands:
 
-(Client to TNC, with parameter(s) to set something.)
+- (Client to TNC, with parameter(s) to set something.)
 
-none yet
+  none yet
 
-Queries:
+- Queries:
 
-(Client to TNC, no parameters, Dire Wolf sends a response.)
+  (Client to TNC, no parameters, Dire Wolf sends a response.)
 
-Query
------
-TNC:
-TXBUF:
-
-Response
---------
-TNC:DIREWOLF 9.9
-TXBUF:999
-
-Comment
--------
-9.9 represents current version.
-Number of bytes (not frames)
-in transmit queue.
+  <!-- table missing -->
 
 Note that these are case sensitive.   i.e.  You must send "TNC:" not "tnc:".
 
-You can test this with the "kissutil" application.   Assuming that Dire Wolf is already running on the
-same host, and listening for a KISS client, on the default port 8001, enter the command:
+You can test this with the "kissutil" application.   Assuming that Dire Wolf is already running on the same host, and listening for a KISS client, on the default port 8001, enter the command:
 
+```
 kissutil
+```
 
-Send the "set hardware" command by typing the lower case letter "h" and the query including the ":"
-character.
+Send the "set hardware" command by typing the lower case letter "h" and the query including the ":" character.
 
+```
 h TNC:
+```
 
 You should get a response something like this:
 
+```
 [0] h DIREWOLF 1.5
+```
 
 That tells you it is for radio channel 0, the "set hardware" KISS command, and the query response.
 
-Page 87
+## APRS Digipeater operation
 
+This section describes digipeating for APRS operation.  Traditional connected mode digipeating is described in another section.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 9.5  APRS Digipeater operation
-
-This section describes digipeating for APRS operation.  Traditional connected mode digipeating is
-described in another section.
-
-There many explanations of how APRS digipeating is supposed to work.  Unfortunately most of them are
-outdated (dwelling on how it was before 2004), don't show tracing in the examples, or are just plain
-wrong.   There are also broken implementations which are not helping the situation.  I will try to make
-this as clear as possible.
+There many explanations of how APRS digipeating is supposed to work.  Unfortunately most of them are outdated (dwelling on how it was before 2004), don't show tracing in the examples, or are just plain wrong.   There are also broken implementations which are not helping the situation.  I will try to make this as clear as possible.
 
 Digipeaters (short for digital repeaters) retransmit signals from other stations to increase their range.
 
-Analog voice repeaters listen on one frequency and simultaneously retransmit the same signal on a
-different frequency.
+Analog voice repeaters listen on one frequency and simultaneously retransmit the same signal on a different frequency.
 
-AX.25 digital repeaters use a "store and forward" approach.  A packet is received, examined, then
-possibly modified and retransmitted.   Usually it is retransmitted on the same radio channel but it is also
-possible for a multi-port digipeater to link multiple radio channels.  Packets received on one channel can
-be retransmitted on different channels.   Each to/from channel combination can have its own filtering
-rules to determine what is allowed.
+AX.25 digital repeaters use a "store and forward" approach.  A packet is received, examined, then possibly modified and retransmitted.   Usually it is retransmitted on the same radio channel but it is also possible for a multi-port digipeater to link multiple radio channels.  Packets received on one channel can be retransmitted on different channels.   Each to/from channel combination can have its own filtering rules to determine what is allowed.
 
-### 9.5.1  The Standard "TNC-2" Monitoring Format
+### The Standard "TNC-2" Monitoring Format
 
-First we need to understand what the standard display format is telling us.  There is a variable length
-address part and an information part.
+First we need to understand what the standard display format is telling us.  There is a variable length address part and an information part.
 
+```
 source > destination : information
 source > destination , digipeater1 : information
 source > destination , digipeater1, ... , digipeater8 : information
+```
 
 The standard display format has an address part composed of:
 
-Source address
+- Source address
 
-- Originating station.  Normally a ham radio callsign.
-An extra number, called the SSID, allows up to 16 stations to
-be operated under the same callsign.
+  Originating station.  Normally a ham radio callsign. An extra number, called the SSID, allows up to 16 stations to be operated under the same callsign.
 
-Destination address
+- Destination address
 
-- In traditional connected mode packet, this would be a specific
-station.  In APRS this is used in several different ways.  We can
-ignore it for this discussion.
+  In traditional connected mode packet, this would be a specific station.  In APRS this is used in several different ways.  We can ignore it for this discussion.
 
-Via path
+- Via path
 
-- Up to 8 items for path that the packet has taken already and
-where it might go.
+  Up to 8 items for path that the packet has taken already and where it might go.
 
-When an address is followed by *, that one, and all earlier addresses,
-have been used up.  They show where the packet has been
+  **When an address is followed by `*`, that one, and all earlier addresses, have been used up.  They show where the packet has been retransmitted already.**  These already used addresses are not considered by the digipeater algorithm.
 
-Page 88
+Suppose I wanted to explicitly route a packet thru N2GH digipeater and then W2UB.  The original packet would look like this, with 2 specific digipeaters listed.  Notice that there is no * so we are hearing the original (source) station:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-retransmitted already.  These already used addresses are not
-considered by the digipeater algorithm.
-
-Suppose I wanted to explicitly route a packet thru N2GH digipeater and then W2UB.  The original packet
-would look like this, with 2 specific digipeaters listed.  Notice that there is no * so we are hearing the
-original (source) station:
-
+```
 WB2OSZ>APRS,N2GH,W2UB:something
+```
 
-The first digipeater listed, recognizes its name, in the first unused digipeater position, and retransmits
-the packet.  The result would look like this:
+The first digipeater listed, recognizes its name, in the first unused digipeater position, and retransmits the packet.  The result would look like this:
 
+```
 WB2OSZ>APRS,N2GH*,W2UB:something
+```
 
-The N2GH digipeater sets the "has been used" flag (the "H" bit), on the address to indicate that it has
-been used up and won't  be considered for any future digipeating decisions.   When you see * after a
-digipeater name, you know that you are hearing the transmission from there.
+The N2GH digipeater sets the "has been used" flag (the "H" bit), on the address to indicate that it has been used up and won't  be considered for any future digipeating decisions.   When you see `*` after a digipeater name, you know that you are hearing the transmission from there.
 
-The same thing happens again.  W2UB sees its name in the first unused position and retransmits the
-packet.    You see the * after the callsign so you know that you are hearing that station.
+The same thing happens again.  W2UB sees its name in the first unused position and retransmits the packet.    You see the `*` after the callsign so you know that you are hearing that station.
 
+```
 WB2OSZ>APRS,N2GH,W2UB*:something
+```
 
 All of the digipeater addresses have been used up and this packet can't be retransmitted again.
 
-Some software might display it like this with two * characters.
+Some software might display it like this with two `*` characters.
 
+```
 WB2OSZ>APRS,N2GH*,W2UB*:something
+```
 
-This might be easier to understand (both are used) but it is wrong.  It does not conform to the rules of
-the standard monitoring format, where only the last used digipeater is marked with * and it is implied
-that earlier addresses have been used up.
+This might be easier to understand (both are used) but it is wrong.  It does not conform to the rules of the standard monitoring format, where only the last used digipeater is marked with `*` and it is implied that earlier addresses have been used up.
 
 This is what you know if everyone is well behaved:
 
-  The packet originally came from WB2OSZ
-
-
-
-It was retransmitted by N2GH.   (Therefore N2GH  can hear WB2OSZ.)
-It was retransmitted by W2UB.    (Therefore W2UB  can hear N2GH.)
+- The packet originally came from WB2OSZ
+- It was retransmitted by N2GH.   (Therefore N2GH  can hear WB2OSZ.)
+- It was retransmitted by W2UB.    (Therefore W2UB  can hear N2GH.)
 
 From the AX.25 protocol spec:
 
-The destination station can determine the route the frame took to reach it by
-examining the address field and use this path to return frames.
+> The destination station can determine the route the frame took to reach it by examining the address field and use this path to return frames.
 
-The second part might be true in theory but not always in practice.   You could have a case where
-station X can hear station Y but Y can't hear X so the same reverse path won't work.
+The second part might be true in theory but not always in practice.   You could have a case where station X can hear station Y but Y can't hear X so the same reverse path won't work.
 
-Page 89
+As we will see later, some implementations are not well behaved so we really don't know where the packet travelled.
 
+### What Gets Repeated?
 
+Clearly a digipeater should not retransmit everything it hears.  If it did that, anything that was heard on the channel would keep bouncing back and forth between all of the available digipeaters.   First the sender needs to construct a suitable via path.   The digipeaters need to have a suitable configuration specifying how they should behave.
 
+Using specific station names is usually not very satisfactory.  Who is available?  Who can hear me? What happens if my favorite digipeater is not available?  What if I'm traveling and don't know what is in the vicinity?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-As we will see later, some implementations are not well behaved so we really don't know where the
-packet travelled.
-
-### 9.5.2  What Gets Repeated?
-
-Clearly a digipeater should not retransmit everything it hears.  If it did that, anything that was heard on
-the channel would keep bouncing back and forth between all of the available digipeaters.   First the
-sender needs to construct a suitable via path.   The digipeaters need to have a suitable configuration
-specifying how they should behave.
-
-Using specific station names is usually not very satisfactory.  Who is available?  Who can hear me?
-What happens if my favorite digipeater is not available?  What if I'm traveling and don't know what is in
-the vicinity?
-
-"Aliases" can allow digipeaters to respond to additional names besides their own callsign.  Multiple
-stations can respond to the same alias.  For example, the local Emergency Operations Center (EOC)
-might respond to the alias EOC so you don't have to remember the exact callsign used.  It is common for
-digipeaters to respond to the alias "TEST."
+"Aliases" can allow digipeaters to respond to additional names besides their own callsign.  Multiple stations can respond to the same alias.  For example, the local Emergency Operations Center (EOC) might respond to the alias EOC so you don't have to remember the exact callsign used.  It is common for digipeaters to respond to the alias "TEST."
 
 The 20th Century hardware TNCs did not allow much flexibility, allowing at most 4 aliases.  For example,
 
+```
 UIDIGI ON EOC,TEST
+```
 
 If I was to transmit something like this,
 
+```
 WB2OSZ>APRS,EOC:something
+```
 
 It might be retransmitted as:
 
+```
 WB2OSZ>APRS,KB1MKZ*:something
+```
 
 The alias is always replaced by the callsign of the digipeater.  It should never be retransmitted like this:
 
+```
 WB2OSZ>APRS,EOC*:something
+```
 
-Aliases are always replaced by the MYCALL of the digipeater.  This gets back to the rule mentioned
-earlier that the used addresses should show you the path that the packet has taken, on its way from the
-source station, to you.
+Aliases are always replaced by the MYCALL of the digipeater.  This gets back to the rule mentioned earlier that the used addresses should show you the path that the packet has taken, on its way from the source station, to you.
 
-Two different old TNC manuals mentioned nothing about duplicate suppression for UIDIGI, as they do
-for UITRACE, so they might clutter up the radio channel with unnecessary duplicates of the same thing.
+Two different old TNC manuals mentioned nothing about duplicate suppression for UIDIGI, as they do for UITRACE, so they might clutter up the radio channel with unnecessary duplicates of the same thing.
 
-### 9.5.3  The New n-N Paradigm
+### The New n-N Paradigm
 
-In the early days of APRS, digipeater aliases of RELAY and WIDE were used.  This is obsolete, since
-around 2004, and all uses of them should have been removed long ago.  So let's not talk about them any
-more since it will only cause confusion.
+In the early days of APRS, digipeater aliases of RELAY and WIDE were used.  This is obsolete, since around 2004, and all uses of them should have been removed long ago.  So let's not talk about them any more since it will only cause confusion.
 
-Page 90
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Fixing the 144.39 APRS Network
-The New n-N Paradigm
-http://www.aprs.org/fix14439.html
+Fixing the 144.39 APRS Network -- The New n-N Paradigm -- <http://www.aprs.org/fix14439.html>
 
 The currently accepted method is to specify classes of APRS digipeaters in the form XXXn-N.
 
-XXX
-
-n
-
-N
-
-The prefix.  Usually this is "WIDE" but others are allowed for geographical
+- `XXX` -- The prefix.  Usually this is "WIDE" but others are allowed for geographical
 regions or other uses.  For example, "MA" might be used for Massachusetts.
 
-Usually 1 for a local "fill-in" short range digipeater.  2 for a good location with
+- `n` -- Usually 1 for a local "fill-in" short range digipeater.  2 for a good location with
 long range.  Theoretically numbers up to 7 can be used.
 
-The remaining hop count.  Initially in the range of 1 thru 7 This is decremented
-each time while not 0.
+- `N` -- The remaining hop count.  Initially in the range of 1 thru 7 This is decremented each time while not 0.
 
 Suppose I transmitted something like this:
 
+```
 WB2OSZ>APRS,WIDE2-2:something
+```
 
 The 20th Century TNC doesn't allow much flexibility here.
 
+```
 UITRACE  WIDE,30
+```
 
 This means it will respond to an address composed of
 
-The characters "WIDE".
-A digit in the range of 1 through 7.
-An SSID in range of 1 through 7.
+- The characters "WIDE".
+- A digit in the range of 1 through 7.
+- An SSID in range of 1 through 7.
 
-This is not very flexible.  It will match 49 different combinations such WIDE1-1, WIDE1-7, WIDE2-2,
-WIDE7-5, etc.
+This is not very flexible.  It will match 49 different combinations such WIDE1-1, WIDE1-7, WIDE2-2, WIDE7-5, etc.
 
 The "30" at the end means that duplicates, within 30 seconds will not be transmitted.
 
 There doesn't seem to be a way to specify more than a single prefix.
 
-The traditional digipeater configuration commands are inadequate for APRS after 2004.   Newer
-implementations have come up with different approaches for more flexibility.
+The traditional digipeater configuration commands are inadequate for APRS after 2004.   Newer implementations have come up with different approaches for more flexibility.
 
-### 9.5.4  Duplicate Suppression
+### Duplicate Suppression
 
-If we are not careful, digipeaters could get completely out of control.  An original packet might get heard
-by a dozen digipeaters and retransmitted by each of them.  A larger growing ring of digipeaters hears
-
-Page 91
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-multiple others and retransmits what it heard from each.  The original digipeaters could hear those and
-transmit again forming a loop.
+If we are not careful, digipeaters could get completely out of control.  An original packet might get heard by a dozen digipeaters and retransmitted by each of them.  A larger growing ring of digipeaters hears multiple others and retransmits what it heard from each.  The original digipeaters could hear those and transmit again forming a loop.
 
 There are a couple things we can do to bring the situation under control.
 
-Usually, when we are preparing to transmit, we wait for a clear channel, and then wait a random
-amount of time to minimize the chances of transmitting at the same time as someone else.  In the case
-of digipeating, we start transmitting immediately when the channel becomes clear.  Digipeaters
-immediately start transmitting at the same time on top of each other.  The AX.25 protocol specification
-refers to these as "expedited" frames.  Due to the FM capture effect, the strongest signal should win.
-Old TNCs often have a parameter, called UIDWAIT, which needs to be off for this to work properly.
+Usually, when we are preparing to transmit, we wait for a clear channel, and then wait a random amount of time to minimize the chances of transmitting at the same time as someone else.  In the case of digipeating, we start transmitting immediately when the channel becomes clear.  Digipeaters immediately start transmitting at the same time on top of each other.  The AX.25 protocol specification refers to these as "expedited" frames.  Due to the FM capture effect, the strongest signal should win. Old TNCs often have a parameter, called UIDWAIT, which needs to be off for this to work properly.
 
-The second part of the solution is to avoid sending duplicates within a certain amount of time, usually 30
-seconds.  A digipeater must remember everything it transmits and not transmit the same thing within 30
-seconds.  The comparison involves only the source, destination, and information part.  In other words,
-the varying via path is ignored when checking to see if two packets are the same.
+The second part of the solution is to avoid sending duplicates within a certain amount of time, usually 30 seconds.  A digipeater must remember everything it transmits and not transmit the same thing within 30 seconds.  The comparison involves only the source, destination, and information part.  In other words, the varying via path is ignored when checking to see if two packets are the same.
 
-### 9.5.5  Digipeater - Configuration Details
+###  Digipeater - Configuration Details
 
-Rather than clinging to the past, and mimicking inadequate configuration options from 30 years ago,
-Dire Wolf avoids these limitations and allows very flexible configuration options to handle a wide variety
-of situations.  APRS digipeater configuration is achieved with commands of the form:
+Rather than clinging to the past, and mimicking inadequate configuration options from 30 years ago, Dire Wolf avoids these limitations and allows very flexible configuration options to handle a wide variety of situations.  APRS digipeater configuration is achieved with commands of the form:
 
+```
 DIGIPEAT  from-chan  to-chan  aliases  wide  [ preemptive ]
+```
 
-where,
+Where
 
-from-chan
+- `from-chan` is the radio channel where the packet is received.  Must be a number.
 
-is the radio channel where the packet is received.  Must be a number.
+- `to-chan` is the channel where the packet is to be re-transmitted.  Must be a number.
 
-to-chan
+- `aliases` is an alias pattern for digipeating ONCE.  Anything matching this pattern is effectively treated like WIDE1-1. 'MYCALL' for the receiving channel is an implied member of this list.
 
-is the channel where the packet is to be re-transmitted.  Must be a number.
+- `wide` is the pattern for normal WIDEn-N digipeating where the ssid is decremented.
 
-aliases
-
-is an alias pattern for digipeating ONCE.  Anything matching
-this pattern is effectively treated like WIDE1-1.
-'MYCALL' for the receiving channel is an implied
-member of this list.
-
-wide
-
-is the pattern for normal WIDEn-N digipeating
-where the ssid is decremented.
-
-preemptive
-
-is one of the preemptive digipeating modes:  OFF, DROP, MARK, or
+- `preemptive` is one of the preemptive digipeating modes:  OFF, DROP, MARK, or
 TRACE.   Default is off.
 
-Pattern matching uses "extended regular expressions."  Rather than listing all the different possibilities
-(such as "WIDE3-3,WIDE4-4,WIDE5-5,WIDE6-6,WIDE7-7"), a pattern can be specified such as
-"^WIDE[34567]-[1-7]$".  This means:
+Pattern matching uses "extended regular expressions."  Rather than listing all the different possibilities (such as "WIDE3-3,WIDE4-4,WIDE5-5,WIDE6-6,WIDE7-7"), a pattern can be specified such as "^WIDE[34567]-[1-7]$".  This means:
 
-Page 92
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-^
-
-beginning of call.  Without this, leading characters
+- `^` means beginning of call.  Without this, leading characters
 don't need to match and ZWIDE3-3 would end up matching.
 
-WIDE
+- `WIDE` is an exact literal match of upper case letters W I D E.
 
-is an exact literal match of upper case letters W I D E.
+- `[34567]` means ANY ONE of the characters listed.
 
-[34567] means ANY ONE of the characters listed.
+- `-` is an exact literal match of the "-" character (when not found inside of []).
 
--
+- `[1-7]` is an alternative form where we have a range of characters rather than listing them all individually.
 
-is an exact literal match of the "-" character (when not
-found inside of []).
-
-[1-7]
-
-is an alternative form where we have a range of characters
-rather than listing them all individually.
-
-$
-
-means end of call.  Without this, trailing characters don't
-need to match.  As an example, we would end up matching
-WIDE3-15 besides WIDE3-1.
+- `$` means end of call.  Without this, trailing characters don't need to match.  As an example, we would end up matching WIDE3-15 besides WIDE3-1.
 
 Google "Extended Regular Expressions" for more information.
 
 (Note:  "Connected" mode digipeating uses a different algorithm and is configured with CDIGIPEAT.)
 
-As a typical example, you might have a dual port digipeater between the national standard APRS
-frequency and a local frequency for a special event.  You could use the "t/m" filter (described in a later
-section)  to allow only "Message" packets to be forwarded to the special event frequency.
+As a typical example, you might have a dual port digipeater between the national standard APRS frequency and a local frequency for a special event.  You could use the "t/m" filter (described in a later section)  to allow only "Message" packets to be forwarded to the special event frequency.
 
-Duplicates are not transmitted if the same thing was transmitted within the DEDUPE number of
-seconds.   The default is
+Duplicates are not transmitted if the same thing was transmitted within the DEDUPE number of seconds.   The default is
 
+```
 DEDUPE  30
+```
 
-Duplicate checking is performed by comparing the source, destination, and information part.  In other
-words, the via path is ignored.
+Duplicate checking is performed by comparing the source, destination, and information part.  In other words, the via path is ignored.
 
-Packet filtering can be used to limit what gets retransmitted for each combination of from/to radio
-channel.   For example you might want to transmit only position reports from W2UB when digipeating
-from channel 0 to 1.
+Packet filtering can be used to limit what gets retransmitted for each combination of from/to radio channel.   For example you might want to transmit only position reports from W2UB when digipeating from channel 0 to 1.
 
+```
 FILTER  0  1  t/p & b/W2UB
+```
 
 Complete details are in the Packet Filtering section.
 
-### 9.5.6  Digipeater - Typical configuration
+### Digipeater - Typical configuration
 
-Enable digipeating by editing the configuration file (direwolf.conf) and modifying the two lines that look
-similar to this:
+Enable digipeating by editing the configuration file (direwolf.conf) and modifying the two lines that look similar to this:
 
-Page 93
+- `MYCALL  NOCALL`
 
+  Obviously, you would want to change this to your own call. For example:  MYCALL WB2OSZ-5
 
+- `#DIGIPEAT  0  0  ^WIDE[3-7]-[1-7]$   ^WIDE[12]-[12]$`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  MYCALL  NOCALL
-
-Obviously, you would want to change this to your own call.
-For example:  MYCALL WB2OSZ-5
-
-  #DIGIPEAT  0  0  ^WIDE[3-7]-[1-7]$   ^WIDE[12]-[12]$
-
-Remove the "#" character at the beginning of the line.  Lines beginning with "#" are
-comments and they are ignored.    This is a good default for general purpose use.
+  Remove the "#" character at the beginning of the line.  Lines beginning with "#" are comments and they are ignored.    This is a good default for general purpose use.
 
 Restart Dire Wolf so it will read the modified configuration file.
 
 What does this all mean?
 
-  The first 0 means the rule applies to packets received on radio channel 0.
+- The first 0 means the rule applies to packets received on radio channel 0.
 
-  The second 0 means anything matching the rule is transmitted on channel 0.
+- The second 0 means anything matching the rule is transmitted on channel 0.
 
-  Next we aliases that need to match exactly.   This gets replaced by MYCALL when digipeateed.  It
-does not apply the rule of decrementing the last digit of WIDEn-n.  We use ^WIDE[3-7]-[1-7]$ to
-"trap" larger values of N as discussed in
+- Next we aliases that need to match exactly.   This gets replaced by MYCALL when digipeateed.  It does not apply the rule of decrementing the last digit of WIDEn-n.  We use ^WIDE[3-7]-[1-7]$ to "trap" larger values of N as discussed in "Fixing the 144.39 APRS Network: The New n-N Paradigm",  <http://www.aprs.org/fix14439.html>
 
-Fixing the 144.39 APRS Network
-The New n-N Paradigm
-http://www.aprs.org/fix14439.html
+  If you wanted to process WIDE3-n normally, instead of "trapping" it, you could use this instead:
 
-If you wanted to process WIDE3-n normally, instead of "trapping" it, you could use this instead:
+  ```
+  DIGIPEAT 0 0 ^WIDE[4-7]-[1-7]$ ^WIDE[123]-[123]$
+  ```
 
-DIGIPEAT 0 0 ^WIDE[4-7]-[1-7]$ ^WIDE[123]-[123]$
-
-  The final parameter specifies patterns to be processed with the new n-N paradigm if not caught
-by the aliases.  If the last digit is greater than zero it is decremented by 1 when retransmitted.
+- The final parameter specifies patterns to be processed with the new n-N paradigm if not caught by the aliases.  If the last digit is greater than zero it is decremented by 1 when retransmitted.
 
 If you wanted a "fill-n" digi, that responded to only WIDE1-1, you could use this:
 
+```
 DIGIPEAT 0 0 ^WIDE1-1$ ^WIDE1-1$
+```
 
-### 9.5.7  Digipeater – example 2 – routing between two states.
+### Digipeater – example 2 – routing between two states.
 
 In this hypothetical example, we are on top of a tall hill between Massachusetts and New Hampshire.
 
-  Radio channel 0:
-  Radio channel 1:
+- Radio channel 0: Directional antenna towards MA
+- Radio channel 1: Directional antenna towards NH
 
-Directional antenna towards MA
-Directional antenna towards NH
+Each channel does its normal digipeating out to the same channel.  Anything with MAn-n in the path should be sent to channel 0 regardless of where it came from.
 
-Each channel does its normal digipeating out to the same channel.  Anything with MAn-n in the path
-should be sent to channel 0 regardless of where it came from.
-
-Page 94
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-DIGIPEAT 0 0 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^MA[1-7]-[1-7]$
+```
+DIGIPEAT 0 0 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^MA[1-7]-[1-7]$
 DIGIPEAT 1 0 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^MA[1-7]-[1-7]$
+```
 
 Similarly we want anything for NH to be digipeated only to radio channel 1.
 
+```
 DIGIPEAT 0 1 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^NH[1-7]-[1-7]$
 DIGIPEAT 1 1 ^WIDE[3-7]-[1-7]$ ^WIDE[12]-[12]$|^NH[1-7]-[1-7]$
+```
 
-### 9.5.8  Digipeater algorithm
+### Digipeater algorithm
 
-If the first unused digipeater field, in the received packet, matches the first pattern, the original
-digipeater field is replaced by MYCALL of the destination channel.
+If the first unused digipeater field, in the received packet, matches the first pattern, the original digipeater field is replaced by MYCALL of the destination channel.
 
 Example:
-Becomes:
 
+```
 W9XYZ>APRS,WIDE7-7
-W9XYZ >APRS,WB2OSZ*
+```
 
-In this example, we "trap" large values of N as recommended in http://www.aprs.org/fix14439.html
-
-If not caught by the first pattern, see if it matches the second pattern.  Matches will be processed with
-the usual WIDEn-N rules.
-
-If N >= 2, the N value is decremented and MYCALL (of the destination channel) is inserted if we have less
-than the limit of 8 addresses.
-
-Example:
 Becomes:
 
+```
+W9XYZ >APRS,WB2OSZ*
+```
+
+In this example, we "trap" large values of N as recommended in <http://www.aprs.org/fix14439.html>
+
+If not caught by the first pattern, see if it matches the second pattern.  Matches will be processed with the usual WIDEn-N rules.
+
+If N >= 2, the N value is decremented and MYCALL (of the destination channel) is inserted if we have less than the limit of 8 addresses.
+
+Example:
+
+```
 W9XYZ >APRS,WIDE2-2
+```
+
+Becomes:
+
+```
 W9XYZ >APRS,WB2OSZ*,WIDE2-1
+```
 
 If N = 1, we don't want to keep WIDEn-0 in the digipeater list so the station is replaced by MYCALL.
 
 Example:
+
+```
+W9XYZ >APRS,WIDE2-1
+```
+
 Becomes:
 
-W9XYZ >APRS,WIDE2-1
+```
 W9XYZ >APRS,WB2OSZ*
+```
 
-If N = 0, the hop count has been used up and the packet is not digipeated.   Normally we would not
-expect to encounter this.   If the address count was all used up, we would expect the has-been- used "H"
-bit to be set.  As we will see later, a few people are still using defective software, from 1997, which
-results in this situation.
+If N = 0, the hop count has been used up and the packet is not digipeated.   Normally we would not expect to encounter this.   If the address count was all used up, we would expect the has-been- used "H" bit to be set.  As we will see later, a few people are still using defective software, from 1997, which results in this situation.
 
-### 9.5.9  APRS Digipeater - Compared to other implementations
+### APRS Digipeater - Compared to other implementations
 
-Based on observations, a couple other popular implementations always insert their call rather than
-replacing when the hop count is all used up.  Example:
+Based on observations, a couple other popular implementations always insert their call rather than replacing when the hop count is all used up.  Example:
 
-Original digipeater path
-After 1 hop
-After 2 hops
+<!-- table missing -->
 
-Unconditional insert
-WIDE1-1,WIDE2-2
-W1ABC,WIDE1*,WIDE2-2
-W1ABC,WIDE1,W2DEF*,WIDE2-1
+The unconditional insert approach has a rather unfortunate consequence.  The final packet looks like it was relayed by five different digipeaters.
 
-Adaptive insert / replace
-WIDE1-1,WIDE2-2
-W1ABC*,WIDE2-2
-W1ABC,W2DEF*,WIDE2-1
-
-Page 95
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-After 2 hops
-Implemented by
-
-W1ABC,WIDE1,W2DEF,W3GHI,WIDE2*  W1ABC,W2DEF,W3GHI*
-KPC-3+, TM-D710A
-
-Dire Wolf
-
-The unconditional insert approach has a rather unfortunate consequence.  The final packet looks like it
-was relayed by five different digipeaters.
-
-  W1ABC
-  Unknown station not implementing tracing.
-  W2DEF
-  W3GHI
-  Unknown station not implementing tracing.
+- W1ABC
+- Unknown station not implementing tracing.
+- W2DEF
+- W3GHI
+- Unknown station not implementing tracing.
 
 The packet is longer than it needs to be and wastes radio channel capacity.
 
@@ -4396,318 +3285,158 @@ This also creates an ambiguous situation where we are not sure about the path ta
 
 Here is another confusing example observed on 145.825 MHz:
 
+```
 K4KDR-6>CQ,PSAT,ARISS*::NB3T     :Hey Mal!!!
 N2UFM-1>APWW10,PSAT,ARISS*::ALL      :Hello de N2UFM via PSAT
 K0KOC-7>3Y2S1Y,PSAT,ARISS*:'i4wl #/]=
+```
 
-It looks like a few people are carefully timing their transmissions, and setting the via path, to go through
-two space digipeaters.   Source station  PSAT   ARISS   heard on Earth.
+It looks like a few people are carefully timing their transmissions, and setting the via path, to go through two space digipeaters.   Source station  PSAT   ARISS   heard on Earth.
 
 Why don't we hear any of them, after the first hop, like this?
 
+```
 K4KDR-6>CQ,PSAT*,ARISS::NB3T     :Hey Mal!!!
 N2UFM-1>APWW10,PSAT*,ARISS::ALL      :Hello de N2UFM via PSAT
 K0KOC-7>3Y2S1Y,PSAT*,ARISS:'i4wl #/]=
+```
 
-After a little research, I was disappointed to learn that PSAT uses the unconditional insertion approach,
-creating this confusing situation.
+After a little research, I was disappointed to learn that PSAT uses the unconditional insertion approach, creating this confusing situation.
 
 I would argue that it violates the AX.25 protocol specification section 3.12.5:
 
-The destination station can determine the route the frame took to reach it
-by examining the address field...
+> The destination station can determine the route the frame took to reach it by examining the address field...
 
-The via path part of the address field, up through the address marked with "*" should contain the path
-that the packet has traveled.
+The via path part of the address field, up through the address marked with "`*`" should contain the path that the packet has traveled.
 
 Here is a real example that demonstrates the different cases and something new and unexpected.
 
-We start off with the original packet.  There is no "*" in the header, so we are hearing the originating
-station.
+We start off with the original packet.  There is no "`*`" in the header, so we are hearing the originating station.
 
-Page 96
+<!-- image missing -->
 
+Next we see the same packet (below) after it was digipeated by WB2OSZ-5 and AB1OC-10.   Notice how the original WIDE1-1 was replaced by WB2OSZ-5 because the remaining hop count was all used up.
 
+The "`*`" appears after WIDE2 so that is what the radio is hearing.  If we didn't know the earlier history, we wouldn't know whether WIDE2-0 (the -0 is not displayed) was left there by AB1OC-5 or a different later station that did not identify itself.
 
+Here is something totally unexpected. Below we see the packet was digipeated twice and we are hearing W1HML, as indicated by the "`*`" after it.
 
+<!-- image missing -->
 
+The really strange part is a WIDE2-0, at the end, which is not marked as being used.  When the remaining count is reduced to zero, the digipeater should be marked as being used.
 
+Here is another case of the same thing that showed up in the discussion forum.  There was a question about why a certain packet was not getting digipeated.
 
+> Under the usual rules, this would not get digipeated.
+>
+> ```
+> NA7Q>APX202:MEGLER*,WIDE1,WIDE2-1
+> ```
+>
+> The Digipeater looks for the first address, in the via path, which has not been used.   This would
+> be the one after "`*`".
+>
+> The digipeater decides whether "WIDE1" would be eligible.  It is not because the remaining hop
+> count (SSID) is 0.
+>
+> Seeing "WIDE1" without the "`*`" is rather odd.  You would not expect to see this.  When the
+> remaining hop count is 0 you would expect the address to be marked as being used.  There are
+> two possibilities here.
+>
+> 1. The originating station used something like "WIDE1-1,WIDE1,WIDE2-1" which is not a
+> sensible thing to do.  or
+>
+> 2. first digipeater is not behaving properly.  Suppose the originating station used
+> "WIDE1-1,WIDE2-1" which is fairly common.   The first digipeater should change it to
+> "MEGLER*,WIDE2-1".   There are a couple implementations that change it to the form
+> "MEGLER,WIDE1*,WIDE2-1" which is confusing.  This looks like it went thru 2 digipeaters and the
+> second one did not identify itself.
+>
+> Both "MEGLER*,WIDE2-1" and "MEGLER,WIDE1*,WIDE2-1" would be eligible for digipeating.
 
+Mystery solved!  Both stations, exhibiting the unexpected behavior, report software type APN382 which translates to KPC-3 or KPC-3+, ROM version 8.2 from 9/1997.   This is a known bug, mentioned here: http://www.aprs.org/kpc3/kpc3+82WIDEn.txt
 
+When packets were decremented to n-0, the path was not marked as being used up.
 
+Maybe it is time to let go, of the 20 year old software, and use something more modern that works properly.
 
-
-
-
-
-
-
-
-
-
-
-Next we see the same packet (below) after it was digipeated by WB2OSZ-5 and AB1OC-10.   Notice how
-the original WIDE1-1 was replaced by WB2OSZ-5 because the remaining hop count was all used up.
-
-The "*" appears after WIDE2 so that is what the radio is hearing.  If we didn't know the earlier history,
-we wouldn't know whether WIDE2-0 (the -0 is not displayed) was left there by AB1OC-5 or a different
-later station that did not identify itself.
-
-Here is something totally unexpected. Below we see the packet was digipeated twice and we are
-hearing W1HML, as indicated by the "*" after it.
-
-The really strange part is a WIDE2-0, at the end, which is not marked as being used.  When the
-remaining count is reduced to zero, the digipeater should be marked as being used.
-
-Here is another case of the same thing that showed up in the discussion forum.  There was a question
-about why a certain packet was not getting digipeated.
-
-Under the usual rules, this would not get digipeated.
-
-NA7Q>APX202:MEGLER*,WIDE1,WIDE2-1
-
-The Digipeater looks for the first address, in the via path, which has not been used.   This would
-be the one after "*".
-
-The digipeater decides whether "WIDE1" would be eligible.  It is not because the remaining hop
-count (SSID) is 0.
-
-Seeing "WIDE1" without the "*" is rather odd.  You would not expect to see this.  When the
-remaining hop count is 0 you would expect the address to be marked as being used.  There are
-two possibilities here.
-
-(1) The originating station used something like "WIDE1-1,WIDE1,WIDE2-1" which is not a
-sensible thing to do.  or
-
-(2) The first digipeater is not behaving properly.  Suppose the originating station used
-"WIDE1-1,WIDE2-1" which is fairly common.   The first digipeater should change it to
-
-Page 97
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"MEGLER*,WIDE2-1".   There are a couple implementations that change it to the form
-"MEGLER,WIDE1*,WIDE2-1" which is confusing.  This looks like it went thru 2 digipeaters and the
-second one did not identify itself.
-
-Both "MEGLER*,WIDE2-1" and "MEGLER,WIDE1*,WIDE2-1" would be eligible for digipeating.
-
-Mystery solved!  Both stations, exhibiting the unexpected behavior, report software type APN382 which
-translates to KPC-3 or KPC-3+, ROM version 8.2 from 9/1997.   This is a known bug, mentioned here:
-http://www.aprs.org/kpc3/kpc3+82WIDEn.txt
-
-When packets were decremented to n-0, the path
-was not marked as being used up.
-
-Maybe it is time to let go, of the 20 year old software, and use something more modern that works
-properly.
-
-In version 1.0, we start to list the possible actual station heard when "*" is after something of the form
-WIDEn-0.  Example:
+In version 1.0, we start to list the possible actual station heard when "`*`" is after something of the form WIDEn-0.  Example:
 
 Of course, this is just a guess and could be wrong.
 
-### 9.5.10  Preemptive Digipeating
+### Preemptive Digipeating
 
-Normally the digipeater function looks only at the first unused item in the digipeater list. The
-preemptive option allows processing of any unused field, not just the first one, if my call or an alias
-matches.  Note that the option does not apply to the "generic XXXXn-N" specification.
+Normally the digipeater function looks only at the first unused item in the digipeater list. The preemptive option allows processing of any unused field, not just the first one, if my call or an alias matches.  Note that the option does not apply to the "generic XXXXn-N" specification.
 
 Example:  The received packet contains these digipeaters:
 
+```
 CITYA*, CITYB, CITYC, CITYD, CITYE
+```
 
 The first one has already been used.   My alias list includes CITYD.
 
-Normally, this would not be retransmitted because CITYB is not in the alias list.  When the preemptive
-option is selected, "CITYD" is matched even though it is not the first unused.   As you would expect,
-CITYD is replaced by my call before retransmission.  What happens to CITYB and CITYC?  That depends
-on the option specified:
+Normally, this would not be retransmitted because CITYB is not in the alias list.  When the preemptive option is selected, "CITYD" is matched even though it is not the first unused.   As you would expect, CITYD is replaced by my call before retransmission.  What happens to CITYB and CITYC?  That depends on the option specified:
 
-  DROP – All prior path data is lost.  (misleading, bad)
-
-Page 98
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  MARK – Prior path data is marked as being used.  (misleading, bad)
-  TRACE – Prior path data will reflect the actual path taken.  (good)
+- DROP – All prior path data is lost.  (misleading, bad)
+- MARK – Prior path data is marked as being used.  (misleading, bad)
+- TRACE – Prior path data will reflect the actual path taken.  (good)
 
 Results, for this example, are summarized below.
 
-Option
-OFF
-DROP
-
-Path after digipeating
-(none)
-WB2OSZ*, CITYE
-
-MARK
-
-CITYA, CITYB, CITYC, WB2OSZ*, CITYE
-
-TRACE
-
-CITYA, WB2OSZ*, CITYE
+<!-- table missing -->
 
 The AX.25 protocol specification states:
 
-Comment
-No match.  Not digipeated.
-Erases history before getting here.
-Gives incorrect impression that original station
-was heard directly rather than via CITYA.  (BAD)
-Gives incorrect impression that packet traveled
-through CITYB and CITYC.  (BAD)
-Accurate tracing of path used to get here.
-(GOOD)
+> As a frame progresses through a chain of repeaters, each successive repeater will set the H bit in its SSID octet, indicating that the frame has been successfully repeated through it. No other changes to the frame are made (except for the necessary recalculation of the FCS). The destination station can determine the route the frame took to reach it by examining the address field and use this path to return frames.
 
-As a frame progresses through a chain of repeaters, each successive repeater will set the
-H bit in its SSID octet, indicating that the frame has been successfully repeated through
-it. No other changes to the frame are made (except for the necessary recalculation of the
-FCS). The destination station can determine the route the frame took to reach it by
-examining the address field and use this path to return frames.
+The DROP and MARK options would violate this principle.   The used digipeater addresses should accurately reflect the path taken.
 
-The DROP and MARK options would violate this principle.   The used digipeater addresses should
-accurately reflect the path taken.
+### The Ultimate APRS Digipeater
 
-### 9.5.11  The Ultimate APRS Digipeater
+<http://www.aprs.org/digi-ultimate.html> describes the "Ultimate APRS Digipeater" with 3 radios and different rules for forwarding packets from one channel to another.   It's no longer necessary to lament that, "such a digipeater does not yet exist."   It's available now.    Using the digipeating rules described above, and packet filtering in the next section, you can do all of this and more.
 
-http://www.aprs.org/digi-ultimate.html describes the "Ultimate APRS Digipeater" with 3 radios and
-different rules for forwarding packets from one channel to another.   It's no longer necessary to lament
-that, "such a digipeater does not yet exist."   It's available now.    Using the digipeating rules described
-above, and packet filtering in the next section, you can do all of this and more.
+### Viscous Digipeating
 
-### 9.5.12  Viscous Digipeating
+The normal mode of operation is that all digipeaters will transmit at the same time.  Other stations should receive only the strongest one due to the FM capture effect.
 
-The normal mode of operation is that all digipeaters will transmit at the same time.  Other stations
-should receive only the strongest one due to the FM capture effect.
+Another controversial strategy is to wait a while and retransmit the frame only if you don't hear it from anyone else in a certain amount of time.  This is known as "viscous" digipeating.
 
-Another controversial strategy is to wait a while and retransmit the frame only if you don't hear it from
-anyone else in a certain amount of time.  This is known as "viscous" digipeating.
+You can certainly construct examples, where redundant transmissions don't accomplish anything.   For example a low power fill-in digi when a high powered mountain top station will over power everyone else.  There are other cases where it will make the situation worse.  Consider the following example:
 
-Page 99
+```
+               -------------W------------
+              /                          \
+             /                            \
+X - - - - - D1 - - - - - - - - - - - - - - D2
+```
 
+- W is a weather station.
+- X is someone interested in hearing weather information.
+- D1 and D2 are digipeaters.
+- The lines indicate who can be heard by whom.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-You can certainly construct examples, where redundant transmissions don't accomplish anything.   For
-example a low power fill-in digi when a high powered mountain top station will over power everyone
-else.  There are other cases where it will make the situation worse.  Consider the following example:
-
-                        - - - -   W  - - - -
-
-           /                       \
-         /                           \
-
-X - - - - -  D1  - - - - - - - - - - - - - -  D2
-
-W is a weather station.
-X is someone interested in hearing weather information.
-D1 and D2 are digipeaters.
-The lines indicate who can be heard by whom.
-(i.e.   X and D1 can hear each other.
-W, D1, and D2 can hear each other.)
+  (i.e.   X and D1 can hear each other. W, D1, and D2 can hear each other.)
 
 Normal digipeater operation:
 
-Station W transmits a packet.
-Both D1 and D2 retransmit it at the same time.
-X is able to receive it from D1.
+- Station W transmits a packet.
+- Both D1 and D2 retransmit it at the same time.
+- X is able to receive it from D1.
 
 Suppose D1 was using "viscous" digipeating:
 
-Station W transmits a packet.
-D2 retransmits it immediately.
-D1 waits a little while, notices the retransmission by D2, and decides not to resend it.
-X is NOT able to receive the weather information.
+- Station W transmits a packet.
+- D2 retransmits it immediately.
+- D1 waits a little while, notices the retransmission by D2, and decides not to resend it.
+- X is NOT able to receive the weather information.
 
-Here is the last mention of it in APRSSIG in 2013:  http://www.tapr.org/pipermail/aprssig/2013-
-March/041554.html
+Here is the last mention of it in APRSSIG in 2013:  <http://www.tapr.org/pipermail/aprssig/2013-March/041554.html>
 
 As far as I can tell, "aprx" is the only APRS application that has implemented this.
 
-Page 100
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 9.6  Packet Filtering for APRS
+<!-- marker -->
+## Packet Filtering for APRS
 
 In some rare unusual situations, it might be desirable for a digipeater or Internet Gateway to pass along
 some types of packets and block others.
