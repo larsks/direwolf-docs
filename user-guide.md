@@ -3435,518 +3435,200 @@ Here is the last mention of it in APRSSIG in 2013:  <http://www.tapr.org/piperma
 
 As far as I can tell, "aprx" is the only APRS application that has implemented this.
 
-<!-- marker -->
 ## Packet Filtering for APRS
 
-In some rare unusual situations, it might be desirable for a digipeater or Internet Gateway to pass along
-some types of packets and block others.
+In some rare unusual situations, it might be desirable for a digipeater or Internet Gateway to pass along some types of packets and block others.
 
-Recommendation:
+**Recommendation**: The defaults are appropriate for most situations.  If you start using filters, without thinking it thru carefully, you will probably get unexpected results, and make the situation worse.
 
-The defaults are appropriate for most situations.  If you start using filters, without
-thinking it thru carefully, you will probably get unexpected results, and make the
-situation worse.
+A filter can be defined for each combination of where the packet came from (radio channel or IGate server) and where it is being sent to.   The format of the configuration command is:
 
-A filter can be defined for each combination of where the packet came from (radio channel or IGate
-server) and where it is being sent to.   The format of the configuration command is:
+- `FILTER  from-channel  to-channel      filter-expression`
 
-FILTER  from-channel  to-channel      filter-expression
+  This is for digipeating.  You can specify different filters for each combination of "from" channel (where recevived) and "to" channel (where transmitted).
 
-This is for digipeating.  You can specify different filters for each combination of "from"
-channel (where recevived) and "to" channel (where transmitted).
+- `FILTER  from-channel  IG       filter-expression`
 
-FILTER  from-channel  IG       filter-expression
+  This is for RF to Internet Server, sometimes written as RF>IS.  Normally we want everything heard over the radio to be sent to the server.  The IGate software is hardcoded to drop packets with TCPIP, TCPXX, RFONLY, or NOGATE in the via path.
 
-This is for RF to Internet Server, sometimes written as RF>IS.  Normally we want
-everything heard over the radio to be sent to the server.  The IGate software is
-hardcoded to drop packets with TCPIP, TCPXX, RFONLY, or NOGATE in the via path.
+- `FILTER  IG         to-channel      filter-expression`
 
-FILTER  IG         to-channel      filter-expression
+  This is for the Internet Server to RF direction, sometimes ritten as "IS>RF."  In most cases you should keep the default of "i/30" which transmits "messages" for stations which have been heard in the area recently.   The servers often send a lot of extra surprising stuff and you will be unpopular if you clutter the channel with all of it.  If you really believe this needs to be customized, add something like " | i/30 " to the expression so "messages" will be sent.
 
-This is for the Internet Server to RF direction, sometimes ritten as "IS>RF."  In most cases
-you should keep the default of "i/30" which transmits "messages" for stations which
-have been heard in the area recently.   The servers often send a lot of extra surprising
-stuff and you will be unpopular if you clutter the channel with all of it.  If you really
-believe this needs to be customized, add something like " | i/30 " to the expression so
-"messages" will be sent.
+The filter expression is loosely based on <http://www.aprs-is.net/javaprsfilter.aspx>   "Server-side Filter Commands" with the addition of logical operators to combine the filter results.   For example, you could decide to digipeat only telemetry originating from WB2OSZ or object reports not within a certain distance of a given location.
 
-The filter expression is loosely based on http://www.aprs-is.net/javaprsfilter.aspx   "Server-side Filter
-Commands" with the addition of logical operators to combine the filter results.   For example, you could
-decide to digipeat only telemetry originating from WB2OSZ or object reports not within a certain
-distance of a given location.
-
+```
 FILTER  0  0  ( t/t & b/WB2OSZ ) | ( t/o & ! r/42.6/-71.3/50 )
+```
 
 It's not necessary to put quotes around the filter expression even though it contains spaces.
 
-### 9.6.1  Logical Operators
+### Logical Operators
 
-Page 101
+The individual filter specifications return a true or false value depending whether the current packet satisfies the condition.  These results can be combined into larger expressions to for very flexible configuration.  The operators are:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The individual filter specifications return a true or false value depending whether the current packet
-satisfies the condition.  These results can be combined into larger expressions to for very flexible
-configuration.  The operators are:
-
-|
-
-&
-
-!
-
-Logical OR.  Result is true if either argument is true.
-
-Logical AND.  Result is true if both arguments are true.
-
-Logical NOT.  This inverts the value of the following part.
-
-(   )
-
-Parentheses are used for grouping.
+- `|` -- Logical OR.  Result is true if either argument is true.
+- `&` -- Logical AND.  Result is true if both arguments are true.
+- `!` -- Logical NOT.  This inverts the value of the following part.
+- `(   )` -- Parentheses are used for grouping.
 
 & has higher precedence than the | operator so the two following forms are equivalent:
 
+```
 w & x | y & z
 ( w & x ) | ( y & z )
+```
 
-This is the same as the rule for multiplying and adding.  When evaluating the arithmetic expression, a * b
-+ c *d, you would first multiply a * b, then multiply c *d, and finally add the two products together.
+This is the same as the rule for multiplying and adding.  When evaluating the arithmetic expression, `a * b + c * d`, you would first multiply `a * b`, then multiply `c * d`, and finally add the two products together.
 
 When in doubt, use parentheses to make the order more explicit.
 
-### 9.6.2  Filter Specifications
+### Filter Specifications
 
 The filter specifications are composed of a lower case letter, the punctuation character to be used as a
 field separator, and parameters.  These two are equivalent:
 
+```
 b/W2UB/N2GH
 b#W2UB#N2GH
+```
 
-Other implementations allow only the "/" separator character.  This extra flexibility comes in handy
-when you want to use the "/" character in a parameter value.
+Other implementations allow only the "/" separator character.  This extra flexibility comes in handy when you want to use the "/" character in a parameter value.
 
-Everything is case sensitive.  This means that UPPER and lower
-case are not equivalent.
+**Everything is case sensitive.  This means that UPPER and lower case are not equivalent.**
 
 Example:
 
+```
 b/w2ub
+```
 
 and
 
+```
 b/W2UB
+```
 
 are NOT equivalent.
 
-All Filter Specifications must be followed by a space.  This is so we can distinguish between special
-characters that are part of the filter or a logical operator.
+All Filter Specifications must be followed by a space.  This is so we can distinguish between special characters that are part of the filter or a logical operator.
 
-#### 9.6.2.1  Wildcarding
+#### Wildcarding
 
-Page 102
+Most of the filters allow the "`*`" character at the end of a string to mean match anything here.  This operates on character strings without any knowledge of the callsign-SSID syntax.  If you wanted to match "W2UB" regardless of any SSID, your first reaction might be to use
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Most of the filters allow the "*" character at the end of a string to mean match anything here.  This
-operates on character strings without any knowledge of the callsign-SSID syntax.  If you wanted to
-match "W2UB" regardless of any SSID, your first reaction might be to use
-
+```
 b/W2UB*
+```
 
-This would not be correct because it would also match W2UBA, W2UBZ, and many others.  The correct
-form would be:
+This would not be correct because it would also match W2UBA, W2UBZ, and many others.  The correct form would be:
 
+```
 b/W2UB/W2UB-*
+```
 
 This will match only that callsign (implied SSID of zero) or that callsign followed by any SSID.
 
-#### 9.6.2.2  Range Filter
+#### Range Filter
 
+```
 r/lat/lon/dist
+```
 
 This allows position and object reports with a location within the specified distance of given location.
 
-Latitude and longitude are in decimal degrees.  (negative for south or west.)
-Distance is in kilometers.
+Latitude and longitude are in decimal degrees.  (negative for south or west.) Distance is in kilometers.
 
-Note that this applies only to packets containing a location.  It will return a false result for other types
-such as messages and telemetry.   If you wanted to digipeat stations only within 50 km you might use
-something like this:
+Note that this applies only to packets containing a location.  It will return a false result for other types such as messages and telemetry.   If you wanted to digipeat stations only within 50 km you might use something like this:
 
+```
 FILTER  0  0  r/42.6/-71.3/50
+```
 
-This would reject other types of packets such as messages and telemetry.  To allow them, use the "or"
-operator to also allow all types other than position and object:
+This would reject other types of packets such as messages and telemetry.  To allow them, use the "or" operator to also allow all types other than position and object:
 
+```
 FILTER  0  0  r/42.6/-71.3/50 | ( ! t/po )
+```
 
-#### 9.6.2.3  Budlist Filter
+#### Budlist Filter
 
+```
 b/call1/call2...
+```
 
-Allow all packets from the specified calls.  These must be exact matches including the SSID.  Wildcarding
-is allowed.
+Allow all packets from the specified calls.  These must be exact matches including the SSID.  Wildcarding is allowed.
 
 When combined with the "!" (not) operator, it can be used to reject packets from specified calls.
 
-#### 9.6.2.4  Object Filter
+#### Object Filter
 
+```
 o/obj1/obj2...
+```
 
-Page 103
+Allow objects and items whose name matches one of them listed.   Wildcarding is allowed.
 
+####  Type Filter
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Allow objects and items whose name matches one of them listed.   Wildcarding is allowed.
-
-#### 9.6.2.5  Type Filter
-
+```
 t/poimqcstuhnw
+```
 
 Use one or more of the following letters for types of packets to be allowed.
 
-p
-o
-i
-m
-q
-c
-s
-t
-u
-h
-n
-w
+<!-- table missing -->
 
--  Position
--  Object
--  Item
--  Message
--  Query
--  station Capabilities
--  Status
--  Telemetry
--  User-defined
--  third party Header
--  NWS format
--  Weather
-
-!  /  =  @  ‘  `
-;
-)
-:
-?
-<
->
-T
-{
-}
-:  )
-*  _
-
-$ULTW
-
-! / =@ ;   if symbol  _
-
-The list of data type indicators (first character of information part) is included for convenience but it is
-often an over simplification.  There are many special cases and subtleties here.
+The list of data type indicators (first character of information part) is included for convenience but it is often an over simplification.  There are many special cases and subtleties here.
 
 Some, but not all, of the interesting cases:
 
-  A "message" starting with PARM, UNIT, EQNS, or BITS is considered to be Telemetry rather than
+- A "message" starting with PARM, UNIT, EQNS, or BITS is considered to be Telemetry rather than a Message.
+- A position (not MIC-E), or Object, with symbol  code "`_`" is also weather.
+- `$` is normally raw GPS but is weather if it starts with $ULTW.
+- NWS format is a message where addressee starts with NWS, SKY, or BOM or an Item where the first 3 characters of the source match the first 3 characters of the addressee.
 
-a Message.
+#### Symbol Filter
 
-  A position (not MIC-E), or Object, with symbol  code "_" is also weather.
-  $ is normally raw GPS but is weather if it starts with $ULTW.
-  NWS format is a message where addressee starts with NWS, SKY, or BOM or an Item where the
+Position and object reports have two characters representing the Icon.  The first is the table and possibly an overlay.  The second is the symbol from the table. Originally the overlay was simply a digit or upper case letter displayed over the symbol.  Later, this was generalized into different icons for related items.
 
-first 3 characters of the source match the first 3 characters of the addressee.
-
-#### 9.6.2.6  Symbol Filter
-
-Position and object reports have two characters representing the Icon.  The first is the table and possibly
-an overlay.  The second is the symbol from the table.
-Originally the overlay was simply a digit or upper case letter displayed over the symbol.  Later, this was
-generalized into different icons for related items.
-
-Table or Overlay
-/
-
-Symbol Table used
-Primary
-
-Examples
-/-
-/>
-
-Meaning
-House
-Car
-
-Page 104
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\
-0-9    A-Z
-
-Alternate
-Alternate with overlay
-
-/s
-/O
-\s
-6s
-Fs
-Js
-
-Ship
-Balloon
-Ship, top view
-Shipwreck
-Fishing
-Jet Ski
+<!-- table missing -->
 
 You can get a complete list by using the "direwolf -S" command.   The upper case S means symbols.
 
 Now let's get back to the filter specification.
 
+```
 s/pri
 s/pri/alt
 s/pri/alt/
 s/pri/alt/over
+```
 
-"pri" is zero or more symbols from the primary symbol set.
+- "pri" is zero or more symbols from the primary symbol set.
 
-Symbol codes are any printable ASCII character other than | or ~.
-(Zero symbols here would be sensible only if later alt part is specified.)
+  Symbol codes are any printable ASCII character other than | or ~. (Zero symbols here would be sensible only if later alt part is specified.)
 
-"alt" is one or more symbols from the alternate symbol set.
+- "alt" is one or more symbols from the alternate symbol set.
 
-"over" is overlay characters for the alternate symbol set.
+- "over" is overlay characters for the alternate symbol set.
 
-Only upper case letters, digits, and \ are allowed here.
-If the last part is not specified, any overlay or lack of overlay, is ignored.
-If the last part is specified, only the listed overlays will match.
-An explicit lack of overlay is represented by the \ character.
-
-Examples:
-
-s/O
-s/->
-
-Balloon.
-House or car from primary symbol table.
-
-s//#
-s//#/\
-s//#/SL1
-s//#/SL\
-
-Alternate table digipeater, with or without overlay.
-Alternate table digipeater, only if no overlay.
-Alternate table digipeater, with overlay S, L, or 1
-Alternate table digipeater, with S, L, or no overlay.
-
-s/s/s
-s/s/s/
-s//s/J
-
-Any variation of watercraft.  Either symbol table.  With or without overlay.
-Ship or ship sideview, only if no overlay.
-Jet Ski.
-
-What if you want to use the / symbol when / is being used as a delimiter here?  Recall that you can use
-some other special character after the initial lower case letter and this becomes the delimiter for the
-rest of the specification.
+  * Only upper case letters, digits, and \\ are allowed here.
+  * If the last part is not specified, any overlay or lack of overlay, is ignored.
+  * If the last part is specified, only the listed overlays will match.
+  * An explicit lack of overlay is represented by the \\ character.
 
 Examples:
 
-s:/
+<!-- table missing -->
 
-Red Dot.
+What if you want to use the / symbol when / is being used as a delimiter here?  Recall that you can use some other special character after the initial lower case letter and this becomes the delimiter for the rest of the specification.
 
-Page 105
+Examples:
 
+<!-- table missing -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-s::/
-s:/:/
-
-Waypoint Destination.
-Either Red Dot or Waypoint Destination.
+<!-- marker -->
 
 #### 9.6.2.7  Digipeater Filter
 
