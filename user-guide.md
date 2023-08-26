@@ -1,9 +1,6 @@
 ---
 title: Dire Wolf User Guide
-numberedsections: true
 ---
-
-# Dire Wolf User Guide
 
 ```
 Decoded
@@ -36,13 +33,13 @@ Without any additional software, it can perform as:
 - Internet Gateway (IGate)
 - APRStt gateway
 
-It can also be used as a virtual TNC for other applications such as [APRSIS32],  [Xastir],  [APRS-TW], [YAAC],  [UISS],  [Linux AX25],  [SARTrack],  [RMS Express], [Packet Compressed Sensing Imaging (pCSI)][pcsi], and many others. Both KISS and AGW network protocols are supported for use by applications.
+It can also be used as a virtual TNC for other applications such as [APRSISCE/32],  [Xastir],  [APRS-TW], [YAAC],  [UISS],  [Linux AX25],  [SARTrack],  [RMS Express], [Packet Compressed Sensing Imaging (pCSI)][pcsi], and many others. Both KISS and AGW network protocols are supported for use by applications.
 
 Starting with version 1.4, AX.25 version 2.2 connected mode is also supported for use with applications such as [Outpost PM].
 
 Starting with version 1.6, FX.25 forward error correction (FEC) is supported.
 
-[aprsis32]: http://aprsisce.wikidot.com/
+[aprsisce/32]: http://aprsisce.wikidot.com/
 [xastir]: http://xastir.org/index.php/Main_Page
 [aprs-tw]: http://aprstw.blandranch.net/
 [yaac]: http://www.ka2ddo.org/ka2ddo/YAAC.html
@@ -52,6 +49,7 @@ Starting with version 1.6, FX.25 forward error correction (FEC) is supported.
 [rms express]: http://www.winlink.org/RMSExpress
 [pcsi]: https://maqifrnswa.github.io/PCSI/
 [outpost pm]: http://www.outpostpm.org/index.php
+[ui-view32]: http://www.wa8lmf.net/aprs/UIview_Notes.htm
 
 ## FX.25 - Forward Error Correction (FEC)
 
@@ -67,7 +65,7 @@ For more than a decade this remained in the realm of satellite operation. Now th
 
 Depending on the FX.25 mode, up to 32 corrupted bytes (yes, bytes, not bits) can be corrected in a frame. Regular AX.25 fails if even a single bit gets corrupted. **FX.25 keeps going strong long after regular AX.25 is completely useless.**
 
-This can be used with all of your favorite applications such as APRSIS32,  UI-View32,  Xastir,  APRS-TW, YAAC,  UISS,  Linux AX25,  SARTrack,  RMS Express, Outpost PM, and many others. Imagine the possibilities for low power transmitters or much more reliable Emergency Communications!
+This can be used with all of your favorite applications such as [APRSISCE/32], [UI-View32],  [Xastir],  [APRS-TW], [YAAC],  [UISS],  [Linux AX25],  [SARTrack],  [RMS Express], [Outpost PM], and many others. Imagine the possibilities for low power transmitters or much more reliable Emergency Communications!
 
 # Features
 
@@ -77,11 +75,11 @@ Dire Wolf includes:
 
 - **Beaconing, Tracker, Telemetry Toolkit.**
 
-  Send periodic beacons to provide information to others.  The location can be provided by a GPS receiver.  Build your own telemetry applications with the toolkit.
+  Send periodic beacons to provide information to others. The location can be provided by a GPS receiver. Build your own telemetry applications with the toolkit.
 
 - **APRStt Gateway.**
 
-  Very few hams have portable equipment for APRS but nearly everyone has a handheld radio that can send DTMF tones.  APRStt allows a user, equipped with only DTMF (commonly known as Touch Tone) generation capability, to enter information into the global APRS data network.  Responses can be sent by Morse Code or synthesized speech.
+  Very few hams have portable equipment for APRS but nearly everyone has a handheld radio that can send DTMF tones. APRStt allows a user, equipped with only DTMF (commonly known as Touch Tone) generation capability, to enter information into the global APRS data network. Responses can be sent by Morse Code or synthesized speech.
 
 - **Digipeaters for APRS and traditional Packet Radio.**
 
@@ -93,13 +91,13 @@ Dire Wolf includes:
 
 - **AX.25 v2.2 Link Layer.**
 
-  When using traditional connected mode packet radio, the sending station TNC wants acknowledgements from the receiving station and automatically resends any missing frames.  Frames are delivered reliably in the proper sequence.
+  When using traditional connected mode packet radio, the sending station TNC wants acknowledgements from the receiving station and automatically resends any missing frames. Frames are delivered reliably in the proper sequence.
 
 - **KISS Interface (TCP/IP, serial port, Bluetooth).**
 
 - **AGW network Interface (TCP/IP).**
 
-  Dire Wolf can be used as a virtual TNC for applications such as   APRSIS32,  Xastir, APRS-TW,YAAC, UISS, Linux  AX25, SARTrack, RMS Express, Outpost PM, and many others.
+  Dire Wolf can be used as a virtual TNC for applications such as   APRSISCE/32,  Xastir, APRS-TW,YAAC, UISS, Linux  AX25, SARTrack, RMS Express, Outpost PM, and many others.
 
 Radio Interfaces:
 
@@ -157,25 +155,25 @@ See the `CHANGES.md` file for revision history.
 
   * RTS signal from RS-232 serial port.
 
-    This is the traditional method but newer computers don't have them anymore.  You could use USB to RS-232 adapter cable if you want to use this method.  Don't connect it directly to your radio!!!  You need a transistor switch or opto-isolator.  Some sample circuits are referenced later in this section.
+    This is the traditional method but newer computers don't have them anymore. You could use USB to RS-232 adapter cable if you want to use this method. Don't connect it directly to your radio!!!  You need a transistor switch or opto-isolator. Some sample circuits are referenced later in this section.
 
   * General Purpose I/O pins.
 
-    Small single board computers, such as the Raspberry Pi, have GPIO pins which are well suited for PTT control and a data carrier detect (DCD) LED indicator.  The  Raspberry-Pi- APRS.pdf   file contains more details.
+    Small single board computers, such as the Raspberry Pi, have GPIO pins which are well suited for PTT control and a data carrier detect (DCD) LED indicator. The  Raspberry-Pi- APRS.pdf   file contains more details.
 
   * VOX circuit.
 
-    This will turn on the transmitter when transmit audio is present.   The  SignaLink USB uses this technique.  Be sure to turn the Delay control all the way down (counter clockwise) so the transmitter is turned off quickly after the transmit audio stops.  Many homebrew designs are also available.
+    This will turn on the transmitter when transmit audio is present. The  SignaLink USB uses this technique. Be sure to turn the Delay control all the way down (counter clockwise) so the transmitter is turned off quickly after the transmit audio stops. Many homebrew designs are also available.
 
   * VOX built in to radio.
 
-    Generally not a good idea.  The VOX circuits are designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended.  This is much too long.  Others will probably start transmitting after your transmit audio has stopped but your transmitter is still on.
+    Generally not a good idea. The VOX circuits are designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended. This is much too long. Others will probably start transmitting after your transmit audio has stopped but your transmitter is still on.
 
     For an explanation, see the section called, "Radio Channel – Transmit Timing."
 
   * GPIO pins inside of USB Audio adapters.
 
-    The C-Media CM108 and CM119 chips are very popular for USB to Audio adapters.  They have GPIO pins that we can use for the PTT signal.   This is a very tidy solution because everything goes through a single USB cable.   Dire Wolf version 1.5 adds support which makes these very easy to use.
+    The C-Media CM108 and CM119 chips are very popular for USB to Audio adapters. They have GPIO pins that we can use for the PTT signal. This is a very tidy solution because everything goes through a single USB cable. Dire Wolf version 1.5 adds support which makes these very easy to use.
 
 At this time, I'm aware of four commercial products using this technique:
 
@@ -193,9 +191,9 @@ There are several similar homebrew projects:
 
 Currently this is implemented for Linux only.
 
-I recommend using some sort of hardware timer to limit transmission time.  Without this, you might end up with your transmitter stuck on for a very long time due to a software malfunction.  Alternatively some radios have a configurable transmit timeout setting to limit transmission time.
+I recommend using some sort of hardware timer to limit transmission time. Without this, you might end up with your transmitter stuck on for a very long time due to a software malfunction. Alternatively some radios have a configurable transmit timeout setting to limit transmission time.
 
-There are many ham radio "soundcard" applications and others have documented this type of interface extensively so I won't duplicate the effort.  Many homebrew plans and commercial products are available.  A few random examples:
+There are many ham radio "soundcard" applications and others have documented this type of interface extensively so I won't duplicate the effort. Many homebrew plans and commercial products are available. A few random examples:
 
 - <http://wa8lmf.net/ham/tonekeyer.htm#NEW>
 - <http://www.ebay.com/itm/EASY-DIGI-USB-Sound-Card-Interface-NO-MORE-USB-RS232-ADAPTERS-/221668996763>
@@ -211,11 +209,11 @@ Google for something like ham radio sound card interface or ham radio digital mo
 
 Maybe you do but don't know about it.
 
-My new computer didn't have a serial port on the back.  This was a disappointment because I still have some useful gadgets that use a good old fashioned RS-232 port.  I was surprised to see a serial port and parallel printer port displayed in the Device Manager:
+My new computer didn't have a serial port on the back. This was a disappointment because I still have some useful gadgets that use a good old fashioned RS-232 port. I was surprised to see a serial port and parallel printer port displayed in the Device Manager:
 
 <!-- image removed -->
 
-The connectors exist on the motherboard.  It was only necessary to add appropriate cables to bring
+The connectors exist on the motherboard. It was only necessary to add appropriate cables to bring
 them out to the rear panel.
 
 ## For Best Results
@@ -224,13 +222,13 @@ For receiving:
 
 - Leave squelch open.
 
-  Squelch delay will cut off the start of transmissions.  You won't hear the weak ones at all.
+  Squelch delay will cut off the start of transmissions. You won't hear the weak ones at all.
 
   (<https://illruminations.com/2014/01/15/baofeng-packet-radio-adventures/>)
 
 - Turn off any battery saver feature.
 
-  This feature powers the receiver on and off rapidly to extend battery life.  You will miss the beginning of transmissions that come during the power down part of the cycle.
+  This feature powers the receiver on and off rapidly to extend battery life. You will miss the beginning of transmissions that come during the power down part of the cycle.
 
 - Turn off any "dual watch" feature.
 
@@ -240,13 +238,13 @@ For transmitting:
 
 - Set proper transmit audio level.
 
-  Too low, you won't be heard.  Too high will cause distortion and make decoding less likely.
+  Too low, you won't be heard. Too high will cause distortion and make decoding less likely.
 
   Most of us don't have the test equipment to set the deviation level around 3 or 3.5 KHz so we need to listen to other signals and set ours around the average of what others are sending.
 
 - Avoid use of VOX built into your transceiver.
 
-  This is designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended.  This is much too long.  Others will probably start transmitting before you stop.
+  This is designed for voice operation and will keep the transmitter on about a half second after the transmit audio has ended. This is much too long. Others will probably start transmitting before you stop.
 
   For an explanation, see the section called, "Radio Channel – Transmit Timing."
 
@@ -256,640 +254,378 @@ For transmitting:
 
 Mobile Rigs:
 
-Transceivers designed for mobile use often have a 6 pin mini-DIN "data" connector designed specifically for connection to an external modem.  If available, use this instead of the speaker and microphone connections.  This connection has flatter audio response.  Adjusting the volume control won't change the receive audio level going in to the software modem.
+Transceivers designed for mobile use often have a 6 pin mini-DIN "data" connector designed specifically for connection to an external modem. If available, use this instead of the speaker and microphone connections. This connection has flatter audio response. Adjusting the volume control won't change the receive audio level going in to the software modem.
 
-The next 3 sections contain information specific to different operating systems.  Proceed to the
+The next 3 sections contain information specific to different operating systems. Proceed to the
 corresponding one for your situation.
 
 <!-- add section links -->
 
--  Windows XP or later
--  Linux
--  Macintosh OS X
+-  [Windows XP or later](#installation-operation-microsoft-windows-xp-or-later)
+-  [Linux](#installation-operation-linux)
+-  [Macintosh OS X](#installation-operation-macintosh-os-x)
 
 After installing on your particular operating system, continue with section 7, Basic Operation.
 
-<!-- marker -->
+# Installation & Operation –- Microsoft Windows XP or later
 
-# 4  Installation & Operation – Microsoft Windows XP or later
-
-If using Linux, skip section 4 and proceed to section 5.
-If using OS X, skip section 4 and proceed to section 6.
+- If using Linux, skip to [Installation & Operation -- Linux](#installation-operation-linux).
+- If using OS X, skip to [Installation & Operation -- Macintosh OS X](#installation-operation-macintosh-os-x)
 
 Instructions for building from source are at the end of this section.
 
-Linux users are accustomed to building open source applications, from source, but Windows users
-generally are not.
+Linux users are accustomed to building open source applications, from source, but Windows users generally are not.
 
 Most Windows users will probably want to download a prebuilt version.
 
-Download the desired  direwolf-*-win_*.zip  file from  https://github.com/wb2osz/direwolf/releases
-
-       The "win" in the file name means it is the Windows version.
+Download the desired  **direwolf-*-win_*.zip**  file from  <https://github.com/wb2osz/direwolf/releases> (the "win" in the file name means it is the Windows version).
 
 Starting with version 1.6, there are two prebuilt versions:
 
-  The file with i868, in the file name, requires a minimum of a Pentium 3 processor or equivalent.
+- The file with i868, in the file name, requires a minimum of a Pentium 3 processor or equivalent.
 
-  The file with x86_64, in the name, requires a 64 bit CPU and operating system.  This one is
+- The file with x86_64, in the name, requires a 64 bit CPU and operating system. This one is preferred because it runs about 1½ times faster for the same hardware.
 
-preferred because it runs about 1½ times faster for the same hardware.
-
-Put the Dire Wolf distribution file, direwolf-1.6.0-win_x86_64.zip (or similar name depending on
-version), in some convenient location such as your user directory.  In this example, we will use
-C:\Users\John
+Put the Dire Wolf distribution file, `direwolf-1.6.0-win_x86_64.zip` (or similar name depending on version), in some convenient location such as your user directory. In this example, we will use `C:\Users\John`.
 
 In Windows Explorer, right click on this file and pick "Extract All…" Click on the Extract button.
 
 You should end up with a new folder containing:
 
-  direwolf.exe
-  User-Guide.pdf
-  and  many others …
+- direwolf.exe
+- User-Guide.pdf
+- The application.
+- This document.
+- and many others …
 
---  The application.
---  This document.
+In Windows Explorer, right click on `direwolf.exe` and pick **Send To > Desktop** (create shortcut).
 
-In Windows Explorer, right click on direwolf.exe and pick Send To > Desktop (create shortcut).
+<!-- image removed -->
 
-Page 10
+Look for the new direwolf.exe icon on your desktop.
 
+## Run Dire Wolf
 
+Double click on the desktop icon...
 
+<!-- image removed -->
 
+...and you should get a new window similar to this:
 
+<!-- image removed -->
 
+It starts with some informational messages in black.
 
+-  Audio devices being used and their mapping to radio channels. The current version allows up to three audio devices. This allows up to six radio channels when all are operating in stereo.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Look for the new direwolf.exe icon on your desktop.
-
-## 4.1  Run Dire Wolf
-
-Double click on the desktop icon:
-
- and you should get a new window similar to this:
-
-Page 11
-
-
-
-
-
-
-
-
-
-
-
-
-It starts with some informational messages in black.
-
--  Audio devices being used and their mapping to radio channels.  The current version allows up to
-
-three audio devices.  This allows up to six radio channels when all are operating in stereo.
-
-Next we have some troubleshooting information about the radio channel configuration.  Dire Wolf
-supports the most popular 1200, 9600, and 300 baud standards.   For 300 baud HF SSB operation,
+Next we have some troubleshooting information about the radio channel configuration. Dire Wolf
+supports the most popular 1200, 9600, and 300 baud standards. For 300 baud HF SSB operation,
 multiple decoders can be configured to compensate for signals off frequency.
 
 A group of several lines is displayed for each packet received.
 
--
+- The first line of each group, in dark green, contains the audio level of the station heard and some other useful troubleshooting information. The numbers, in parentheses, after the audio level are explained in **A-Better-Packet-Demodulator-Part-1-1200-baud.pdf** & **A-Closer-Look-at-the WA8LMF-TNC-Test-CD.pdf**.
 
--
--
--
+The raw data is displayed in green and deciphered information is in blue. Sometimes you will see error messages in red when invalid data is received or other problems are noticed.
 
-The first line of each group, in dark green, contains the audio level of the station heard and
-some other useful troubleshooting information.   The numbers, in parentheses, after the audio
-level are explained in                           A-Better-Packet-Demodulator-Part-1-1200-baud.pdf   &
-A-Closer-Look-at-the WA8LMF-TNC-Test-CD.pdf.
+We will learn more about these in later chapters.
 
-The raw data is displayed in green and deciphered information is in blue.
-Sometimes you will see error messages in red when invalid data is received or other problems
-are noticed.
+The rest of section 4 describes how to use Dire Wolf with other packet radio applications such as APRSISCE/32 and UI-View. If you are not interested using them this time, skip ahead to section 7, Basic Operation.
 
-Page 12
+When using the network interfaces, Dire Wolf and the client application can be running on different computers. You could have a Linux computer in the "shack" running Dire Wolf as a digipeater. You could connect to it from a Windows Laptop, running APRSISCE/32, in another part of the house. In this case you would specify the name or address of the first computer instead of using "localhost."
 
+## Select better font
 
+You might need to change the font for best results. Right-click on the title bar and pick Properties from the pop-up menu. Select the Font tab. I like *Consolas*, because it is clean and easy to read but you might prefer  a different font.
 
+In earlier versions of Windows, some of the fonts were missing some letters not in the Latin alphabet. This doesn't seem to be an issue anymore with Windows 10. You can check by running direwolf with the "-u"  (lower case u) command line option.
 
+For more details, see section called [UTF-8 Characters](#utf-8-characters).
 
+## AGW TCPIP socket interface
 
+Dire Wolf provides a server function with the "AGW TCPIP Socket Interface" on default port 8000. Up to 3 different client applications can connect at the same time.
 
+### APRSISCE/32
 
+1. First, start up Dire Wolf.
+2. Run [APRSISCE/32].
+3. From the "Configure" menu, pick "ports" then "new port…"
+4. Select type "AGW" from the list. Enter "Dire Wolf" as the name. Click "Create" button.
+5. When it asks, "Configure as TCP/IP Port?" answer Yes.
+6. Enter "localhost" for the address and port 8000.
+7. Finally click on "Accept.".
 
+A common complaint is that "messages" are not being sent. It is necessary to enable the messages option in the TNC port configuration.
 
+<!-- image removed -->
 
+By default it is off. An attempt to send an APRS "message" does nothing and doesn't produce any sort of warning.
 
+### Ui-View
 
-We will learn more about these in later chapters.
+1. First, start up Dire Wolf.
+2. Run [UI-View32]
+3. From the Setup menu, pick Comms Setup.
+4. Select Host mode: AGWPE from the list and click the "Setup" button.
+5. Take defaults of localhost and 8000. Click on OK.
+6. Click on OK for Comms Setup.
 
-The rest of section 4 describes how to use Dire Wolf with other packet radio applications such as
-APRSISCE/32 and UI-View.  If you are not interested using them this time, skip ahead to section 7, Basic
-Operation.
+### YAAC (Yet Another APRS Client)
 
-When using the network interfaces, Dire Wolf and the client application can be running on different
-computers.  You could have a Linux computer in the "shack" running Dire Wolf as a digipeater.   You
-could connect to it from a Windows Laptop, running APRSIS 32, in another part of the house.  In this
-case you would specify the name or address of the first computer instead of using "localhost."
+1. First, start up Dire Wolf.
+2. Run [YAAC]
+3. From the Setup menu, pick Configure `->` by Expert Mode.
+4. Select the "Ports" tab.
+5. Click the "Add" button.
+6. From the Port type list, choose AGWPE.
+7. For Server Host name specify where Dire Wolf is running. Use "localhost" if both are running on the same computer.
+8. For the port name list, you should see one or two items depending how Dire Wolf was configured.
 
-## 4.2  Select better font
+### SARTrack
 
-You might need to change the font for best results.  Right-click on the title bar and pick Properties from
-the pop-up menu.      Select the Font tab.   I like Consolas, because it is clean and easy to read but you
-might prefer  a different font.
-
-Page 13
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-In earlier versions of Windows, some of the fonts were missing some letters not in the Latin alphabet.
-This doesn't seem to be an issue anymore with Windows 10.  You can check by running direwolf with
-the "-u"  (lower case u) command line option.
-
-For more details, see section called UTF-8 Characters.
-
-## 4.3  AGW TCPIP socket interface
-
-Dire Wolf provides a server function with the "AGW TCPIP Socket Interface" on default port 8000.  Up to
-3 different client applications can connect at the same time.
-
-### 4.3.1  APRSISCE/32
-
-1.  First, start up Dire Wolf.
-2.  Run APRSISCE/32.
-3.  From the "Configure" menu, pick "ports" then "new port…"
-4.  Select type "AGW" from the list.  Enter "Dire Wolf" as the name.  Click "Create" button.
-5.  When it asks, "Configure as TCP/IP Port?" answer Yes.
-6.  Enter "localhost" for the address and port 8000.
-7.  Finally click on "Accept.".
-
-A common complaint is that "messages" are not being sent.  It is necessary to enable the messages
-option in the TNC port configuration.
-
-By default it is off.  An attempt to send an APRS "message" does nothing and doesn't produce any sort
-of warning.
-
-Page 14
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 4.3.2  Ui-View
-
-1.  First, start up Dire Wolf.
-2.  Run UI-View32
-3.  From the Setup menu, pick Comms Setup.
-4.  Select Host mode: AGWPE from the list and click the "Setup" button.
-5.  Take defaults of localhost and 8000.  Click on OK.
-6.  Click on OK for Comms Setup.
-
-### 4.3.3  YAAC (Yet Another APRS Client)
-
-1.  First, start up Dire Wolf.
-2.  Run YAAC
-3.  From the Setup menu, pick Configure  by Expert Mode.
-4.  Select the "Ports" tab.
-5.  Click the "Add" button.
-6.  From the Port type list, choose AGWPE.
-7.  For Server Host name specify where Dire Wolf is running.  Use "localhost" if both are running on
-
-the same computer.
-
-8.  For the port name list, you should see one or two items depending how Dire Wolf was
-
-configured.
-
-### 4.3.4  SARTrack
-
-1.  First, start up Dire Wolf.
-2.  Run SARTrack.
-3.  Select AGWPE under Connections.
-4.
-
-If SARTrack and Dire Wolf are running on different computers, enter the address of the host
+1. First, start up Dire Wolf.
+2. Run [SARTrack].
+3. Select AGWPE under Connections.
+4. If SARTrack and Dire Wolf are running on different computers, enter the address of the host
 where Dire Wolf is running.
 
-Later versions of SARTrack now have a special Dire Wolf button.
+    <!-- image removed -->
 
-Page 15
+    Later versions of SARTrack now have a special Dire Wolf button.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 4.4  Kiss TNC emulation – serial port
+## Kiss TNC emulation – serial port
 
 Dire Wolf can act like a packet radio TNC using the KISS protocol by serial port.
 
-You can use a serial port to emulate a hardware TNC.  A cable can be attached to different computer
-running an application expecting a KISS TNC.  More often, you will run both on the same computer and
-want to connect them together without two physical serial ports and a cable between them.
+You can use a serial port to emulate a hardware TNC. A cable can be attached to different computer running an application expecting a KISS TNC. More often, you will run both on the same computer and want to connect them together without two physical serial ports and a cable between them.
 
-To use this feature, you must install com0com as explained later in the Advanced Topics section.  If you
-followed the instructions, other applications will think they are talking with a TNC on the COM4 serial
-port.
+To use this feature, you must install com0com as explained later in the Advanced Topics section. If you followed the instructions, other applications will think they are talking with a TNC on the COM4 serial port.
 
 Here are detailed configuration steps for a couple popular applications.
 
-### 4.4.1  APRSISCE/32
+### APRSISCE/32
 
-1.  First start up Dire Wolf.
-2.  Run APRSISCE/32.
-3.  From the "Configure" menu, pick "ports" then "new port…"
-4.  Select type "KISS" from the list.  Enter "Dire Wolf" as the name.  Click "Create" button.
-5.  When it asks, "Configure as TCP/IP Port?" answer No.
-6.  For port configuration, pick "COM4" from the list.  If you don't see COM4, com0com has not
+1. First start up Dire Wolf.
+2. Run [APRSISCE/32].
+3. From the "Configure" menu, pick "ports" then "new port…"
+4. Select type "KISS" from the list. Enter "Dire Wolf" as the name. Click "Create" button.
+5. When it asks, "Configure as TCP/IP Port?" answer No.
+6. For port configuration, pick "COM4" from the list. If you don't see COM4, com0com has not been installed properly. Go back and fix it.
+7. The baud rate shouldn't matter because there is not a physical serial port. Leaving it blank seems to be fine. Keep defaults of Party:None, Data:8, and Stop:1
+8. Finally click on "Accept.".
 
-been installed properly.  Go back and fix it.
+### UI-View32
 
-7.  The baud rate shouldn't matter because there is not a physical serial port.  Leaving it black
+1. First, start up Dire Wolf.
+2. Run [UI-View32]
+3. From the Setup menu, pick Comms Setup.
+4. Select Host mode: KISS from the list, then COM port 4, and click the "Setup" button.
+5. Clear all of the "Into KISS" and "Exit KISS" fields then click the OK button.
+6. Click on OK for Comms Setup.
 
-seems to be fine. Keep defaults of Party:None, Data:8, and Stop:1
+### YAAC (Yet Another APRS Client)
 
-8.  Finally click on "Accept.".
+1. First, start up Dire Wolf.
+2. Run [YAAC]
+3. From the Setup menu, pick Configure  by Expert Mode.
+4. Select the "Ports" tab.
+5. Click the "Add" button.
+6. From the Port type list, choose Serial_TNC
+7. For device name pick COM4.
+8. Baud Rate doesn't apply in this case because there is no physical serial port.
+9. For Command to enter KISS mode, pick KISS-only.
 
-### 4.4.2  UI-View32
-
-1.  First, start up Dire Wolf.
-2.  Run UI-View32
-3.  From the Setup menu, pick Comms Setup.
-4.  Select Host mode: KISS from the list, then COM port 4, and click the "Setup" button.
-5.  Clear all of the "Into KISS" and "Exit KISS" fields then click the OK button.
-6.  Click on OK for Comms Setup.
-
-### 4.4.3  YAAC (Yet Another APRS Client)
-
-1.  First, start up Dire Wolf.
-2.  Run YAAC
-3.  From the Setup menu, pick Configure  by Expert Mode.
-4.  Select the "Ports" tab.
-5.  Click the "Add" button.
-6.  From the Port type list, choose Serial_TNC
-7.  For device name pick COM4.
-8.  Baud Rate doesn't apply in this case because there is no physical serial port.
-
-Page 16
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9.  For Command to enter KISS mode, pick KISS-only.
-
-## 4.5  Kiss TNC emulation – network
+## Kiss TNC emulation – network
 
 Dire Wolf can also use the KISS protocol over a network connection with default port 8001.
 
 Here are detailed configuration steps for a couple popular applications.
 
-### 4.5.1  Winlink / RMS Express
+### Winlink / RMS Express
 
-1.  First start up Dire Wolf.
-2.  Run Winlink Express.
-3.  Next to "Open Session," pick either "Packet Winlink" or "Packet P2P."
-4.  Click on "Open Session."
-5.
-6.  Set configuration as shown below.
+1. First start up Dire Wolf.
+2. Run Winlink Express.
+3. Next to "Open Session," pick either "Packet Winlink" or "Packet P2P."
+4. Click on "Open Session."
+5. In the "Packet … Session" window, click on "Settings."
+6. Set configuration as shown below.
 
-In the "Packet … Session" window, click on "Settings."
+    **Be sure model is set to NORMAL. ACKMODE will cause an error.** Change the host/port appropriately if Dire Wolf and Winlink are running on different computers.
 
-Be sure model is set to NORMAL.  ACKMODE will cause an error.
-Change the host/port appropriately if Dire Wolf and Winlink are running on different computers.
+### APRSISCE/32
 
-### 4.5.2  APRSISCE/32
-
-7.  First start up Dire Wolf.
-8.  Run APRSISCE/32.
-9.  From the "Configure" menu, pick "ports" then "new port…"
-10. Select type "Simply(KISS)" from the list.  Enter "Dire Wolf" as the name.  Click "Create" button.
-11. When it asks, "Configure as TCP/IP Port?" answer Yes.
-12. Enter "localhost" for the address and port 8001.
-13. Finally click on "Accept.".
+1. First start up Dire Wolf.
+2. Run APRSISCE/32.
+3. From the "Configure" menu, pick "ports" then "new port…"
+4. Select type "Simply(KISS)" from the list. Enter "Dire Wolf" as the name. Click "Create" button.
+5. When it asks, "Configure as TCP/IP Port?" answer Yes.
+6. Enter "localhost" for the address and port 8001.
+7. Finally click on "Accept.".
 
 Notice the two similar choices:
 
-  KISS
+- KISS
 
-Page 17
+  This is intended for use with a traditional TNC. The application attempts to get a command prompt, and enter KISS mode with commands like "KISS ON" and "TRSTART."   Dire Wolf does not recognize the commands and will complain:
 
+  ```
+  KISS TCP: Something unexpected from client application.
+  Is client app treating this like an old TNC with command mode?
+  ```
 
+  This is usually harmless.
 
+- Simply(KISS)
 
+  This is for a KISS-only TNC without a command interpreter. This is the preferred setting.
 
+## Build Dire Wolf from source on Windows (optional)
 
+The Windows version contains prebuilt executable files so you don't need to build it from source.  If you want to build it from source, here is how to do it.
 
+It is built using Cygwin, which provides a Unix-like development environment.  The MinGW compiler is a special version of gcc which generates native code for the Windows operating system.
 
-
-
-
-
-
-
-
-
-
-
-
-
-This is intended for use with a traditional TNC.  The application attempts to get a command
-prompt, and enter KISS mode with commands like "KISS ON" and "TRSTART."   Dire Wolf does
-not recognize the commands and will complain:
-
-KISS TCP: Something unexpected from client application.
-Is client app treating this like an old TNC with command mode?
-
-This is usually harmless.
-
-  Simply(KISS)
-
-This is for a KISS-only TNC without a command interpreter.  This is the preferred setting.
-
-## 4.6  Build Dire Wolf from source on Windows (optional)
-
-The Windows version contains prebuilt executable files so you don't need to build it from source.  If you
-want to build it from source, here is how to do it.
-
-It is built using Cygwin, which provides a Unix-like development environment.  The MinGW compiler is a
-special version of gcc which generates native code for the Windows operating system.
-
-Install Cygwin 64 from https://cygwin.com/
+Install Cygwin 64 from <https://cygwin.com/>.
 
 During installation pick these additional packages:
 
-  git
-  bin-utils
-  make
-  cmake
-  mingw64-x86_64-gcc-core
-  mingw64-x86_64-gcc-g++
+- `git`
+- `bin-utils`
+- `make`
+- `cmake`
+- `mingw64-x86_64-gcc-core`
+- `mingw64-x86_64-gcc-g++`
 
 If you want to generate code for a 32 bit target (i.e. Windows XP), also install these:
 
-  mingw64-i686gcc-core
-  mingw64-i686gcc-g++
+- `mingw64-i686gcc-core`
+- `mingw64-i686gcc-g++`
 
 Open a Cygwin command window by double clicking this desktop shortcut.
-Edit your ~/.bash_profile file and add the following:
 
-Page 18
+<!-- image removed -->
 
+Edit your `~/.bash_profile` file and add the following:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export CC=/usr/bin/x86_64-w64-mingw32-gcc
+```
+export CC=/usr/bin/x86_64-w64-mingw32-gcc
 export CXX=/usr/bin/x86_64-w64-mingw32-g++
 export AR=/usr/bin/x86_64-w64-mingw32-ar
 export WINDRES=/usr/bin/x86_64-w64-mingw32-windres
+```
 
 To build the 32 bit version, use these instead:
 
+```
 export CC=/usr/bin/i686-w64-mingw32-gcc
 export CXX=/usr/bin/i686-w64-mingw32-g++
 export AR=/usr/bin/i686-w64-mingw32-ar
 export WINDRES=/usr/bin/i686-w64-mingw32-windres
+```
 
-These commands will be run automatically when a new command window is opened.  To apply them to
-the current command window:
+These commands will be run automatically when a new command window is opened.  To apply them to the current command window:
 
+```
 source  ~/.bash_profile
+```
 
 Type this to obtain the source code:
 
+```
 git clone http://github.com/wb2osz/direwolf
 cd direwolf
+```
 
-This is the most recent stable version.  If you want the most recent development version, with all of the
-latest new features and bug fixes, type:
+This is the most recent stable version.  If you want the most recent development version, with all of the latest new features and bug fixes, type:
 
+```
 git checkout dev
+```
 
 Build it.  Notice the double period at the end of the cmake command.
 
+```
 mkdir build
 cd buile
 cmake -DUNITTEST=1 ..
 make -j4
+```
 
 It would be a good idea to run the self-tests.
 
+```
 make test
+```
 
-The result should be several new executable files, in the build/src directory including "direwolf.exe" and
-"decode_aprs.exe."
+The result should be several new executable files, in the build/src directory including "direwolf.exe" and "decode_aprs.exe."
 
 If you want to bundle up the application, so it can be run on a different computer, create a zip file with:
 
+```
 make package
+```
+
+<!-- TODO -->
 
 Skip sections 5 (Linux) and 6 (Mac OS X) and proceed to section 7 for Basic Operation.
 
-Page 19
+# Installation & Operation –- Linux
 
+Depending on your particular operating system, you might be able to install direwolf with "yum install" or "apt-get install." The packaging process will lag behind so you would probably end up with an outdated version. If you want the most recent version you will have to build from source.
 
+Special considerations for the Raspberry Pi are covered in a separate document. If you are using the Raspberry Pi, or other similar single board computer, see separate "Raspberry Pi APRS" document.
 
+## Install Prerequisites
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 5  Installation & Operation – Linux
-
-Depending on your particular operating system, you might be able to install direwolf with "yum install"
-or "apt-get install."   The packaging process will lag behind so you would probably end up with an
-outdated version.   If you want the most recent version you will have to build from source.
-
-Special considerations for the Raspberry Pi are covered in a separate document.   If you are using the
-Raspberry Pi, or other similar single board computer, see separate "Raspberry Pi APRS" document.
-
-## 5.1  Install Prerequisites
-
-A standard operating system install will probably have the gcc compiler and "make" pre-installed.  Clang
-can also be used as an alternative to gcc.
+A standard operating system install will probably have the gcc compiler and "make" pre-installed.  Clang can also be used as an alternative to gcc.
 
 It will probably be necessary to install some additional packages.
 
 On Debian / Ubuntu / Raspbian:
 
+```
 sudo apt-get install cmake
 sudo apt-get install libasound2-dev
 sudo apt-get install libudev-dev
+```
 
 Optional if you want to transmit the location from a GPS receiver:
 
+```
 sudo apt-get install gpsd
 sudo apt-get install libgps-dev
+```
 
 On Red Hat / Fedora / CentOS:
 
+```
 sudo yum install cmake
 sudo yum install alsa-lib-devel
 sudo yum install libudev-devel
+```
 
 Optional if you want to transmit the location from a GPS receiver:
 
+
+```
 sudo yum install gpsd
 sudo yum install libgps-devel
+```
 
-Failure to install the libasound2-dev  (or alsa-lib-devel) package will result in the compile error,
-"audio.c…: fatal error: alsa/asoundlib.h:  No such file or directory."
+Failure to install the libasound2-dev  (or alsa-lib-devel) package will result in the compile error, `audio.c…: fatal error: alsa/asoundlib.h:  No such file or directory.`
 
-The libudev-dev (or libudev-devel) package contains /usr/include/libudev.h.  This is required for using
-the USB audio GPIO pins for PTT.
+The libudev-dev (or libudev-devel) package contains /usr/include/libudev.h.  This is required for using the USB audio GPIO pins for PTT.
 
-Page 20
+### Optional Step: hamlib support
 
+Dire Wolf can use "hamlib" for more flexible PTT control.   Most people will not need this.  It can be complicated and problematic.  **Skip this section unless you absolutely need this option.**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 5.1.1  Optional Step:  hamlib support
-
-Dire Wolf can use "hamlib" for more flexible PTT control.   Most people will not need this.  It can be
-complicated and problematic.  Skip this section unless you absolutely need this option.
-
-You can install it from a package or build from source as described here:
-
-https://github.com/Hamlib/Hamlib/wiki
+You can install it from a package or build from source as described in <https://github.com/Hamlib/Hamlib/wiki>.
 
 Boiled down version if you don't want to read the instructions:
 
+```
 cd ~
 sudo apt-get install automake libtool texinfo
 git clone https://github.com/Hamlib/Hamlib
@@ -899,318 +635,144 @@ cd Hamlib
 make
 make check
 sudo make install
+```
 
 Troubleshooting tip:   When running direwolf, you might see a message like this:
 
-direwolf: error while loading shared libraries: libhamlib.so.4: cannot open shared object file: No
-such file or directory
+```
+direwolf: error while loading shared libraries: libhamlib.so.4: cannot open
+shared object file: No such file or directory
+```
 
-The reason is that libhamlib.so is in /usr/local/lib rather than the usual /usr/lib and the particular
-operating system does not look in the former.  One solution is to define an environment variable.
+The reason is that libhamlib.so is in /usr/local/lib rather than the usual /usr/lib and the particular operating system does not look in the former.  One solution is to define an environment variable.
 
+```
 export LD_LIBRARY_PATH=/usr/local/lib
+```
 
 You will probably want to put this in your ~/.profile, or similar, file that gets run when you log in.
 
-## 5.2  Download Dire Wolf source code
+## Download Dire Wolf source code
 
 Follow these steps to clone the git repository and checkout the desired version.
 
+```
 cd ~
 git clone https://www.github.com/wb2osz/direwolf
 cd direwolf
+```
 
 At this point you should have the most recent stable version.
 
-In some cases, you might want the latest (sometimes unstable) development version to test a bug fix or
-get a preview of a new (possibly incomplete) feature that will be in the next release.   In that case, also
-type:
+In some cases, you might want the latest (sometimes unstable) development version to test a bug fix or get a preview of a new (possibly incomplete) feature that will be in the next release.   In that case, also type:
 
-Page 21
+```
+git checkout dev
+```
 
+## Start Build & Install
 
+Note that version 1.6 is different than earlier versions.  It now uses "cmake" for greater portability across different platforms.  First create a directory for building outside of the source tree.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- git checkout dev
-
-## 5.3  Start Build & Install
-
-Note that version 1.6 is different than earlier versions.  It now uses "cmake" for greater portability
-across different platforms.  First create a directory for building outside of the source tree.
-
+```
 mkdir build && cd build
+```
 
 In most cases you can use this. Notice the double period at the end
 
+```
 cmake ..
+```
 
 There are many possible options that can be used with cmake.  Some of the most common are:
 
-  Enable the testing scripts.  This is needed
+- Enable the testing scripts.  This is needed
 
-cmake -DUNITTEST=1 ..
+  ```
+  cmake -DUNITTEST=1 ..
+  ```
 
-  Build for debug.  (includes compiler  –g option)
+- Build for debug.  (includes compiler  –g option)
 
-cmake -DCMAKE_BUILD_TYPE=DEBUG ..
+  ```
+  cmake -DCMAKE_BUILD_TYPE=DEBUG ..
+  ```
 
-## 5.4  Finish build and install
+## Finish build and install
 
+```
 make –j4
+```
 
 If you enabled the test scripts earlier:
 
+```
 make test
+```
 
 Finally install it:
 
+```
 sudo make install
+```
 
 You should now have files in these locations, mostly under /usr/local, owned by root.
 
-/usr/local/bin/direwolf
-/usr/local/bin/decode_aprs
-
-/usr/local/bin/tt2text
-                           text2tt
-                           ll2utm
-                           utm2ll
-
-The main application.
-Utility to interpret "raw" data you might find on
-http://aprs.fi or http://findu.com
-Utilities related to APRStt gateway, UTM
-coordinates, log file to GPX conversion, test
-frame generation, TNC comparison, and a Touch
-Tone to Speech sample application.
-
-Page 22
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-APRS Telemetry Toolkit.
-
-Application definition with icon location,
-command to execute, etc.  You might want to
-copy this to ~/Desktop.
-
-Icon for the desktop.
-Mapping from destination address to system
-type.
-Search order for tocalls.txt is first the current
-working directory and then /usr/share/direwolf.
-Descriptions and codes for APRS symbols.
-
-Various documentation, mostly in PDF form.
-
-README.md is an overview.
-
-                           log2gpx
-                           gen_packets
-                           aclients
-                           ttcalc
-                           kissutil
-                           cm108
-                           dwspeak.sh
-/usr/local/bin/telem-balloon.pl
-                           telem-bits.pl
-                           telem-data91.pl
-                           telem-data.pl
-                           telem-eqns.pl
-                           telem-parm.pl
-                           telem-unit.pl
-                           telem-volts.py
-/usr/local/share/doc/direwolf/
-
-APRS-Telemetry-Toolkit.pdf
- telem-balloon.conf
-telem-m0xer-3.txt
-telem-volts.conf
-/usr/local/share/applications/direwolf.desktop
-
-/usr/local/share/pixmaps/direwolf_icon.png
-/usr/local/share/direwolf/tocalls.txt
-
-/usr/local/share/direwolf/symbolsX.txt
-                                                symbols-new.txt
-/usr/local/share/doc/direwolf/
-
-A-Better-APRS-Packet-Demodulator-Part-1-
-1200-baud.pdf
-A-Better-APRS-Packet-Demodulator-Part-2-
-9600-baud.pdf
-A-Closer-Look-at-the-WA8LMF-TNC-
-Test-CD.pdf
-APRStt-Implementation-Notes.pdf
-APRStt-interface-for-SARTrack.pdf
-CHANGES.md
-AX25_plus_FEC_equals_FX25.pdf
-LICENSE-dire-wolf.txt
-LICENSE-other.txt
-Raspberry-Pi-APRS.pdf
-Raspberry-Pi-APRS-Tracker.pdf
-Raspberry-Pi-SDR-IGate.pdf
-README.md
-
-Page 23
-
-
-
-
-
-
-
-
-
-
-
-
-Successful-APRS-IGate-
-Operation.pdf
-User-Guide.pdf
-WA8LMF-TNC-Test-CD-Results.pdf
-Why-is-9600-only-twice-as-fast-as-1200.pdf
-
-/usr/local/share/doc/direwolf/examples/
-
-direwolf.conf
-dw-start.sh
-sdr.conf
-telem-m0xer-3.txt
-telem-balloon.conf
-telem-volts.conf
-/usr/local/share/man/man1/*
-/etc/udev/rules.d/99-direwolf-cmedia.rules
-
-Sample configuration files and other examples.
-
-"man" pages with concise on-line help.
-Set group and mode of HID devices
-corresponding to C-Media USB Audio adapters.
-This will allow us to use the CM108/CM119 GPIO
-pins for PTT.
+<!-- table removed -->
 
 Some of these files might not apply to your system depending on the type of desktop environment.
 
 If this is the first time you are installing Dire Wolf perform this step:
 
+```
 make install-conf
+```
 
-When upgrading from an earlier version, you will probably want to skip this step because it could wipe
-out your earlier configuration file.  If you accidentally trash your configuration file, you can copy the
-example from /usr/local/share/doc/direwolf/examples/direwolf.conf.
+When upgrading from an earlier version, you will probably want to skip this step because it could wipe out your earlier configuration file.  If you accidentally trash your configuration file, you can copy the example from /usr/local/share/doc/direwolf/examples/direwolf.conf.
 
 This step should have copied the initial configuration file into your home directory.
 
-~/direwolf.conf
+- `~/direwolf.conf`
 
-Configuration file.
-Search order is current working directory then the
-user's home directory.
+  Configuration file.
 
-If you are installing from a DEB  or RPM package,  /usr/bin will probably be used instead of
-/usr/local/bin.   You should find the sample "direwolf.conf" file along with the documentation.  Copy it
-to your home directory or other desired location.
+  Search order is current working directory then the user's home directory.
 
-## 5.5  Select UTF-8 character set
+If you are installing from a DEB  or RPM package,  /usr/bin will probably be used instead of /usr/local/bin.   You should find the sample "direwolf.conf" file along with the documentation.  Copy it to your home directory or other desired location.
 
-For best results, you will want to be using the UTF-8 character set.   Verify this by examining the LANG
-environment variable.
+## Select UTF-8 character set
 
+For best results, you will want to be using the UTF-8 character set.   Verify this by examining the LANG environment variable.
+
+```
 $ echo $LANG
+```
 
-Page 24
+Make sure that it ends with ".utf8" like these examples:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Make sure that it ends with ".utf8" like these examples:
-
+```
 af_ZA.utf8
 en_GB.utf8
 fr_CH.utf8
+```
 
- See section called UTF-8 Characters for more details.
+See section called [UTF-8 Characters](#utf-8-characters) for more details.
 
-## 5.6  Run Dire Wolf
+## Run Dire Wolf
 
 Run "direwolf" from the command line.
 
-The rest of this section describes how to use Dire Wolf with other Linux packet radio applications such as
-Xastir.  If you are not interested in using it with some other application at this time, skip ahead to
-section 7, Basic Operation.
+The rest of this section describes how to use Dire Wolf with other Linux packet radio applications such as Xastir.  If you are not interested in using it with some other application at this time, skip ahead to section 7, Basic Operation.
 
-## 5.7  AGW TCPIP socket interface
+## AGW TCPIP socket interface
 
-Dire Wolf provides a server function with the "AGW TCPIP Socket Interface" on default port 8000.  Up to
-3 different client applications can attach at the same time.   You can increase the number by modifying
-this line in source file server.c:    #define MAX_NET_CLIENTS 3
+Dire Wolf provides a server function with the "AGW TCPIP Socket Interface" on default port 8000.  Up to 3 different client applications can attach at the same time.   You can increase the number by modifying this line in source file server.c:
 
-### 5.7.1  Xastir
+```
+#define MAX_NET_CLIENTS 3
+```
+
+### Xastir
 
 1.  Run "direwolf" from a bash shell window.
 2.  Run Xastir from another window.
@@ -1218,70 +780,29 @@ this line in source file server.c:    #define MAX_NET_CLIENTS 3
 4.  Click the "Add" button.
 5.  From the "Choose Interface Type" list, pick "Networked AGWPE" and click "Add" button.
 6.  Take all the default values and click on "OK" button.
-7.  You should now be back to the "Interface Control" dialog box.  Select the device mentioning
-"Networked AGWPE" and click the "Start" button.  The device status should now be "UP."
-
+7.  You should now be back to the "Interface Control" dialog box.  Select the device mentioning "Networked AGWPE" and click the "Start" button.  The device status should now be "UP."
 8.  Click the "Close" button.
 9.  Watch all the stations appear on the map.
 
-You might notice that the "Configure AGWPE" option for "Digipeat?" is grayed out.  This is because the
-protocol does not have the ability to set the "has been repeated" bits in the "via" fields of the AX.25
-protocol.  You can overcome this restriction by using the KISS TNC interface.
+You might notice that the "Configure AGWPE" option for "Digipeat?" is grayed out.  This is because the protocol does not have the ability to set the "has been repeated" bits in the "via" fields of the AX.25 protocol.  You can overcome this restriction by using the KISS TNC interface.
 
-## 5.8  Kiss TNC emulation – serial port
+## Kiss TNC emulation – serial port
 
 Dire Wolf can act like a packet radio TNC speaking the KISS protocol over a pseudo terminal.
 
-Page 25
+What is a pseudo terminal?   Dire Wolf acts like a traditional TNC speaking the KISS protocol over a serial port.  Some packet applications want to talk to a TNC over a serial port.  One possible approach would be to have Dire Wolf talk to one serial port and the application would talk to another serial port.  The two serial port connectors would be attached to each other with a "null modem" (cross over) cable so that data going out of one would go into the other.
 
+A pseudo terminal is like a pair of real serial ports connected to each other with a cable.  Except there are no serial ports and no cable.  Instead there is just a pair of virtual devices.  Applications can use them exactly like they would use a serial port.
 
+In this case, Dire Wolf creates a pseudo terminal and talks to one end.  The other is available for use by an application such as Xastir or kissattach.  The visible end will have a device name like /dev/pts/99.
 
+The annoying thing is that you can't specify the name you want.  One time you might get /dev/pts/1 and other time it might be /dev/pts/5, depending on what happens to be available.  This is inconvenient if you need to store the serial port name (pseudo terminal in this case) in the application configuration. It's also annoying if you want a single script to start up Dire Wolf and associated applications that use the serial KISS interface.
 
+Dire Wolf creates a symlink, /tmp/kisstnc, when the pseudo terminal is created.  Xastir will correctly handle a symbolic link to the actual device name so you can put /tmp/kisstnc in the configuration.
 
+Avoid using the "-p" pseudo terminal option if possible.   Each time it might use a different device number making it difficult for automatic connection by other applications.   It has been problematic in other ways.   Use the AGW or KISS network interface if your application supports it.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-What is a pseudo terminal?   Dire Wolf acts like a traditional TNC speaking the KISS protocol over a serial
-port.  Some packet applications want to talk to a TNC over a serial port.  One possible approach would
-be to have Dire Wolf talk to one serial port and the application would talk to another serial port.  The
-two serial port connectors would be attached to each other with a "null modem" (cross over) cable so
-that data going out of one would go into the other.
-
-A pseudo terminal is like a pair of real serial ports connected to each other with a cable.  Except there
-are no serial ports and no cable.  Instead there is just a pair of virtual devices.  Applications can use them
-exactly like they would use a serial port.
-
-In this case, Dire Wolf creates a pseudo terminal and talks to one end.  The other is available for use by
-an application such as Xastir or kissattach.  The visible end will have a device name like /dev/pts/99.
-
-The annoying thing is that you can't specify the name you want.  One time you might get /dev/pts/1 and
-other time it might be /dev/pts/5, depending on what happens to be available.  This is inconvenient if
-you need to store the serial port name (pseudo terminal in this case) in the application configuration.
-It's also annoying if you want a single script to start up Dire Wolf and associated applications that use
-the serial KISS interface.
-
-Dire Wolf creates a symlink, /tmp/kisstnc, when the pseudo terminal is created.  Xastir will correctly
-handle a symbolic link to the actual device name so you can put /tmp/kisstnc in the configuration.
-
-  Avoid using the "-p" pseudo terminal option if possible.   Each time it might use a different
-
-device number making it difficult for automatic connection by other applications.   It has been
-problematic in other ways.   Use the AGW or KISS network interface if your application supports
-it.
-
-### 5.8.1  Xastir
+### Xastir
 
 1.  Run "direwolf -p" from a bash shell window.
 2.  Run Xastir from another window.
@@ -1289,274 +810,165 @@ it.
 4.  Click the "Add" button.
 5.  From the "Choose Interface Type" list, pick "Serial KISS TNC" and click "Add" button.
 6.  For TNC Port, enter "/tmp/kisstnc".  Take all the other default values and click on "OK" button.
-7.  You should now be back to the "Interface Control" dialog box.  Select the device mentioning
-
-"Serial KISS TNC" and click the "Start" button.  The device status should now be "UP."
-
+7.  You should now be back to the "Interface Control" dialog box.  Select the device mentioning "Serial KISS TNC" and click the "Start" button.  The device status should now be "UP."
 8.  Click the "Close" button.
 9.  Watch stations appear on the map.
 
-### 5.8.2  Linux AX25
+### Linux AX25
 
-Dire Wolf can be used with Linux AX25 instead of a physical TNC.  First install ax25-tools.  On Debian /
-Ubuntu / Raspbian, it might be as simple as:
+Dire Wolf can be used with Linux AX25 instead of a physical TNC.  First install ax25-tools.  On Debian / Ubuntu / Raspbian, it might be as simple as:
 
-Page 26
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-sudo apt-get update
+```
+sudo apt-get update
 sudo apt-get install ax25-tools
+```
 
 For Red Hat / Fedora / CentOS,
 
+```
 (need command)
+```
 
 Add a port description to /etc/ax25/axports, as described in the AS25 HOWTO documentation.  For
 example,
 
+```
 radio WB2OSZ-15 1200 255 2 comment
+```
 
-This is important and not obvious.        Remove any blank lines from the file.   
+**This is important and not obvious: Remove any blank lines from the file.**
 
 Start up Dire Wolf with the "-p" option to make the KISS pseudo terminal interface available.
 
+```
 direwolf –p
+```
 
 You should see a message something like this:
 
+```
 Virtual KISS TNC is available on /dev/pts/5
 WARNING - Dire Wolf will hang eventually if nothing is reading from it.
 Created symlink /tmp/kisstnc -> /dev/pts/5
+```
 
-Take heed of that warning!  The pseudo terminal has a finite amount of buffer space available.  If
-direwolf is filling it up on one end and nothing is reading from the other end, the received frame
-processing thread will stop and eventually you will get a message like this:
+Take heed of that warning!  The pseudo terminal has a finite amount of buffer space available.  If direwolf is filling it up on one end and nothing is reading from the other end, the received frame processing thread will stop and eventually you will get a message like this:
 
-Received frame queue is out of control. Length=….
-Reader thread is probably frozen.
-This can be caused by using a pseudo terminal (direwolf -p) where another.
-application is not reading the frames from the other side.
+```
+Received frame queue is out of control. Length=…. Reader thread is probably
+frozen. This can be caused by using a pseudo terminal (direwolf -p) where
+another. application is not reading the frames from the other side.
+```
 
-After a while this will trigger another error message about a memory leak.  If you encounter this, try to
-use the network KISS interface instead of the pseudo terminal interface.
+After a while this will trigger another error message about a memory leak.  If you encounter this, try to use the network KISS interface instead of the pseudo terminal interface.
 
 Leave that command window alone and open a new one.  These are some sample commands for a quick
-test.  Your situation will vary.   kissattach command needs to be run as root:
+test.  Your situation will vary.   **kissattach command needs to be run as root:**
 
+```
 sudo /usr/sbin/kissattach /dev/pts/5 radio 44.56.4.118
+```
 
-kissattach doesn't like to see a symbolic link instead of a device.   (See
-http://www.spinics.net/lists/linux-hams/msg03487.html)
- You could use something like this instead if you want to start up multiple applications from one script.
+kissattach doesn't like to see a symbolic link instead of a device.   (See <http://www.spinics.net/lists/linux-hams/msg03487.html>) You could use something like this instead if you want to start up multiple applications from one script.
 
-      sudo /usr/sbin/kissattach `ls -l /tmp/kisstnc | awk '{ print $11 }'` radio 44.56.4.118
+```
+sudo /usr/sbin/kissattach `ls -l /tmp/kisstnc | awk '{ print $11 }'` radio 44.56.4.118
+```
 
 See troubleshooting section, below, if you run into an issue with this.
 
-Page 27
+After a successful kissattach, continue appropriately for your situation.  Simple example for testing:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-After a successful kissattach, continue appropriately for your situation.  Simple example for testing:
-
+```
 sudo route add -net 44.0.0.0/8 ax0
 ping 44.56.4.120
+```
 
 You should see it transmitting something.
 
-If difficulties are encountered, try using the "-d k" option to display the KISS protocol messages.  You
-might see something like this for a ping command to one of the 44.x.x.x addresses:
+If difficulties are encountered, try using the "-d k" option to display the KISS protocol messages.  You might see something like this for a ping command to one of the 44.x.x.x addresses:
 
+```
 <<< Data frame from KISS client application, port 0, total length = 47
-  000:  00 a2 a6 a8 40 40 40 60 ae 84 64 9e a6 b4 7f 03  ....@@@`..d.....
-  010:  cd 00 03 00 cc 07 04 00 01 ae 84 64 9e a6 b4 1e  ...........d....
-  020:  2c 38 04 76 00 00 00 00 00 00 00 2c 38 04 78     ,8.v.......,8.x
+000:  00 a2 a6 a8 40 40 40 60 ae 84 64 9e a6 b4 7f 03  ....@@@`..d.....
+010:  cd 00 03 00 cc 07 04 00 01 ae 84 64 9e a6 b4 1e  ...........d....
+020:  2c 38 04 76 00 00 00 00 00 00 00 2c 38 04 78     ,8.v.......,8.x
+```
 
-#### 5.8.2.1  Unexpected transmissions
+#### Unexpected transmissions
 
-Why might you transmitting apparent trash when no beacons were configured?  The issue is that if you
-enable a TCP/IP address on your Linux ax? interface, broadcasting programs like Samba, Avahi (Bonjour),
-etc. will send their traffic out over RF!  The solution here is to either reconfigure those applications to
-only bind to specific interfaces (not all interfaces) or setup iptables packet filters to intercept that
-broadcast traffic before it hits the ax? interface.
+Why might you transmitting apparent trash when no beacons were configured?  The issue is that if you enable a TCP/IP address on your Linux ax? interface, broadcasting programs like Samba, Avahi (Bonjour), etc. will send their traffic out over RF!  The solution here is to either reconfigure those applications to only bind to specific interfaces (not all interfaces) or setup iptables packet filters to intercept that broadcast traffic before it hits the ax? interface.
 
-You can find a lot of good information on Linux AX.25 here:
-http://www.trinityos.com/HAM/CentosDigitalModes/hampacketizing-centos.html
+You can find a lot of good information on Linux AX.25 here: <http://www.trinityos.com/HAM/CentosDigitalModes/hampacketizing-centos.html>
 
-## 5.9  Automatic Start Up After Reboot
+## Automatic Start Up After Reboot
 
-You might want your TNC / application server / digipeater to start up automatically after a reboot.  This
-often causes confusion as there are many ways to do this.   You will find some discussions in the forums
-but here is one solution which should be usable for many use cases.
+You might want your TNC / application server / digipeater to start up automatically after a reboot.  This often causes confusion as there are many ways to do this.   You will find some discussions in the forums but here is one solution which should be usable for many use cases.
 
-The important thing to remember is that direwolf writes a lot of information to "stdout."   This
-information is valuable and really needs to go somewhere.  If you simply try starting direwolf from
-/etc/rc.local or via a script in /etc/rc2.d, you will probably be disappointed.  I also think it is better to run
-direwolf as an ordinary user, rather than root, so there is less chance of damaging your system if
-something goes wrong.
+The important thing to remember is that direwolf writes a lot of information to "stdout."   This information is valuable and really needs to go somewhere.  If you simply try starting direwolf from /etc/rc.local or via a script in /etc/rc2.d, you will probably be disappointed.  I also think it is better to run direwolf as an ordinary user, rather than root, so there is less chance of damaging your system if something goes wrong.
 
-(a)  If you are running a graphical desktop, the recommended way to start direwolf is to create a
+- If you are running a graphical desktop, the recommended way to start direwolf is to create a terminal window and run direwolf inside of that window.  Examples:
 
-terminal window and run direwolf inside of that window.  Examples:
+  ```
+  /usr/bin/xterm -bg white -fg black -e "direwolf" &
+  ```
 
-/usr/bin/xterm -bg white -fg black -e "direwolf" &
+  or
 
-or
+  ```
+  /usr/bin/lxterminal -t "Dire Wolf" -e "direwolf" &
+  ```
 
-/usr/bin/lxterminal -t "Dire Wolf" -e "direwolf" &
+- If you are running a "lite" version of Linux without the graphical desktop, popping up a GUI window is not an option and will give Xsession errors.  Even if a graphical desktop is available, you still might want to use alternative solutions like the "screen" tool in detached mode so you can re-connect to Direwolf  and see what happened with only a text terminal (locally, via an SSH connection, etc).
 
-Page 28
+  ```
+  screen -d -m -S direwolf "direwolf"
+  ```
 
+  If the "screen" utility is not already installed, add it with "sudo apt-get install screen" on Debian-based distributions.
 
+  Later you can use "screen -list" to get a list of sessions and attach to an existing session with "screen -D  -r direwolf" You can again "detach" from the Direwolf screen session with control-a then "d" at any time and direwolf will continue to run.
 
+A script is provided to handle the most common cases.  If you followed the installation steps above, you should have a file named dw-start.sh in your home directory.  Ensure that it is executable:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(b)  If you are running a "lite" version of Linux without the graphical desktop, popping up a GUI
-
-window is not an option and will give Xsession errors.  Even if a graphical desktop is available,
-you still might want to use alternative solutions like the "screen" tool in detached mode so you
-can re-connect to Direwolf  and see what happened with only a text terminal (locally, via an SSH
-connection, etc).
-
-screen -d -m -S direwolf "direwolf"
-
-If the "screen" utility is not already installed, add it with "sudo apt-get install screen" on Debian-
-based distributions.
-
-Later you can use "screen -list" to get a list of sessions and attach to an existing session with
-"screen -D  -r direwolf"
-You can again "detach" from the Direwolf screen session with control-a then "d" at any time and
-direwolf will continue to run.
-
-A script is provided to handle the most common cases.  If you followed the installation steps above, you
-should have a file named dw-start.sh in your home directory.  Ensure that it is executable:
-
+```
 chmod +x dw-start.sh
+```
 
-My suggestion is to run this script from cron so if direwolf stops running for any reason, it will be
-automatically restarted.   Use the "crontab –e" command and add a line like this, substituting you own
-user name instead of john:
+My suggestion is to run this script from cron so if direwolf stops running for any reason, it will be automatically restarted.   Use the "crontab –e" command and add a line like this, substituting you own user name instead of john:
 
+```
 * * * * *  /home/john/dw-start.sh  >/dev/null  2>&1
+```
 
-The line above will run the /home/john/dw-start.sh script once per minute.  Dire Wolf will be started
-automatically if not running already.  If a previous instance of Dire wolf crashes, or is terminated for any
-other reason, it will be restarted within a minute.  A log of restarts can be found in /tmp/dw-start.log.
+The line above will run the /home/john/dw-start.sh script once per minute.  Dire Wolf will be started automatically if not running already.  If a previous instance of Dire wolf crashes, or is terminated for any other reason, it will be restarted within a minute.  A log of restarts can be found in /tmp/dw-start.log.
 
-dw-start.sh will try to determine if you have a graphical desktop and select either GUI or CLI mode.  You
-can override this by looking for "RUNMODE=AUTO" near the top of the dw-start.sh file and modifying as
-described in the script's comments.
+dw-start.sh will try to determine if you have a graphical desktop and select either GUI or CLI mode.  You can override this by looking for "RUNMODE=AUTO" near the top of the dw-start.sh file and modifying as described in the script's comments.
+
+<!-- TODO -->
 
 Skip over section 6 (Macintosh OS X), and continue with section 7, Basic Operation.
 
-Page 29
+# Installation & operation -- Macintosh OS X
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 6  Macintosh OS X
-
-A port to the Macintosh was provided by Robert, KK5VD for version 1.3.  This was updated a little for
-using "cmake" with direwolf 1.6.
+A port to the Macintosh was provided by Robert, KK5VD for version 1.3.  This was updated a little for using "cmake" with direwolf 1.6.
 
 Requirements for compiling/installing Direwolf on Mac OS X.
 
-  Built/Tested using Mac OS X 10.13 (High Sierra) and XCode 9.4.1 (latest that will run on this OS
+- Built/Tested using Mac OS X 10.13 (High Sierra) and XCode 9.4.1 (latest that will run on this OS version)  Development/Command line tools.
 
-version)  Development/Command line tools.
+- Installation of Macports package manager is required as the dependencies within the makefile are structured for it.
 
-
+## Install Xcode/Command line tools.
 
-Installation of Macports package manager is required as the dependencies within the makefile
-are structured for it.
+Xcode can be found on Apple's Developer website.  You will need an ID and password to gain access.
 
-## 6.1  Install Xcode/Command line tools.
-
- Xcode can be found on Apple's Developer website.  You will need an ID and password to gain access.
-
- https://developer.apple.com/downloads/index.action  will lead you to a login window from your
+<https://developer.apple.com/downloads/index.action>  will lead you to a login window from your
 browser.
 
-Obtain a login ID or enter your current one.  Once logged in, uncheck all checked boxes on the left with
-the exception of Developer tools.
+Obtain a login ID or enter your current one.  Once logged in, uncheck all checked boxes on the left with the exception of Developer tools.
 
-Locate Xcode and command line tools for your operating system version. Do not select anything that's a
-beta release.
+Locate Xcode and command line tools for your operating system version. Do not select anything that's a beta release.
 
 Download both and install Xcode first followed by the command line tools.
 
@@ -1566,152 +978,103 @@ This program is used to enter command line commands.
 
 After installing, run the following command from the command line to activate the command line tools.
 
+```
 sudo xcode-select -s /Library/Developer/CommandLineTools
+```
 
 At the prompt enter your password. (You must have admin rights).
 
-## 6.2  Install Macports
+## Install Macports
 
-Install macports package manager from this URL:   https://www.macports.org/install.php
+Install macports package manager from this URL:  <https://www.macports.org/install.php>
 
 Select and install the one that is relevant to your operating system version.
 
-Page 30
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 6.3  Install Support tools and PortAudio Library.
+## Install Support tools and PortAudio Library.
 
 From the command line, enter the following:
 
+```
 sudo port install coreutils portaudio cmake +universal
+```
 
-
+- `coreutilis`
 
-coreutilis
+  Includes the program ginstall, as Apple's version doesn't work correctly with the makefile provided by Direwolf.
 
- Includes the program ginstall, as Apple's version doesn't work correctly with
- the makefile provided by Direwolf.
+- `portaudio`
 
-  portaudio   Portable Audio Interface library for accessing Apple's CoreAudio sound system.
+  Portable Audio Interface library for accessing Apple's CoreAudio sound system.
 
-
+- `cmake`
 
-cmake
+  "CMake is an extensible, open-source system that manages the build process in an operating system and in a compiler-independent manner."
 
-"CMake is an extensible, open-source system that manages the build process in
- an operating system and in a compiler-independent manner."
+- `+universal`
 
-  +universal   This flag will cause the build system to create both 32bit and 64bit versions
+  This flag will cause the build system to create both 32bit and 64bit versions of the library. Not sure why we want this.
 
-of the library. Not sure why we want this.
-
-## 6.4  Compiling Direwolf.
+## Compiling Direwolf.
 
 From the command line, get the source code:
 
+```
 cd ~
 git clone https://github.com/wb2osz/direwolf
 cd direwolf
+```
 
 Optional, if you want current development version rather than the most recent release:
 
+```
 git checkout dev
+```
 
 Compile and link it:
 
+```
 mkdir build && cd build
 cmake ..
 
 make -j4
+```
 
 If there are no reported errors. Install:
 
+```
 sudo make install
+```
 
-Perform next step only if this is the first time DireWolf is being installed. It will cause an existing
-customized version of direwolf.conf file to be overwritten.
+Perform next step only if this is the first time DireWolf is being installed. It will cause an existing customized version of direwolf.conf file to be overwritten.
 
+```
 make install-conf
+```
 
-Page 31
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 6.5  Read the instructions to configure direwolf.conf file.
+## Read the instructions to configure direwolf.conf file.
 
 The configuration file is located in either the current directory path or the HOME directory.
 
-The one significant difference from the other operating systems is that the audio device names can
-contain spaces.   If they do, they must be quoted like the example below.
+The one significant difference from the other operating systems is that the audio device names can contain spaces.   If they do, they must be quoted like the example below.
 
 Configuration file format:
 
-    ADEVICE <Device Input Name>:<Device Input Number> <Device Output Name>:<Device Output Number>
+```
+ADEVICE <Device Input Name>:<Device Input Number> <Device Output Name>:<Device Output Number>
+```
 
 Examples:
 
-    ADEVICE "USB Audio Codec:6" "USB Audio Codec:5"
-    ADEVICE "Built-in Input" "Built-in Output"
+```
+ADEVICE "USB Audio Codec:6" "USB Audio Codec:5"
+ADEVICE "Built-in Input" "Built-in Output"
+```
 
-You are probably wondering:  How do I know what devices are available?  A listing of audio devices
-is presented on start up of Dire Wolf. The remaining configuration options are described in
-the relevant sections of this User Guide.  Where there are Windows / Linux differences use the Linux
-version.
+You are probably wondering:  How do I know what devices are available?  A listing of audio devices is presented on start up of Dire Wolf. The remaining configuration options are described in the relevant sections of this User Guide.  Where there are Windows / Linux differences use the Linux version.
 
 Example Device listing:
 
+```
 Dire Wolf version ...
 Reading config file /Users/<Home_Dir>/direwolf.conf
 Audio input device for receive: USB Audio CODEC:6  (channel 0)
@@ -1738,72 +1101,34 @@ Name        = "USB Audio CODEC"
 Host API    = Core Audio
 Max inputs  = 2
 Max outputs = 0
+```
 
-Page 32
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 6.6  Running direwolf.
+## Running direwolf.
 
 From the command line enter.
 
+```
 cd ~
 /usr/local/bin/direwolf
+```
 
-Direwolf reads the configure file that is located in the same directory where the program was executed.
-i.e.   ~/direwolf.conf
+Direwolf reads the configure file that is located in the same directory where the program was executed. i.e.  `~/direwolf.conf`
 
-There are a number of command line parameter available to the user.  These are listed later in this User
-Guide.
+There are a number of command line parameter available to the user.  These are listed later in this User Guide.
 
-## 6.7  Read the rest of the User Guide.
+## Read the rest of the User Guide.
 
 This should answer most of your questions.
 
 If something is missing or unclear post a question on the discussion group.
 
-## 6.8  In case of difficulties
+## In case of difficulties
 
 If you are having Mac-specific issues, post your question to this discussion group:
 
-https://groups.io/g/direwolf
+- <https://groups.io/g/direwolf>
 
-Page 33
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- marker -->
 
 # 7  Basic Operation
 
@@ -1896,7 +1221,7 @@ Page 35
 
 priority.   0 for the first channel, 1 for the second if used.  "H" means high priority for digipeated
 packets.  "L" is for lower priority packets originating at this station.
- Red for errors.  If a newcomer is wondering why his transmissions are not showing up in other
+Red for errors.  If a newcomer is wondering why his transmissions are not showing up in other
 applications, these error messages might provide a clue about the problem.
 
 
@@ -2098,7 +1423,7 @@ CH0  90
 
 is the approximate average sample rate during the interval.  If this is off
 significantly, there is something wrong with the audio input system.  For
- example,  one time use of a USB hub for an audio adapter caused this to
+example,  one time use of a USB hub for an audio adapter caused this to
 be 42.8 k.  Many samples were getting lost.
 
 shows a audio input is working for channel 0.   If no frames are being decoded,
@@ -2118,7 +1443,7 @@ If you are getting insufficient audio, check the cabling and the audio input gai
 
 If using Linux, run "alsamixer" and look for the microphone, or line input.    "MM" indicates it is muted.
 
- Select it by using the  and  keys.    Press the ‘m" key to unmute it.   The "MM" should change to
+Select it by using the  and  keys.    Press the ‘m" key to unmute it.   The "MM" should change to
 "00."
 
 Page 41
@@ -2265,7 +1590,7 @@ on the RF carrier.  Here are some early designs from the previous century.
 
 - need to find link…
 
-  http://www.tapr.org/pdf/CNC1988-9600BaudModem-G3RUH.pdf
+http://www.tapr.org/pdf/CNC1988-9600BaudModem-G3RUH.pdf
 
   KD2BD  -http://www.amsat.org/amsat/articles/kd2bd/9k6modem/
 
@@ -2304,7 +1629,7 @@ operation:
 
 http://www.wb4hfn.com/Resources/9600MAN.TXT
 ftp://ftp.tapr.org/general/9600baud/
- https://groups.io/g/direwolf/topic/34951101
+https://groups.io/g/direwolf/topic/34951101
 
 Page 44
 
@@ -2905,14 +2230,14 @@ Page 52
 
 
 card 0: Intel [HDA Intel], device 0: AD1984 Analog [AD1984 Analog]
-  Subdevices: 0/1
-  Subdevice #0: subdevice #0
+Subdevices: 0/1
+Subdevice #0: subdevice #0
 card 0: Intel [HDA Intel], device 2: AD1984 Alt Analog [AD1984 Alt Analog]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
+Subdevices: 1/1
+Subdevice #0: subdevice #0
 card 1: Device [C-Media USB Audio Device], device 0: USB Audio [USB Audio]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
+Subdevices: 1/1
+Subdevice #0: subdevice #0
 
 Get a list of audio output cards by typing "aplay -l"
 
@@ -2921,14 +2246,14 @@ Get a list of audio output cards by typing "aplay -l"
 john@linux64:~/direwolf$ aplay -l
 **** List of PLAYBACK Hardware Devices ****
 card 0: Intel [HDA Intel], device 0: AD1984 Analog [AD1984 Analog]
-  Subdevices: 0/1
-  Subdevice #0: subdevice #0
+Subdevices: 0/1
+Subdevice #0: subdevice #0
 card 0: Intel [HDA Intel], device 2: AD1984 Alt Analog [AD1984 Alt Analog]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
+Subdevices: 1/1
+Subdevice #0: subdevice #0
 card 1: Device [C-Media USB Audio Device], device 0: USB Audio [USB Audio]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
+Subdevices: 1/1
+Subdevice #0: subdevice #0
 
 In this case we find two "cards" to use the ALSA terminology.  The first (card 0) is on the system board.
 The second (card 1) is a cheap USB audio adapter.  Remember these numbers so we can reference the
@@ -2938,22 +2263,22 @@ The included "cm108" utility can be used to obtain a list of USB audio devices. 
 example of 3 C-Media USB adapters, a SignaLink USB, a keyboard, and a mouse.   There is more
 discussion of this in the Push To Talk (PTT) section.
 
-          VID  PID   Product                          Sound                  ADEVICE         HID [ptt]
-          ---  ---   -------                          -----                  -------         ---------
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0c      plughw:1,0      /dev/hidraw0
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0p      plughw:1,0      /dev/hidraw0
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC1                     /dev/hidraw0
-          08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0c      plughw:2,0      /dev/hidraw2
-          08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0p      plughw:2,0      /dev/hidraw2
-          08bb 2904  USB Audio CODEC                  /dev/snd/controlC2                     /dev/hidraw2
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0c      plughw:0,0      /dev/hidraw1
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0p      plughw:0,0      /dev/hidraw1
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC0                     /dev/hidraw1
-      **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0c      plughw:4,0      /dev/hidraw6
-      **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0p      plughw:4,0      /dev/hidraw6
-      **  0d8c 0008  C-Media USB Audio Device         /dev/snd/controlC4                     /dev/hidraw6
-          413c 2010  Dell USB Keyboard                                                       /dev/hidraw4
-          0461 4d15  USB Optical Mouse                                                       /dev/hidraw5
+        VID  PID   Product                          Sound                  ADEVICE         HID [ptt]
+        ---  ---   -------                          -----                  -------         ---------
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0c      plughw:1,0      /dev/hidraw0
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0p      plughw:1,0      /dev/hidraw0
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC1                     /dev/hidraw0
+        08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0c      plughw:2,0      /dev/hidraw2
+        08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0p      plughw:2,0      /dev/hidraw2
+        08bb 2904  USB Audio CODEC                  /dev/snd/controlC2                     /dev/hidraw2
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0c      plughw:0,0      /dev/hidraw1
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0p      plughw:0,0      /dev/hidraw1
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC0                     /dev/hidraw1
+    **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0c      plughw:4,0      /dev/hidraw6
+    **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0p      plughw:4,0      /dev/hidraw6
+    **  0d8c 0008  C-Media USB Audio Device         /dev/snd/controlC4                     /dev/hidraw6
+        413c 2010  Dell USB Keyboard                                                       /dev/hidraw4
+        0461 4d15  USB Optical Mouse                                                       /dev/hidraw5
 
 If you have multiple USB audio devices,  the device names can change as other USB devices are plugged
 in.   Here are some different ways that you can ensure that a particular device will always get the same
@@ -3231,7 +2556,7 @@ direwolf -n 1 -r 24000 -b 16 udp:7355
 
 In a different window, run rtl_fm and use the netcat utility to send the audio by UDP.
 
-  rtl_fm -f 144.39M -o 4 - | nc -u localhost 7355
+rtl_fm -f 144.39M -o 4 - | nc -u localhost 7355
 
 Note that the SDR and Dire Wolf can be running on different computers, even different operating
 systems.  You could use the command above on Linux but change localhost to the address of a Windows
@@ -3327,7 +2652,7 @@ http://www.google.com/search?q=sdrsharp+tutorial
 
 Here are some other good locations to help you get started.
 
- http://www.atouk.com/SDRSharpQuickStart.html
+http://www.atouk.com/SDRSharpQuickStart.html
 http://www.qsl.net/yo4tnv/docs/SDRSharp.pdf
 https://learn.adafruit.com/getting-started-with-rtl-sdr-and-sdr-sharp/sdr-number-fm-radio
 
@@ -3340,7 +2665,7 @@ lower half decreases it.
 
 Source:
 
- RTL-SDR  (or other for your hardware)
+RTL-SDR  (or other for your hardware)
 
 Radio:
 
@@ -3402,9 +2727,9 @@ Nothing shows up under the Programs menu so don't worry when you don't see anyth
 
 If SDR# is currently receiving, you will need to click the pause button
 
- Instead of using the default output, select the new "CABLE Input (VB-Audio Virtual C" instead.
+Instead of using the default output, select the new "CABLE Input (VB-Audio Virtual C" instead.
 
-  before changing configuration.
+before changing configuration.
 
 Page 59
 
@@ -3494,17 +2819,17 @@ When you start up Dire Wolf, you should see something like this:
 
 Reading config file direwolf.conf
 Available audio input devices for receive (*=selected):
-    0: Microphone (Realtek High Defini
-    1: Microphone (Bluetooth SCO Audio
-    2: Microphone (Bluetooth AV Audio)
- *  3: CABLE Output (VB-Audio Virtual    (channel 0)
+  0: Microphone (Realtek High Defini
+  1: Microphone (Bluetooth SCO Audio
+  2: Microphone (Bluetooth AV Audio)
+*  3: CABLE Output (VB-Audio Virtual    (channel 0)
 Available audio output devices for transmit (*=selected):
- *  0: Speakers (Realtek High Definiti   (channel 0)
-    1: Speakers (Bluetooth SCO Audio)
-    2: CABLE Input (VB-Audio Virtual C
-    3: Realtek Digital Output(Optical)
-    4: Speakers (Bluetooth AV Audio)
-    5: Realtek Digital Output (Realtek
+*  0: Speakers (Realtek High Definiti   (channel 0)
+  1: Speakers (Bluetooth SCO Audio)
+  2: CABLE Input (VB-Audio Virtual C
+  3: Realtek Digital Output(Optical)
+  4: Speakers (Bluetooth AV Audio)
+  5: Realtek Digital Output (Realtek
 Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, E+, 48000 sample rate.
 Note: PTT not configured for channel 0. (Ignore this if using VOX.)
 
@@ -3652,17 +2977,17 @@ actual rate is 48k so the decoding will fail.
 
 Reading config file sdrsharp.conf
 Available audio input devices for receive (*=selected):
-    0: Microphone (Realtek High Defini
-    1: Microphone (Bluetooth SCO Audio
-    2: Microphone (Bluetooth AV Audio)
- *  3: CABLE Output (VB-Audio Virtual    (channel 0)
+  0: Microphone (Realtek High Defini
+  1: Microphone (Bluetooth SCO Audio
+  2: Microphone (Bluetooth AV Audio)
+*  3: CABLE Output (VB-Audio Virtual    (channel 0)
 Available audio output devices for transmit (*=selected):
- *  0: Speakers (Realtek High Definiti   (channel 0)
-    1: Speakers (Bluetooth SCO Audio)
-    2: CABLE Input (VB-Audio Virtual C
-    3: Realtek Digital Output(Optical)
-    4: Speakers (Bluetooth AV Audio)
-    5: Realtek Digital Output (Realtek
+*  0: Speakers (Realtek High Definiti   (channel 0)
+  1: Speakers (Bluetooth SCO Audio)
+  2: CABLE Input (VB-Audio Virtual C
+  3: Realtek Digital Output(Optical)
+  4: Speakers (Bluetooth AV Audio)
+  5: Realtek Digital Output (Realtek
 Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, E+, 44100 sample rate.
 Note: PTT not configured for channel 0. (Ignore this if using VOX.)
 Ready to accept AGW client application 0 on port 8000 ...
@@ -4258,7 +3583,7 @@ For Linux, the device name would probably be something like
 
 /dev/ttyS0 or /dev/ttyS1 for a COM port on the PC motherboard, or
 
- /dev/ttyUSB0 or /dev/ttyUSB1 for a USB-to-RS232 adapter.  You would also see this for
+/dev/ttyUSB0 or /dev/ttyUSB1 for a USB-to-RS232 adapter.  You would also see this for
 transceivers, like the IC-7100, that have a USB-to-serial converter built in.
 
 You can also use the Windows format on Linux.  COM1 is converted to /dev/ttyS0, COM1 is
@@ -4616,7 +3941,7 @@ Page 75
   DMK URI                 http://www.dmkeng.com/URI_Order_Page.htm
   RB-USB RIM           http://www.repeater-builder.com/products/usb-rim-lite.html
   RA-35
-   http://www.masterscommunications.com/products/radio-adapter/ra35.html
+ http://www.masterscommunications.com/products/radio-adapter/ra35.html
 
 Similar homebrew projects:
 
@@ -4632,22 +3957,22 @@ Here we have an example of 3 C-Media USB adapters, a SignaLink USB, a keyboard, 
 devices proceeded by ** are eligible for handling transmit/receive audio and PTT all with one
 device.    This came from the included "cm108" application.
 
-          VID  PID   Product                          Sound                  ADEVICE         HID [ptt]
-          ---  ---   -------                          -----                  -------         ---------
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0c      plughw:1,0      /dev/hidraw0
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0p      plughw:1,0      /dev/hidraw0
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC1                     /dev/hidraw0
-          08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0c      plughw:2,0      /dev/hidraw2
-          08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0p      plughw:2,0      /dev/hidraw2
-          08bb 2904  USB Audio CODEC                  /dev/snd/controlC2                     /dev/hidraw2
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0c      plughw:0,0      /dev/hidraw1
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0p      plughw:0,0      /dev/hidraw1
-      **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC0                     /dev/hidraw1
-      **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0c      plughw:4,0      /dev/hidraw6
-      **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0p      plughw:4,0      /dev/hidraw6
-      **  0d8c 0008  C-Media USB Audio Device         /dev/snd/controlC4                     /dev/hidraw6
-          413c 2010  Dell USB Keyboard                                                       /dev/hidraw4
-          0461 4d15  USB Optical Mouse                                                       /dev/hidraw5
+        VID  PID   Product                          Sound                  ADEVICE         HID [ptt]
+        ---  ---   -------                          -----                  -------         ---------
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0c      plughw:1,0      /dev/hidraw0
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0p      plughw:1,0      /dev/hidraw0
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC1                     /dev/hidraw0
+        08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0c      plughw:2,0      /dev/hidraw2
+        08bb 2904  USB Audio CODEC                  /dev/snd/pcmC2D0p      plughw:2,0      /dev/hidraw2
+        08bb 2904  USB Audio CODEC                  /dev/snd/controlC2                     /dev/hidraw2
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0c      plughw:0,0      /dev/hidraw1
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC0D0p      plughw:0,0      /dev/hidraw1
+    **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/controlC0                     /dev/hidraw1
+    **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0c      plughw:4,0      /dev/hidraw6
+    **  0d8c 0008  C-Media USB Audio Device         /dev/snd/pcmC4D0p      plughw:4,0      /dev/hidraw6
+    **  0d8c 0008  C-Media USB Audio Device         /dev/snd/controlC4                     /dev/hidraw6
+        413c 2010  Dell USB Keyboard                                                       /dev/hidraw4
+        0461 4d15  USB Optical Mouse                                                       /dev/hidraw5
 
 The USB soundcards (/dev/snd/pcm...) have an associated Human Interface Device (HID) corresponding
 to the GPIO pins which are sometimes connected to pushbuttons.  The mapping has no obvious pattern.
@@ -4685,12 +4010,12 @@ Page 76
 
 PTT CM108   [ [-]n ] [ dev ]
 
-                -              means to invert, i.e. low for transmit.
-                n             is optional gpio number.  Default is 3.
-                dev         is optional device such as /dev/hidraw1.
-                                Normally this can be determined automatically from the audio device name
+              -              means to invert, i.e. low for transmit.
+              n             is optional gpio number.  Default is 3.
+              dev         is optional device such as /dev/hidraw1.
+                              Normally this can be determined automatically from the audio device name
 
- in the ADEVICE configuration item.
+in the ADEVICE configuration item.
 
 In most cases, you can simply use "PTT CM108."  All of the designs I have found so far, both homebrew
 and commercial, all use GPIO 3 which is the default.
@@ -5099,7 +4424,7 @@ PTT from VOX
 
 Another station
 
-    VOX delay 
+  VOX delay 
 
 Digital Data as Audio
 
@@ -5464,7 +4789,7 @@ Only a single SERIALKISS or SERIALKISSPOLL can be used at the same time.
 
 ### 9.4.5
 
- Pseudo Terminal KISS  -  Linux  only
+Pseudo Terminal KISS  -  Linux  only
 
 This feature does not use the configuration file.  Instead it is activated by using the –p option on the
 command line.
@@ -5553,13 +4878,13 @@ Our implementation will start with the easy to understand human readable format.
 An application wants to know how much is in the transmit queue still waiting to be sent.  This can be
 used for throttling of large transmissions and performing some action after the last frame has been sent.
 
- Commands:
+Commands:
 
 (Client to TNC, with parameter(s) to set something.)
 
 none yet
 
- Queries:
+Queries:
 
 (Client to TNC, no parameters, Dire Wolf sends a response.)
 
@@ -5682,19 +5007,19 @@ The standard display format has an address part composed of:
 Source address
 
 - Originating station.  Normally a ham radio callsign.
-  An extra number, called the SSID, allows up to 16 stations to
-  be operated under the same callsign.
+An extra number, called the SSID, allows up to 16 stations to
+be operated under the same callsign.
 
 Destination address
 
 - In traditional connected mode packet, this would be a specific
-  station.  In APRS this is used in several different ways.  We can
-  ignore it for this discussion.
+station.  In APRS this is used in several different ways.  We can
+ignore it for this discussion.
 
 Via path
 
 - Up to 8 items for path that the packet has taken already and
-  where it might go.
+where it might go.
 
 When an address is followed by *, that one, and all earlier addresses,
 have been used up.  They show where the packet has been
@@ -6605,10 +5930,10 @@ Page 99
 example a low power fill-in digi when a high powered mountain top station will over power everyone
 else.  There are other cases where it will make the situation worse.  Consider the following example:
 
-                          - - - -   W  - - - -
+                        - - - -   W  - - - -
 
-             /                       \
-           /                           \
+           /                       \
+         /                           \
 
 X - - - - -  D1  - - - - - - - - - - - - - -  D2
 
@@ -6617,7 +5942,7 @@ X is someone interested in hearing weather information.
 D1 and D2 are digipeaters.
 The lines indicate who can be heard by whom.
 (i.e.   X and D1 can hear each other.
- W, D1, and D2 can hear each other.)
+W, D1, and D2 can hear each other.)
 
 Normal digipeater operation:
 
@@ -7086,7 +6411,7 @@ s/pri/alt/over
 Symbol codes are any printable ASCII character other than | or ~.
 (Zero symbols here would be sensible only if later alt part is specified.)
 
- "alt" is one or more symbols from the alternate symbol set.
+"alt" is one or more symbols from the alternate symbol set.
 
 "over" is overlay characters for the alternate symbol set.
 
@@ -7215,7 +6540,7 @@ u/APN391
 This does not apply to the MIC-E packet types because they use the destination field for part of the
 position.
 
- Wildcarding is allowed so you could use "u/APDW*"  to mean any version of Dire Wolf.
+Wildcarding is allowed so you could use "u/APDW*"  to mean any version of Dire Wolf.
 
 Page 106
 
@@ -7398,8 +6723,8 @@ Packet filter from IGate to radio channel 0 returns FALSE
 To get more detail, use double the "f" in the command line option.  i.e.  "-dff" will explain what each of
 the individual filter specifications is doing.
 
-   t/p returns FALSE for T data type indicator
-   t/p returns TRUE for ! data type indicator
+ t/p returns FALSE for T data type indicator
+ t/p returns TRUE for ! data type indicator
 
 In this example, we have a filter that will pass only position reports.   This is based primarily on the first
 character of the information part of the packet.   "T" indicates telemetry data so the result is false.  "!" is
@@ -7432,18 +6757,18 @@ has a built in mailbox feature.
 
 We would have two separate audio interfaces.  One for the radio and one for the classic TNC.
 
-    HF Radio
+  HF Radio
 
-                Dire Wolf
+              Dire Wolf
 
 Channel  0            Channel 2
 
-            Classic
-     Hardware TNC
+          Classic
+   Hardware TNC
 
-                                  300 baud audio
+                                300 baud audio
 
-                                   1200 baud audio
+                                 1200 baud audio
 
 A 300 baud frame is received over the HF radio.  Exactly the same thing is sent out channel 2 except at a
 different data rate.    The TNC processes the frame and possibly sends a response.   The 1200 baud
@@ -7656,14 +6981,14 @@ sentences.
 
 formats
 
- is one or more letters representing the formats.   If none specified, the default
+is one or more letters representing the formats.   If none specified, the default
 
- is generic and Kenwood.
+is generic and Kenwood.
 
 N
 G
 
- M
+M
 K
 A
 
@@ -8184,9 +7509,9 @@ Note how "/r" was used to get the repeater symbol.  If you used "SYMBOL=repeater
 matching the "Mic-E Repeater" description and the symbol code would come out as "/m."
 
 $ direwolf -S | grep -i repeater
- /m     LM      77  AB177   Mic-E Repeater
- /r     LR      82  AB182   Repeater
- I0     A0I          AB0164C  IRLP repeater (I0)
+/m     LM      77  AB177   Mic-E Repeater
+/r     LR      82  AB182   Repeater
+I0     A0I          AB0164C  IRLP repeater (I0)
 
 The transmit offset often causes confusion.  When it appears in the packet, it is in units of 10 kHz.
 "500" means 5 MHz.   "060" means 600 kHz. A complete description can be found here:
@@ -8289,7 +7614,7 @@ FREQ, OFFSET, or any other options that would put anything else in the comment p
 weather report needs to be in a very specific format.
 
 PBEACON  LAT=42^37.14N  LONG=71^20.83W  SYMBOL="weather station"
-            COMMENTCMD="tail -1 wxnow.txt"
+          COMMENTCMD="tail -1 wxnow.txt"
 
 The result would be:
 
@@ -8631,7 +7956,7 @@ It contains several identifier / value pairs.
 
 MSG_CNT
 
- Number of APRS "messages" from the Internet Server which have been
+Number of APRS "messages" from the Internet Server which have been
 transmitted over the radio.
 
 PKT_CNT
@@ -9363,7 +8688,7 @@ DTMF
 
 with the startup status messages.
 
-     Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, E+, 44100 sample rate, DTMF decoder enabled.
+   Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, E+, 44100 sample rate, DTMF decoder enabled.
 
 (5)  Run "ttcalc" in another window.   Dire Wolf should display a message that a client application
 
@@ -9438,12 +8763,12 @@ day.
 -L (upper case L) command line option is used to specify a single file name. In this case, the file will grow
 forever or you could use something like "logrotate" to start new files.
 
- Rather than saving often unreadable raw data, the digested parts are saved in Comma Separated Value
+Rather than saving often unreadable raw data, the digested parts are saved in Comma Separated Value
 (CSV) format.  The first line has the names of the fields.
 
 chan, utime, isotime, source, heard, level, error, dti, name, symbol, latitude, longitude,
 
- speed,  course, altitude, frequency, offset, tone ,system, status, comment
+speed,  course, altitude, frequency, offset, tone ,system, status, comment
 
 Example
 0
@@ -9718,29 +9043,29 @@ x
 Debug options
 The level of detail can sometimes be increased by repeating the option.
 
-    a = AGWPE network protocol client
-    k = KISS serial port client
-    n = KISS network client
-    u = Display non-ASCII characters in hexadecimal
-    p = Packet hex dump
-    g = GPS interface
-    t = Tracker beacon
-    o = Output controls such as PTT and DCD
-    i = IGate.  Use ii for greater detail
-    h = Hamlib verbose level.  Repeat for more.
-    m = monitor heard station list.
-    f = packet filtering.  Use ff for details of individual filter specifications.
+  a = AGWPE network protocol client
+  k = KISS serial port client
+  n = KISS network client
+  u = Display non-ASCII characters in hexadecimal
+  p = Packet hex dump
+  g = GPS interface
+  t = Tracker beacon
+  o = Output controls such as PTT and DCD
+  i = IGate.  Use ii for greater detail
+  h = Hamlib verbose level.  Repeat for more.
+  m = monitor heard station list.
+  f = packet filtering.  Use ff for details of individual filter specifications.
 
 fff for logical operator results too.
 
-    x = FX.25 increase verbose level.
+  x = FX.25 increase verbose level.
 
 -q
 
 x
 
 Quiet (suppress output) options
-    h = Omit the "heard" line with audio level.
+  h = Omit the "heard" line with audio level.
 
 Page 137
 
@@ -9834,7 +9159,7 @@ Page 137
 
 
     d = Omit decoding of APRS packets.
-    x = Silence FX.25 information.
+  x = Silence FX.25 information.
 
 -t
 
@@ -10649,7 +9974,7 @@ port
 
 Application
 
- Dire Wolf is a software replacement for a separate TNC.  One way of using it is illustrated below.
+Dire Wolf is a software replacement for a separate TNC.  One way of using it is illustrated below.
 
 Computer
 
@@ -11100,7 +10425,7 @@ used by MIC-E
 seen in "{UIV32N}<0x0d><0x9f><0x80>"
 seen in "{UIV32N}<0x0d><0x9f><0x80>"
 degree symbol, ISO Latin1
-  (Note: UTF-8 uses two byte sequence 0xc2 0xb0.)
+(Note: UTF-8 uses two byte sequence 0xc2 0xb0.)
 invalid MIC-E encoding.
 degree symbol, Microsoft code page 437
 
@@ -11217,10 +10542,10 @@ received
 1.2
 
 976
- + 21
- +  1
- +  0
- + 24
++ 21
++  1
++  0
++ 24
 
 - - -
 2.1
@@ -11373,9 +10698,9 @@ Page 157
 
 
 
-# 13 UTF-8 characters
+# UTF-8 characters
 
-## 13.1 Background
+## Background
 
 AX.25, like most other computer communication, uses the ASCII character set.  ASCII was developed in
 the 1960's and has a total of 94 printable characters.  This didn't keep people happy for very long.  As
@@ -11625,7 +10950,7 @@ products use one of these to activate the push to talk (PTT) control.
   DMK URI                 http://www.dmkeng.com/URI_Order_Page.htm
   RB-USB RIM           http://www.repeater-builder.com/products/usb-rim-lite.html
   RA-35
-   http://www.masterscommunications.com/products/radio-adapter/ra35.html
+ http://www.masterscommunications.com/products/radio-adapter/ra35.html
 
 The audio part and the GPIO part show up different Linux devices.   The relationship between them is
 not obvious.  The included "cm108" will display that information.  For more information, see section
@@ -11682,21 +11007,21 @@ Otherwise it is treated like AX.25.
 03 f0 3e 45 4d 36 34 6e 65 2f 23 20 45 63 68 6f 6c 69 6e 6b 20 31 34 35 2e 33 31 30 2f
 31 30 30 68 7a 20 54 6f 6e 65
 --- KISS frame ---
-  000:  00 82 a0 ae ae 62 60 e0 82 96 68 84 40 40 60 9c  .....b`...h.@@`.
-  010:  68 b0 ae 86 40 e0 40 ae 92 88 8a 64 63 03 f0 3e  h...@.@....dc..>
-  020:  45 4d 36 34 6e 65 2f 23 20 45 63 68 6f 6c 69 6e  EM64ne/# Echolin
-  030:  6b 20 31 34 35 2e 33 31 30 2f 31 30 30 68 7a 20  k 145.310/100hz
-  040:  54 6f 6e 65                                      Tone
+000:  00 82 a0 ae ae 62 60 e0 82 96 68 84 40 40 60 9c  .....b`...h.@@`.
+010:  68 b0 ae 86 40 e0 40 ae 92 88 8a 64 63 03 f0 3e  h...@.@....dc..>
+020:  45 4d 36 34 6e 65 2f 23 20 45 63 68 6f 6c 69 6e  EM64ne/# Echolin
+030:  6b 20 31 34 35 2e 33 31 30 2f 31 30 30 68 7a 20  k 145.310/100hz
+040:  54 6f 6e 65                                      Tone
 --- AX.25 frame ---
 U frame UI: p/f=0, No layer 3 protocol implemented., length = 67
- dest    APWW10  0 c/r=1 res=3 last=0
- source  AK4B    0 c/r=0 res=3 last=0
- digi 1  N4XWC   0   h=1 res=3 last=0
- digi 2   WIDE2  1   h=0 res=3 last=1
-  000:  82 a0 ae ae 62 60 e0 82 96 68 84 40 40 60 9c 68  ....b`...h.@@`.h
-  010:  b0 ae 86 40 e0 40 ae 92 88 8a 64 63 03 f0 3e 45  ...@.@....dc..>E
-  020:  4d 36 34 6e 65 2f 23 20 45 63 68 6f 6c 69 6e 6b  M64ne/# Echolink
-  030:  20 31 34 35 2e 33 31 30 2f 31 30 30 68 7a 20 54   145.310/100hz T
+dest    APWW10  0 c/r=1 res=3 last=0
+source  AK4B    0 c/r=0 res=3 last=0
+digi 1  N4XWC   0   h=1 res=3 last=0
+digi 2   WIDE2  1   h=0 res=3 last=1
+000:  82 a0 ae ae 62 60 e0 82 96 68 84 40 40 60 9c 68  ....b`...h.@@`.h
+010:  b0 ae 86 40 e0 40 ae 92 88 8a 64 63 03 f0 3e 45  ...@.@....dc..>E
+020:  4d 36 34 6e 65 2f 23 20 45 63 68 6f 6c 69 6e 6b  M64ne/# Echolink
+030:  20 31 34 35 2e 33 31 30 2f 31 30 30 68 7a 20 54   145.310/100hz T
 
 Page 164
 
@@ -11758,7 +11083,7 @@ Speed for serial port.   e.g. 9600.
 All received frames are displayed in the usual monitor format, preceded with the channel number inside
 of [ ].
 
- [0] K1NRO-1>APDW14,WIDE2-2:!4238.80NS07105.63W#PHG5630
+[0] K1NRO-1>APDW14,WIDE2-2:!4238.80NS07105.63W#PHG5630
 
 Page 165
 
@@ -11793,21 +11118,21 @@ transmission.
 Input, starting with a lower case letter is interpreted as being a command.  Whitespace, as shown in the
 examples, is optional.
 
-        letter
-        -------
-        d
-        p
-        s
-        t
-        f
-        h
+      letter
+      -------
+      d
+      p
+      s
+      t
+      f
+      h
 
 example
 -----------
 
 meaning
 -----------
- txDelay, 10ms units       d 30
+txDelay, 10ms units       d 30
 Persistence
 p 63
 Slot time, 10ms units     s 10
@@ -11901,9 +11226,9 @@ The time stamp will then appear after the channel number like this:
 Finally we have the "-v" (verbose) option to display the KISS format in each direction.
 
 From KISS TNC:
-  000:  c0 00 a8 68 a6 a6 62 a0 60 ae 62 9e 86 82 40 f6  ...h..b.`.b...@.
-  010:  ae 92 88 8a 62 40 e0 96 62 9c a4 9e 40 e1 03 f0  ....b@..b...@...
-  020:  27 62 3d 44 6c 20 1c 68 2f 5d 3d 0d c0           'b=Dl .h/]=..
+000:  c0 00 a8 68 a6 a6 62 a0 60 ae 62 9e 86 82 40 f6  ...h..b.`.b...@.
+010:  ae 92 88 8a 62 40 e0 96 62 9c a4 9e 40 e1 03 f0  ....b@..b...@...
+020:  27 62 3d 44 6c 20 1c 68 2f 5d 3d 0d c0           'b=Dl .h/]=..
 
 ## 14.7 ll2utm, utm2ll – Convert between Latitude/Longitude & UTM Coordinates
 
