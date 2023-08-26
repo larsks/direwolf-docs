@@ -288,7 +288,7 @@ Starting with version 1.6, there are two prebuilt versions:
 
 Put the Dire Wolf distribution file, `direwolf-1.6.0-win_x86_64.zip` (or similar name depending on version), in some convenient location such as your user directory. In this example, we will use `C:\Users\John`.
 
-In Windows Explorer, right click on this file and pick "Extract All…" Click on the Extract button.
+In Windows Explorer, right click on this file and pick "Extract All..." Click on the Extract button.
 
 You should end up with a new folder containing:
 
@@ -296,7 +296,7 @@ You should end up with a new folder containing:
 - User-Guide.pdf
 - The application.
 - This document.
-- and many others …
+- and many others ...
 
 In Windows Explorer, right click on `direwolf.exe` and pick **Send To > Desktop** (create shortcut).
 
@@ -350,7 +350,7 @@ Dire Wolf provides a server function with the "AGW TCPIP Socket Interface" on de
 
 1. First, start up Dire Wolf.
 2. Run [APRSISCE/32].
-3. From the "Configure" menu, pick "ports" then "new port…"
+3. From the "Configure" menu, pick "ports" then "new port..."
 4. Select type "AGW" from the list. Enter "Dire Wolf" as the name. Click "Create" button.
 5. When it asks, "Configure as TCP/IP Port?" answer Yes.
 6. Enter "localhost" for the address and port 8000.
@@ -408,7 +408,7 @@ Here are detailed configuration steps for a couple popular applications.
 
 1. First start up Dire Wolf.
 2. Run [APRSISCE/32].
-3. From the "Configure" menu, pick "ports" then "new port…"
+3. From the "Configure" menu, pick "ports" then "new port..."
 4. Select type "KISS" from the list. Enter "Dire Wolf" as the name. Click "Create" button.
 5. When it asks, "Configure as TCP/IP Port?" answer No.
 6. For port configuration, pick "COM4" from the list. If you don't see COM4, com0com has not been installed properly. Go back and fix it.
@@ -448,7 +448,7 @@ Here are detailed configuration steps for a couple popular applications.
 2. Run Winlink Express.
 3. Next to "Open Session," pick either "Packet Winlink" or "Packet P2P."
 4. Click on "Open Session."
-5. In the "Packet … Session" window, click on "Settings."
+5. In the "Packet ... Session" window, click on "Settings."
 6. Set configuration as shown below.
 
     **Be sure model is set to NORMAL. ACKMODE will cause an error.** Change the host/port appropriately if Dire Wolf and Winlink are running on different computers.
@@ -457,7 +457,7 @@ Here are detailed configuration steps for a couple popular applications.
 
 1. First start up Dire Wolf.
 2. Run APRSISCE/32.
-3. From the "Configure" menu, pick "ports" then "new port…"
+3. From the "Configure" menu, pick "ports" then "new port..."
 4. Select type "Simply(KISS)" from the list. Enter "Dire Wolf" as the name. Click "Create" button.
 5. When it asks, "Configure as TCP/IP Port?" answer Yes.
 6. Enter "localhost" for the address and port 8001.
@@ -613,7 +613,7 @@ sudo yum install gpsd
 sudo yum install libgps-devel
 ```
 
-Failure to install the libasound2-dev  (or alsa-lib-devel) package will result in the compile error, `audio.c…: fatal error: alsa/asoundlib.h:  No such file or directory.`
+Failure to install the libasound2-dev  (or alsa-lib-devel) package will result in the compile error, `audio.c...: fatal error: alsa/asoundlib.h:  No such file or directory.`
 
 The libudev-dev (or libudev-devel) package contains /usr/include/libudev.h.  This is required for using the USB audio GPIO pins for PTT.
 
@@ -855,7 +855,7 @@ Created symlink /tmp/kisstnc -> /dev/pts/5
 Take heed of that warning!  The pseudo terminal has a finite amount of buffer space available.  If direwolf is filling it up on one end and nothing is reading from the other end, the received frame processing thread will stop and eventually you will get a message like this:
 
 ```
-Received frame queue is out of control. Length=…. Reader thread is probably
+Received frame queue is out of control. Length=.... Reader thread is probably
 frozen. This can be caused by using a pseudo terminal (direwolf -p) where
 another. application is not reading the frames from the other side.
 ```
@@ -1191,7 +1191,7 @@ the message type (e.g. MIC-E, Position, or Weather)
 
 symbol to be displayed (e.g. Truck, House)
   equipment model or software application
-  MIC-E status (In Service, En Route, Off Duty, …)
+  MIC-E status (In Service, En Route, Off Duty, ...)
 
 
 transmitter power, antenna height, gain, and direction.
@@ -1576,7 +1576,7 @@ Page 43
 
 
 Packet Radio on HF   http://wiki.complete.org/PacketRadioOnHF
-Others… ?
+Others... ?
 
 Google for "hf aprs" for many discussions on this topic.
 
@@ -1588,7 +1588,7 @@ on the RF carrier.  Here are some early designs from the previous century.
   K9NG
   G3RUH  - http://www.amsat.org/amsat/articles/g3ruh/109.html
 
-- need to find link…
+- need to find link...
 
 http://www.tapr.org/pdf/CNC1988-9600BaudModem-G3RUH.pdf
 
@@ -2286,7 +2286,7 @@ name.   https://github.com/dh1tw/remoteAudio/wiki/Persistent-USB-Mapping-of-Audi
 
 Troubleshooting tip:
 
-What if "aplay –l" complains, "no soundcards found…"?
+What if "aplay –l" complains, "no soundcards found..."?
 
 Page 53
 
@@ -3054,7 +3054,7 @@ substation id (SSID), if specified, must be in the range of 1 to 15.
 Each radio channel can be configured separately for different speeds and modem properties.   The
 general form of the configuration option is:
 
-MODEM  speed  [ option ]…
+MODEM  speed  [ option ]...
 
 In most cases, you can just specify the speed and take the other defaults.
 
@@ -3397,7 +3397,7 @@ Page 69
 Using the "/n" option would be a very bad idea in this case.  We need the high sample rate to capture
 the high baud rate.
 
-The demodulator types (A, B, C, …) are only for the AFSK modes.  They are not applicable to 9600 baud.
+The demodulator types (A, B, C, ...) are only for the AFSK modes.  They are not applicable to 9600 baud.
 
 The "+" option can also be useful in this case but for a different reason.  There are no tones but a DC
 offset can be introduced with using a software defined radio (SDR).   This will be explained in a later
@@ -3810,7 +3810,7 @@ Page 74
 
 
 
-We observe that the RTS control line changed.  Next…
+We observe that the RTS control line changed.  Next...
 
 rigctl -m 2 -r localhost:4532
 T 1
@@ -5000,7 +5000,7 @@ address part and an information part.
 
 source > destination : information
 source > destination , digipeater1 : information
-source > destination , digipeater1, … , digipeater8 : information
+source > destination , digipeater1, ... , digipeater8 : information
 
 The standard display format has an address part composed of:
 
@@ -5697,7 +5697,7 @@ creating this confusing situation.
 I would argue that it violates the AX.25 protocol specification section 3.12.5:
 
 The destination station can determine the route the frame took to reach it
-by examining the address field…
+by examining the address field...
 
 The via path part of the address field, up through the address marked with "*" should contain the path
 that the packet has traveled.
@@ -6192,7 +6192,7 @@ FILTER  0  0  r/42.6/-71.3/50 | ( ! t/po )
 
 #### 9.6.2.3  Budlist Filter
 
-b/call1/call2…
+b/call1/call2...
 
 Allow all packets from the specified calls.  These must be exact matches including the SSID.  Wildcarding
 is allowed.
@@ -6201,7 +6201,7 @@ When combined with the "!" (not) operator, it can be used to reject packets from
 
 #### 9.6.2.4  Object Filter
 
-o/obj1/obj2…
+o/obj1/obj2...
 
 Page 103
 
@@ -6503,7 +6503,7 @@ Either Red Dot or Waypoint Destination.
 
 #### 9.6.2.7  Digipeater Filter
 
-d/digi1/digi2…
+d/digi1/digi2...
 
 Allow packets that have been repeated by any of the listed digipeaters.   Wildcarding is allowed.
 
@@ -6516,20 +6516,20 @@ digipeated through some other station.
 
 #### 9.6.2.8  Via digipeater unused Filter
 
-v/digi1/digi2…
+v/digi1/digi2...
 
 Allow packets that have any listed digipeaters that don't have the "has-been-used" flag set.  Wildcarding
 is allowed.
 
 #### 9.6.2.9  Group Message Filter
 
-g/call1/call2…
+g/call1/call2...
 
 Allow "message" packets with any of the listed addressees.   Wildcarding is allowed.
 
 #### 9.6.2.10  Unproto Filter
 
-u/unproto1/unproto2…
+u/unproto1/unproto2...
 
 Allow packets with any of the specified strings in the AX.25 destination field.   APRS uses this field in a
 variety of ways.  Most often it is the system type from the tocalls.txt file.  For example, to select packets
@@ -9167,7 +9167,7 @@ n
 
 Text colors.
 1 = normal, 0 = disable text colors.
-Other values (2, 3, …) might give better results for your particular terminal
+Other values (2, 3, ...) might give better results for your particular terminal
 emulator type.  Use a large number, such as 9, to available options and what
 they look like.
 
@@ -9642,7 +9642,7 @@ v2.0.    This is rather heavy handed.   It is much better to use the next
 (V20) option for stations known not to support v2.2.   This will allow
 v2.2 to be used with stations that understand it.
 
-V20   address [ address … ]
+V20   address [ address ... ]
 
 List stations known to understand only v2.0.
 When trying to connect to them, use only v2.0 without trying v2.2 first.
@@ -9650,7 +9650,7 @@ This can speed up connections to specific stations with outdated
 implementations.
 Multiple addresses can be listed on one line or in multiple V20 lines.
 
-NOXID   address [ address … ]
+NOXID   address [ address ... ]
 
 List stations known to understand SABME but not XID.
 This is a work-around for talking to stations with partial v2.2
@@ -9875,7 +9875,7 @@ This will match only that callsign (implied SSID of zero) or that callsign follo
 
 #### 10.4.2.2  Budlist Filter  (source address)
 
-b/call1/call2…
+b/call1/call2...
 
 Page 145
 
@@ -9919,19 +9919,19 @@ When combined with the "!" (not) operator, it can be used to reject packets from
 
 #### 10.4.2.3  Digipeater Filter
 
-d/digi1/digi2…
+d/digi1/digi2...
 
 Allow packets that have been repeated by any of the listed digipeaters.
 
 #### 10.4.2.4  Via digipeater unused Filter
 
-v/digi1/digi2…
+v/digi1/digi2...
 
 Allow packets that have any listed digipeaters that don't have the "has-been-used" flag set.
 
 #### 10.4.2.5  Unproto Filter  (destination address)
 
-u/call1/call2…
+u/call1/call2...
 
 Allow packets with any of the specified calls in the AX.25 destination field.
 
@@ -10312,7 +10312,7 @@ MODEM  1200  /3
 
 This is now the default when running on the Raspberry Pi or similar ARM based computer.
 
-TO BE CONTINUED….
+TO BE CONTINUED....
 
 Page 152
 
@@ -10332,12 +10332,12 @@ Page 152
 
 
 
-## 12.3 One Bad Apple Don't Spoil the Whole Bunch…  ("FIX_BITS" option)
+## 12.3 One Bad Apple Don't Spoil the Whole Bunch...  ("FIX_BITS" option)
 
 There is an old proverb, "One bad apple spoils the barrel," which applies to AX.25 frames used for APRS
 and traditional packet radio.  Each frame contains a 16 bit frame check sequence (FCS) used for error
 detection.  If any one bit is corrupted along the way, the FCS is wrong and the entire frame is discarded.
-The Osmond Brothers offered the advice, "Give it one more try before you give up…"  That can also
+The Osmond Brothers offered the advice, "Give it one more try before you give up..."  That can also
 apply to AX.25 frames.  From my observations, single bit errors are fairly common.  Why not give it one
 more try before giving up?
 
@@ -10729,7 +10729,7 @@ Vast numbers of additional characters are represented by sequences of two or mor
 byte has 11 in the two most significant bits.  One or more additional bytes have 10 in the most
 significant bytes.
 
-11xxxxxx  10xxxxxx  …
+11xxxxxx  10xxxxxx  ...
 
 For example, the degree symbol is now:
 
@@ -10901,7 +10901,7 @@ This extra line appears only when non-ASCII characters are present.
 To transmit non-ASCII characters in a beacon, use the same hexadecimal notation used to display
 received packets.  For example,
 
-PBEACON  …  comment="Water freezes at 0<0xc2><0xb0>C = 32<0xc2><0xb0>F"
+PBEACON  ...  comment="Water freezes at 0<0xc2><0xb0>C = 32<0xc2><0xb0>F"
 
 Would send a comment that looks like this:
 
