@@ -261,9 +261,9 @@ corresponding one for your situation.
 
 <!-- add section links -->
 
--  [Windows XP or later](#installation-operation-microsoft-windows-xp-or-later)
--  [Linux](#installation-operation-linux)
--  [Macintosh OS X](#installation-operation-macintosh-os-x)
+- [Windows XP or later](#installation-operation-microsoft-windows-xp-or-later)
+- [Linux](#installation-operation-linux)
+- [Macintosh OS X](#installation-operation-macintosh-os-x)
 
 After installing on your particular operating system, continue with section 7, Basic Operation.
 
@@ -316,7 +316,7 @@ Double click on the desktop icon...
 
 It starts with some informational messages in black.
 
--  Audio devices being used and their mapping to radio channels. The current version allows up to three audio devices. This allows up to six radio channels when all are operating in stereo.
+- Audio devices being used and their mapping to radio channels. The current version allows up to three audio devices. This allows up to six radio channels when all are operating in stereo.
 
 Next we have some troubleshooting information about the radio channel configuration. Dire Wolf
 supports the most popular 1200, 9600, and 300 baud standards. For 300 baud HF SSB operation,
@@ -1459,294 +1459,127 @@ Objects table.
 
 A separate document, **AIS-Reception.pdf**, goes into a lot more detail.
 
-<!-- marker -->
-
-# 9  Configuration File & command line options
+# Configuration File & command line options
 
 The default configuration provides standard 1200 baud AFSK reception and will be adequate for many
 people.  Those desiring more features and flexibility can change the operation by editing the
 configuration file and restarting Dire Wolf.  Some of the options available include:
 
-  Selecting alternate audio devices.
-  Dual channel (stereo) operation for use with two transceivers.
-  Audio sampling rate to balance between performance and CPU power required.
-  Transmission rates other than 1200 baud.  e.g. 300 for HF use.
-  AFSK tones other than 1200 & 2200 Hz
-  Digipeating.
-  APRStt Gateway
-
-  Beaconing.
+- Selecting alternate audio devices.
+- Dual channel (stereo) operation for use with two transceivers.
+- Audio sampling rate to balance between performance and CPU power required.
+- Transmission rates other than 1200 baud.  e.g. 300 for HF use.
+- AFSK tones other than 1200 & 2200 Hz
+- Digipeating.
+- APRStt Gateway
+- Internet Gateway (IGate).
+- Beaconing.
 
-Internet Gateway (IGate).
-
-Normally the configuration file is read from the current working directory.  On Linux the user's home
-directory is also searched.  The "-c" command line option can be used to read a file from a different
-location.
+Normally the configuration file is read from the current working directory.  On Linux the user's home directory is also searched.  The "-c" command line option can be used to read a file from a different location.
 
 Other command line options are described at the end of this section.
 
 Configuration commands are generally a keyword followed by parameters.
 
-  Command keywords are case insensitive.  i.e. upper and lower case are equivalent.
-  Command parameters are case sensitive.  i.e. upper and lower case are different.
-  Any parameter values containing spaces must be enclosed by quotes.
+- Command keywords are case insensitive.  i.e. upper and lower case are equivalent.
+- Command parameters are case sensitive.  i.e. upper and lower case are different.
+- Any parameter values containing spaces must be enclosed by quotes.
 
 Example:  The next two are equivalent
 
+```
 PTT /dev/ttyS0 RTS
 ptt /dev/ttyS0 RTS
+```
 
 But this not equivalent because device names are case sensitive.
 
+```
 PTT /dev/TTYs0 RTS
+```
 
-## 9.1  Audio Device
+## Audio Device
 
 Often the system's primary, maybe only, audio device is used.
 
-If you have multiple soundcards, you might want to use a different dedicated interface rather than the
-same one that goes to your speakers.
+If you have multiple soundcards, you might want to use a different dedicated interface rather than the same one that goes to your speakers.
 
-Page 49
+Starting with version 1.2, up to three audio devices can be used at the same time.  This allows operation with up to six radio channels.  If you need two channels, there are some advantages to using a separate soundcard for each instead of running one in stereo.
 
+- Better utilization of multicore systems.  Each soundcard can use a different CPU for the digital signal processing.  Two channels, on the same soundcard, must use the same CPU.
 
+- Simultaneous transmitting on multiple channels.  Dire Wolf is not clever enough to transmit both channels on the same sound card at the same time.  One will have to wait until the other is finished. 
+- Inexpensive USB audio adapters only have mono microphone inputs.
+- Text-to-Speech applications can't use a single channel of a soundcard in stereo mode.
 
+<!-- table missing -->
 
+Note that valid radio channels might not be contiguous.   For example if the first device is operating in mono and the second device is operating in stereo, you will have radio channels 0, 2, and 3.
 
+<!-- image missing -->
 
+Applications use a single KISS or AGW network connection for all channels.  The protocols have a way to convey the channel (port) number.
 
+### Audio Device Selection – All Platforms
 
+A radio channel (or pair of channels when using stereo) normally uses the same physical interface for both input (receive) and output (transmit).   In this case, it can be listed once, in the ADEVICE configuration, as in these examples:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Starting with version 1.2, up to three audio devices can be used at the same time.  This allows operation
-with up to six radio channels.  If you need two channels, there are some advantages to using a separate
-soundcard for each instead of running one in stereo.
-
-  Better utilization of multicore systems.  Each soundcard can use a different CPU for the digital
-
-signal processing.  Two channels, on the same soundcard, must use the same CPU.
-
-  Simultaneous transmitting on multiple channels.  Dire Wolf is not clever enough to transmit
-
-both channels on the same sound card at the same time.  One will have to wait until the other is
-finished.
-Inexpensive USB audio adapters only have mono microphone inputs.
-
-
-  Text-to-Speech applications can't use a single channel of a soundcard in stereo mode.
-
-Audio Device
-
-0 = first or only
-
-1 = second optional
-2 = third optional
-
-Configuration
-Command
-ADEVICE
-or   ADEVICE0
-ADEVICE1
-ADEVICE2
-
-Channels,
-mono
-0
-
-2
-4
-
-Channels, stereo
-
-Left
-0
-
-2
-4
-
-Right
-1
-
-3
-5
-
-Note that valid radio channels might not be contiguous.   For example if the first device is operating in
-mono and the second device is operating in stereo, you will have radio channels 0, 2, and 3.
-
-Channel 0  (left or mono)
-
-Channel 1  (right if stereo)
-
-ADEVICE0
-
-Channel 2  (left or mono)
-
-Channel 3  (right if stereo)
-
-ADEVICE1
-
-Multiport
-
-TNC
-
-Channel 4  (left or mono)
-
-Channel 5  (right if stereo)
-
-ADEVICE2
-
-Applications
-
-KISS or
-AGW
-network
-protocol
-
-Applications use a single KISS or AGW network connection for all channels.  The protocols have a way to
-convey the channel (port) number.
-
-Page 50
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 9.1.1  Audio Device Selection – All Platforms
-
-A radio channel (or pair of channels when using stereo) normally uses the same physical interface for
-both input (receive) and output (transmit).   In this case, it can be listed once, in the ADEVICE
-configuration, as in these examples:
-
+```
 ADEVICE0  USB
 ADEVICE1  plughw:1,0
 ADEVICE2  "USB Audio Codec:5"
+```
 
-You could also list the same interface twice, once for input and once for output.  These are equivalent
-to the previous example where the interface was listed once.
+You could also list the same interface twice, once for input and once for output.  These are equivalent to the previous example where the interface was listed once.
 
+```
 ADEVICE0  USB   USB
 ADEVICE1  plughw:1,0   plughw:1,0
 ADEVICE2  "USB Audio Codec:5"   "USB Audio Codec:5"
+```
 
 It is also possible to use different audio interfaces for receive and transmit.   Examples:
 
+```
 ADEVICE   USB  Bluetooth
 ADEVICE1  plughw:1,0   plughw:2,0
 ADEVICE2  "Built-in Line In"   "USB Audio Codec:5"
+```
 
-The output interface must be something recognized by the sound system for your particular Operating
-System, often referred to as a platform.   Windows, Linux, and Mac OSX differences are covered in the
-next few sections.
+The output interface must be something recognized by the sound system for your particular Operating System, often referred to as a platform.   Windows, Linux, and Mac OSX differences are covered in the next few sections.
 
-The sections after that cover additional forms that can be used for the input only.  These are typically
-used with Software Defined Radios (SDR).
+The sections after that cover additional forms that can be used for the input only.  These are typically used with Software Defined Radios (SDR).
 
-  The single "-" character (usual Linux convention) or the keyword "stdin" means read from
+- The single "-" character (usual Linux convention) or the keyword "stdin" means read from standard input.
+- UDP:nnn  means read from the specified UDP port.
 
-standard input.
+In both cases, the audio streams must be 16 bit signed little endian.  You must make sure that the number of samples per second agree for the digital audio source and in the Dire Wolf configuration.
 
-  UDP:nnn  means read from the specified UDP port.
-
-In both cases, the audio streams must be 16 bit signed little endian.  You must make sure that the
-number of samples per second agree for the digital audio source and in the Dire Wolf configuration.
-
-### 9.1.2  Audio Device selection - Windows
+### Audio Device selection - Windows
 
 When Dire Wolf starts up, it displays the available audio devices.
 
-Page 51
+<!-- image missing -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Input devices and output devices are listed with a number assigned by the operating system.   In the
-configuration you can select them with either the number or a substring of the description.   One
-number (or string) can be used for both or the receive/transmit sides can be listed separately.
+Input devices and output devices are listed with a number assigned by the operating system.   In the configuration you can select them with either the number or a substring of the description.   One number (or string) can be used for both or the receive/transmit sides can be listed separately.
 
 For this example, these two different forms would be equivalent:
 
-or
-
+```
 ADEVICE0  3  4
 ACHANNELS  2
 ADEVICE1  0
+```
 
+or
+
+```
 ADEVICE0  High
 ACHANNELS  2
 ADEVICE1  USB
+```
 
-The numbers can change as USB devices are added and removed so picking some unique substring of
-the description is more predictable.
+The numbers can change as USB devices are added and removed so picking some unique substring of the description is more predictable.
 
 Many people will simply use the default device and won't have to worry about this option.
 
@@ -1756,42 +1589,18 @@ Many people will simply use the default device and won't have to worry about thi
 
 Mono operation (one channel per device) is assumed if not specified.
 
-### 9.1.3  Audio Device selection – Linux ALSA
+### Audio Device selection – Linux ALSA
 
-Linux ALSA audio devices are much more flexible and therefore more complicated and confusing.  Here
-is the simplified version that will be appropriate in most cases.
+Linux ALSA audio devices are much more flexible and therefore more complicated and confusing.  Here is the simplified version that will be appropriate in most cases.
 
 Get a list of audio input cards by typing "arecord -l"
 
 (the option is lower case L)
 
+```
 john@linux64:~/direwolf$ arecord -l
 **** List of CAPTURE Hardware Devices ****
-
-Page 52
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-card 0: Intel [HDA Intel], device 0: AD1984 Analog [AD1984 Analog]
+card 0: Intel [HDA Intel], device 0: AD1984 Analog [AD1984 Analog]
 Subdevices: 0/1
 Subdevice #0: subdevice #0
 card 0: Intel [HDA Intel], device 2: AD1984 Alt Analog [AD1984 Alt Analog]
@@ -1800,11 +1609,13 @@ Subdevice #0: subdevice #0
 card 1: Device [C-Media USB Audio Device], device 0: USB Audio [USB Audio]
 Subdevices: 1/1
 Subdevice #0: subdevice #0
+```
 
 Get a list of audio output cards by typing "aplay -l"
 
 (the option is lower case L)
 
+```
 john@linux64:~/direwolf$ aplay -l
 **** List of PLAYBACK Hardware Devices ****
 card 0: Intel [HDA Intel], device 0: AD1984 Analog [AD1984 Analog]
@@ -1816,15 +1627,13 @@ Subdevice #0: subdevice #0
 card 1: Device [C-Media USB Audio Device], device 0: USB Audio [USB Audio]
 Subdevices: 1/1
 Subdevice #0: subdevice #0
+```
 
-In this case we find two "cards" to use the ALSA terminology.  The first (card 0) is on the system board.
-The second (card 1) is a cheap USB audio adapter.  Remember these numbers so we can reference the
-desired one later.
+In this case we find two "cards" to use the ALSA terminology.  The first (card 0) is on the system board. The second (card 1) is a cheap USB audio adapter.  Remember these numbers so we can reference the desired one later.
 
-The included "cm108" utility can be used to obtain a list of USB audio devices.   Here we have an
-example of 3 C-Media USB adapters, a SignaLink USB, a keyboard, and a mouse.   There is more
-discussion of this in the Push To Talk (PTT) section.
+The included "cm108" utility can be used to obtain a list of USB audio devices.   Here we have an example of 3 C-Media USB adapters, a SignaLink USB, a keyboard, and a mouse.   There is more discussion of this in the Push To Talk (PTT) section.
 
+```
         VID  PID   Product                          Sound                  ADEVICE         HID [ptt]
         ---  ---   -------                          -----                  -------         ---------
     **  0d8c 000c  C-Media USB Headphone Set        /dev/snd/pcmC1D0c      plughw:1,0      /dev/hidraw0
@@ -1841,544 +1650,285 @@ discussion of this in the Push To Talk (PTT) section.
     **  0d8c 0008  C-Media USB Audio Device         /dev/snd/controlC4                     /dev/hidraw6
         413c 2010  Dell USB Keyboard                                                       /dev/hidraw4
         0461 4d15  USB Optical Mouse                                                       /dev/hidraw5
+```
 
-If you have multiple USB audio devices,  the device names can change as other USB devices are plugged
-in.   Here are some different ways that you can ensure that a particular device will always get the same
-name.   https://github.com/dh1tw/remoteAudio/wiki/Persistent-USB-Mapping-of-Audio-devices-(Linux)
+If you have multiple USB audio devices,  the device names can change as other USB devices are plugged in.   Here are some different ways that you can ensure that a particular device will always get the same name.   <https://github.com/dh1tw/remoteAudio/wiki/Persistent-USB-Mapping-of-Audio-devices-(Linux)>
+
+---
 
 Troubleshooting tip:
 
 What if "aplay –l" complains, "no soundcards found..."?
 
-Page 53
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-I had a situation where user "root" could see the devices but an ordinary user could not.
+I had a situation where user "root" could see the devices but an ordinary user could not.
 The solution was to add the user name to the "audio" group like this.
 
+```
 sudo  addgroup  john  audio
+```
 
 This will not take effect immediately.  Log out and log in again.
 
-In this example, I want to pick the USB device.   Recall that the card number was 1 so we want to put
-"plughw:1,0" in the configuration file like this:
+---
 
+In this example, I want to pick the USB device.   Recall that the card number was 1 so we want to put "plughw:1,0" in the configuration file like this:
+
+```
 ADEVICE  plughw:1,0
+```
 
 If you had a third audio "card," its name would be plughw:2,0
 
 Use pavucontrol, alsamixer, or similar application to set the audio signal levels.
 
-If the user has PulseAudio installed, the installing of pavucontrol is mandatory to make sure the right
-audio routing is done.  In many respects, pavucontrol can do everything that alsamixer can do but not
-the other way around.  Unfortunately, there are reports that pavucontrol can create blocking issues and
-programs will crash if it's running or they will stop running when pavucontrol is loaded.
+<!-- image missing -->
+
+If the user has PulseAudio installed, the installing of pavucontrol is mandatory to make sure the right audio routing is done.  In many respects, pavucontrol can do everything that alsamixer can do but not the other way around.  Unfortunately, there are reports that pavucontrol can create blocking issues and programs will crash if it's running or they will stop running when pavucontrol is loaded.
+
+---
 
 Troubleshooting tip:
 
-On a new system you might find the audio input device initially muted.  If you see
-"MM" in alsamixer, select the input device using  and  keys then press "m" to
-unmute it.   Use  ↑  key to set near maximum gain.
+<!-- image missing -->
+
+On a new system you might find the audio input device initially muted.  If you see "MM" in alsamixer, select the input device using  and  keys then press "m" to unmute it.   Use  ↑  key to set near maximum gain.
 
 Once you have the proper levels set, save them with:
 
+```
 sudo alsactl store
+```
 
 Otherwise, you might find them reset to some other default the next time you reboot.
 
-Page 54
+You might need to use "sudo alsactl restore" to make sure proper sound levels are always restored.
 
+---
 
+### Audio Device selection – Mac OS X
 
+The Macintosh version uses Port Audio.   The audio device names may contain spaces.  If they do, the parts with spaces must be quoted so we now which spaces are part of the names and which spaces separate them.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-You might need to use "sudo alsactl restore" to make sure proper sound levels are always restored.
-
-### 9.1.4  Audio Device selection – Mac OS X
-
-The Macintosh version uses Port Audio.   The audio device names may contain spaces.  If they do, the
-parts with spaces must be quoted so we now which spaces are part of the names and which spaces
-separate them.
-
+```
 ADEVICE  "USB Audio Codec:6"  "USB Audio Codec:5"
+```
 
 When Dire Wolf starts up, you should see a list of the audio devices available.
 
-### 9.1.5  Audio Device properties
+### Audio Device properties
 
 Two options are available.  They apply to the most recent ADEVICEn command.
 
-ARATE   sample-rate
+- `ARATE` --  sample-rate
 
-Where,
+  Where, sample-rate is number of audio samples per second. The default is 44100.  Other standard values are 22050 and 11025. When using 9600 bps data, a 48000 sample rate might provide some improvement.
 
-sample-rate is number of audio samples per second.
-The default is 44100.  Other standard values are 22050 and 11025.
-When using 9600 bps data, a 48000 sample rate might provide some
-improvement.
+  When using a normal audio interface (built in to motherboard or USB adapter), it's generally best to take the default.
 
-When using a normal audio interface (built in to motherboard or USB adapter),
-it's generally best to take the default.
+  This would be necessary when using a software defined radio which tend to use rates like 48000 or 24000.   This can also be specified on the command line for the first device only.
 
-This would be necessary when using a software defined radio which tend to use
-rates like 48000 or 24000.   This can also be specified on the command line for
-the first device only.
+- `ACHANNELS` --  num-channels
 
-ACHANNELS  num-channels
+  Where, num-channels is 1 for mono (default) or 2 for stereo, allowing use of two radio channels on one soundcard.
 
-Where,
+  People find "ACHANNELS" confusing because it is too similar to "CHANNEL."   Would it be better to use something more distinct such as "STEREO?"
 
-num-channels is 1 for mono (default) or 2 for stereo,
-allowing use of two radio channels on one soundcard.
+### Use with Software Defined Radios
 
-People find "ACHANNELS" confusing because it is too similar to "CHANNEL."   Would it be better to use
-something more distinct such as "STEREO?"
+When using software defined radios (SDR), the audio will be coming from another application rather than a "soundcard."
 
-### 9.1.6  Use with Software Defined Radios
+#### gqrx
 
-Page 55
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-When using software defined radios (SDR), the audio will be coming from another application rather
-than a "soundcard."
-
-#### 9.1.6.1  gqrx
-
-Gqrx (2.3 and later) has the ability to send streaming audio through a UDP socket to another application
-for further processing.   As explained in http://gqrx.dk/doc/streaming-audio-over-udp, select the
-Network tab of the audio settings window.  Enter the host name or address where Dire Wolf will be
-running.  Use "localhost" if both are on the same computer.  Pick some unused UDP port.  Here we use
-the same number as in the gqrx documentation.
+Gqrx (2.3 and later) has the ability to send streaming audio through a UDP socket to another application for further processing.   As explained in <http://gqrx.dk/doc/streaming-audio-over-udp>, select the Network tab of the audio settings window.  Enter the host name or address where Dire Wolf will be running.  Use "localhost" if both are on the same computer.  Pick some unused UDP port.  Here we use the same number as in the gqrx documentation.
 
 Use the following Dire Wolf configuration file options:
 
+```
 ADEVICE  udp:7355  default
 ARATE  48000
 ACHANNELS 1
+```
 
-This means that Dire Wolf will obtain audio from a UDP stream for receiving.   If you transmit on that
-channel, audio will go to the ALSA device named "default."
+This means that Dire Wolf will obtain audio from a UDP stream for receiving.   If you transmit on that channel, audio will go to the ALSA device named "default."
 
 Alternatively, you can override the configuration file settings with command line options like this:
 
+```
 direwolf -n 1 -r 48000 -b 16 udp:7355
+```
 
-
-
-
+- "-n 1" sets number of audio channels to 1.
+- "-r 48000" means audio sample rate of 48000 per second.
+- "-b 16" means 16 bits per sample, signed, little endian.
 
-"-n 1" sets number of audio channels to 1.
-"-r 48000" means audio sample rate of 48000 per second.
-"-b 16" means 16 bits per sample, signed, little endian.
+Note that these command line options apply only to the first audio device (ADEVICE0) and the first channel (CHANNEL 0).
 
-Note that these command line options apply only to the first audio device (ADEVICE0) and the first
-channel (CHANNEL 0).
+#### rtl_fm
 
-#### 9.1.6.2  rtl_fm
+Other SDR applications might produce audio on stdout so it is convenient to pipe into the next application.  In this example, the final "-" means read from stdin.
 
-Other SDR applications might produce audio on stdout so it is convenient to pipe into the next
-application.  In this example, the final "-" means read from stdin.
-
+```
 rtl_fm -f 144.39M -o 4 - | direwolf -n 1 -r 24000 -b 16 -
+```
 
 Instead of command line options, you could do the same thing in the configuration file like this:
 
+```
 ADEVICE0  stdin  default
 ARATE  24000
+```
 
 What do the rtl_fm options mean?
 
--f 144.39M
+- `-f 144.39M`
 
-Pretty obvious.  You can guess.  Frequency accuracy is notoriously bad
-for the cheapest models.   The –p option can be used for calibration.
+  Pretty obvious.  You can guess.  Frequency accuracy is notoriously bad for the cheapest models.   The –p option can be used for calibration.
 
-Page 56
+- `-o 4` By trial and error this seemed to work better.
+- `-` Send audio to stdout where we pipe it to another application. This is the default so it is probably redundant.
 
+Note that the default is 24000 samples per second out.  This is adequate for 1200 baud but you would want it to be higher for 9600 baud. You might be able to get better results by playing with the sampling and filtering options.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--o 4
--
-
-Models
-By trial and error this seemed to work better.
-Send audio to stdout where we pipe it to another application.
-This is the default so it is probably redundant.
-
-Note that the default is 24000 samples per second out.  This is adequate for 1200 baud but you
-would want it to be higher for 9600 baud.
-You might be able to get better results by playing with the sampling and filtering options.
-
-See http://kmkeen.com/rtl-demod-guide/index.html for rtl_fm documentation.
+See <http://kmkeen.com/rtl-demod-guide/index.html> for rtl_fm documentation.
 
 What do the direwolf options mean?
 
--n 1
+- `-n 1`
 
--r 24000
--b 16
--
+  Single audio channel (mono).   This the default but will override Any stereo option in the configuration file.
 
-Single audio channel (mono).   This the default but will override
-Any stereo option in the configuration file.
-Audio sample rate.  Must match the source.
-Bits per audio sample.  This is the default so it is really redundant.
-Take audio from stdin.  In this case it is piped from rtl_fm.
+- `-r 24000`
 
-Here is another possible variation you might want to try.  In one window, start up Dire Wolf listening to
-a UDP port.  Note that rtl_fm has a default sample rate of 24000.
+  Audio sample rate.  Must match the source.
 
+- `-b 16`
+
+  Bits per audio sample.  This is the default so it is really redundant. Take audio from stdin.  In this case it is piped from rtl_fm.
+
+Here is another possible variation you might want to try.  In one window, start up Dire Wolf listening to a UDP port.  Note that rtl_fm has a default sample rate of 24000.
+
+```
 direwolf -n 1 -r 24000 -b 16 udp:7355
+```
 
 In a different window, run rtl_fm and use the netcat utility to send the audio by UDP.
 
+```
 rtl_fm -f 144.39M -o 4 - | nc -u localhost 7355
+```
 
-Note that the SDR and Dire Wolf can be running on different computers, even different operating
-systems.  You could use the command above on Linux but change localhost to the address of a Windows
-machine where Dire Wolf is running.
+Note that the SDR and Dire Wolf can be running on different computers, even different operating systems.  You could use the command above on Linux but change localhost to the address of a Windows machine where Dire Wolf is running.
 
 If you see some warning about audio input level being too high, don't worry about in this case.
 
-It's only a potential problem when using the analog input of a sound card.  If the analog audio input is
-too large, it can exceed the range of the A/D converter, resulting in clipping, distortion of the signal, and
-less reliable demodulation.  The warning level is overly cautious.  The input level can go much higher
-before it reaches the A/D range limit.
+It's only a potential problem when using the analog input of a sound card.  If the analog audio input is too large, it can exceed the range of the A/D converter, resulting in clipping, distortion of the signal, and less reliable demodulation.  The warning level is overly cautious.  The input level can go much higher before it reaches the A/D range limit.
 
-In this case, where 16 bit digital audio is going from one application to another, there is no danger of
-overflowing the signal range.
+In this case, where 16 bit digital audio is going from one application to another, there is no danger of overflowing the signal range.
 
 I found this to work well for 9600 baud.
 
+```
 rtl_fm –p 62 -f 144.99M -o 4 -s 48000 | direwolf -c sdr.conf -r 48000 -B 9600 –
+```
 
-Page 57
+The default 24000 sample rate is too low for reliable 9600 baud operation so we want to increase it to 48000 or maybe even a little higher.  Obviously, both applications need to use the same audio sample rate.   Results seemed to be better with the "-o 4" option but it wasn't a very scientific test.
 
+I would like to hear from anyone who has done experimentation with different sampling options and came up with something that works better.
 
+The companion document,  Raspberry-Pi-SDR-IGate.pdf , goes into more detail about the frequency error for the cheaper devices and how to deal with it.  Most of the information applies to other Linux systems, not just the Raspberry Pi.
 
+#### SDR#
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The default 24000 sample rate is too low for reliable 9600 baud operation so we want to increase it to
-48000 or maybe even a little higher.  Obviously, both applications need to use the same audio sample
-rate.   Results seemed to be better with the "-o 4" option but it wasn't a very scientific test.
-
-I would like to hear from anyone who has done experimentation with different sampling options and
-came up with something that works better.
-
-The companion document,  Raspberry-Pi-SDR-IGate.pdf , goes into more detail about the frequency
-error for the cheaper devices and how to deal with it.  Most of the information applies to other Linux
-systems, not just the Raspberry Pi.
-
-#### 9.1.6.3  SDR#
-
-The SDR# website doesn't seem to have any documentation on how to use the software.  They just
-point to a Google search:
-
-http://www.google.com/search?q=sdrsharp+tutorial
+The SDR# website doesn't seem to have any documentation on how to use the software.  They just point to a Google search: <http://www.google.com/search?q=sdrsharp+tutorial>
 
 Here are some other good locations to help you get started.
 
-http://www.atouk.com/SDRSharpQuickStart.html
-http://www.qsl.net/yo4tnv/docs/SDRSharp.pdf
-https://learn.adafruit.com/getting-started-with-rtl-sdr-and-sdr-sharp/sdr-number-fm-radio
+- <http://www.atouk.com/SDRSharpQuickStart.html>
+- <http://www.qsl.net/yo4tnv/docs/SDRSharp.pdf>
+- <https://learn.adafruit.com/getting-started-with-rtl-sdr-and-sdr-sharp/sdr-number-fm-radio>
 
 Essential settings:
 
-Frequency:
+- **Frequency**:
 
-Set to local APRS frequency.  Clicking on the upper half of a digit increases it.  On the
-lower half decreases it.
+  Set to local APRS frequency.  Clicking on the upper half of a digit increases it.  On the lower half decreases it.
 
-Source:
+- **Source**:
 
-RTL-SDR  (or other for your hardware)
+  RTL-SDR  (or other for your hardware)
 
-Radio:
+- **Radio**:
 
-NFM.  This defaults to a bandwidth of 8 kHz which would be appropriate for commercial
-/ public service analog voice with 2.5 kHz deviation.   It did work with a very strong
-signal, but this is probably too narrow for best results.  We are dealing with a peak
-deviation up to ± 5 kHz and the cheap devices are not real accurate about the
-frequency.   You might want to start off with 15,000 here but I'm no expert.  You
-definitely don't want WFM, which is for broadcast FM.  This has a 180 kHz bandwidth
-for 200 kHz channel spacing.
+  NFM.  This defaults to a bandwidth of 8 kHz which would be appropriate for commercial / public service analog voice with 2.5 kHz deviation.   It did work with a very strong signal, but this is probably too narrow for best results.  We are dealing with a peak deviation up to ± 5 kHz and the cheap devices are not real accurate about the frequency.   You might want to start off with 15,000 here but I'm no expert.  You definitely don't want WFM, which is for broadcast FM.  This has a 180 kHz bandwidth for 200 kHz channel spacing.
 
-Audio:
+- **Audio**:
 
-Note that the sample rate is 48,000 per second.  It is grayed out and we can't change it.
-This will be important later.  Set output to speakers for now.  We will change this later.
+  Note that the sample rate is 48,000 per second.  It is grayed out and we can't change it. This will be important later.  Set output to speakers for now.  We will change this later.
 
-Start button:
+- **Start button**:
 
-In the upper left is a triangle pointing to the right.  Click to start.
+  In the upper left is a triangle pointing to the right.  Click to start.
 
-First verify that you can hear the desired signal through the speaker.    Check the frequency calibration
-against a signal of known frequency.  My cheap RTL-SDR dongle was off by 64 ppm which is more than 9
-kHz on the 2 meter band.
+First verify that you can hear the desired signal through the speaker.    Check the frequency calibration against a signal of known frequency.  My cheap RTL-SDR dongle was off by 64 ppm which is more than 9 kHz on the 2 meter band.
 
-Page 58
+When you receive an APRS signal, it should look something like this:
 
+<!-- image missing -->
 
+The side lobes seem to be an artifact from the SDR receiver, not a dirty transmitter.  The same thing is seen with a much different transmitter.
 
+How can we send the received audio to another application instead of the speaker?   You could install a second sound card and connect the "line out" from the first to the "line in" of the second.   There is another way.  Install a "virtual audio cable" which is a pair of imaginary audio devices connected to each other without any hardware in the middle.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-When you receive an APRS signal, it should look something like this:
-
-The side lobes seem to be an artifact from the SDR receiver, not a dirty transmitter.  The same thing is
-seen with a much different transmitter.
-
-How can we send the received audio to another application instead of the speaker?   You could install a
-second sound card and connect the "line out" from the first to the "line in" of the second.   There is
-another way.  Install a "virtual audio cable" which is a pair of imaginary audio devices connected to each
-other without any hardware in the middle.
-
-Install VB-CABLE Driver from  https://www.vb-audio.com/Cable/index.htm   and reboot.
-Nothing shows up under the Programs menu so don't worry when you don't see anything new there.
+Install VB-CABLE Driver from  https://www.vb-audio.com/Cable/index.htm   and reboot. Nothing shows up under the Programs menu so don't worry when you don't see anything new there.
 
 If SDR# is currently receiving, you will need to click the pause button
 
+<!-- image missing -->
+
 Instead of using the default output, select the new "CABLE Input (VB-Audio Virtual C" instead.
+
+<!-- image missing -->
 
 before changing configuration.
 
-Page 59
+Let's test what we have so far.  In the Task Bar notification area (usually bottom right corner) right click on the speaker icon and pick Recording Devices from the pop up menu.
 
+<!-- image missing -->
 
+You should see CABLE Output and the level indicator on the right should show some activity.  Select it and click the Properties button.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Let's test what we have so far.  In the Task Bar notification area (usually bottom right corner) right click
-on the speaker icon and pick Recording Devices from the pop up menu.
-
-You should see CABLE Output and the level indicator on the right should show some activity.  Select it
-and click the Properties button.
+<!-- image missing -->
 
 Pick the Listen tab.
 
-Page 60
+<!-- image missing -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Check the "Listen to this device" box and Apply.     You should hear audio from SDR# through the
-speaker.  Leave it on for now during the testing.  You might want to turn it off again after it is all
-working.
+Check the "Listen to this device" box and Apply.     You should hear audio from SDR# through the speaker.  Leave it on for now during the testing.  You might want to turn it off again after it is all working.
 
 If you look at the CABLE device Advanced properties,
 
-you will probably find that it says 44100 Hz sample rate.  We are using 48000 but this doesn't seem to
-cause a problem.  I don't know if it is performing rate conversions or just pushing the bytes through and
-not caring.
+<!-- image missing -->
 
-Page 61
+you will probably find that it says 44100 Hz sample rate.  We are using 48000 but this doesn't seem to cause a problem.  I don't know if it is performing rate conversions or just pushing the bytes through and not caring.
 
+I found the mismatch to be disturbing and changed it to different values for sample rate, bits per sample, and number of channels.  It didn't seem to make any difference.  Based on the evidence, this setting seems to be ignored and the bytes just get pushed through.   It wouldn't hurt to set it to this just so there is no question:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-I found the mismatch to be disturbing and changed it to different values for sample rate, bits per
-sample, and number of channels.  It didn't seem to make any difference.  Based on the evidence, this
-setting seems to be ignored and the bytes just get pushed through.   It wouldn't hurt to set it to this just
-so there is no question:
-
+```
 1 channel, 16 bit, 48000 Hz (DVD Quality)
+```
 
-It is important that the applications producing and consuming the audio stream agree.  The delivery
-service doesn't seem to care.
+It is important that the applications producing and consuming the audio stream agree.  The delivery service doesn't seem to care.
 
 Put this near the top of your direwolf.conf file and remove any others that would conflict with them.
 
+```
 ADEVICE CABLE 0
 ARATE 48000
+```
 
 When you start up Dire Wolf, you should see something like this:
 
+```
 Reading config file direwolf.conf
 Available audio input devices for receive (*=selected):
   0: Microphone (Realtek High Defini
@@ -2394,15 +1944,18 @@ Available audio output devices for transmit (*=selected):
   5: Realtek Digital Output (Realtek
 Channel 0: 1200 baud, AFSK 1200 & 2200 Hz, E+, 48000 sample rate.
 Note: PTT not configured for channel 0. (Ignore this if using VOX.)
+```
 
+<!-- TODO -->
 The lines of interest have been highlighted in red.
 
-  The audio input is from the CABLE output device.
-  The sample rate matches the value seen in SDR#.
+- The audio input is from the CABLE output device.
+- The sample rate matches the value seen in SDR#.
 
 You should now be able to decode the packets you hear.
 
-#### 9.1.6.4  Gnu Radio – multiple simultaneous channels
+<!-- marker -->
+#### Gnu Radio – multiple simultaneous channels
 
 Here is a great tip from the forum, posted by N6BA.   Thanks, Jeff!!!
 
@@ -4124,15 +3677,15 @@ Time in ISO format.
 Source address – Generally ham callsign.
 Station heard – Either source or digipeater.
 
--  Radio channel .
--  Unix time as integer.
+- Radio channel .
+- Unix time as integer.
 -
 -
 -
--  Audio level – Useful  to find improperly adjusted transmit audio levels.
+- Audio level – Useful  to find improperly adjusted transmit audio levels.
 -
--  DTI – Data Type Indicator – First character of the Information field.
--  Name for Object or Item.
+- DTI – Data Type Indicator – First character of the Information field.
+- Name for Object or Item.
 -
 Symbol
 -
@@ -4141,10 +3694,10 @@ Latitude
 Longitude
 -
 Speed
--  Course
--  Altitude
+- Course
+- Altitude
 -
--  Offset
+- Offset
 -
 Tone
 -
@@ -4153,7 +3706,7 @@ System – Software which generated the frame.
 Status
 -
 Telemetry
--  Comment
+- Comment
 
 Frequency
 
@@ -5816,18 +5369,18 @@ h
 n
 w
 
--   Position
--   Object
--   Item
--   Message
--   Query
--   station Capabilities
--   Status
--   Telemetry
--   User-defined
--   third party Header
--   NWS format
--   Weather
+-  Position
+-  Object
+-  Item
+-  Message
+-  Query
+-  station Capabilities
+-  Status
+-  Telemetry
+-  User-defined
+-  third party Header
+-  NWS format
+-  Weather
 
 !  /  =  @  ‘  `
 ;
@@ -10619,8 +10172,8 @@ generate the scrambled signals commonly used for 9600 baud operation.
 
 People often ask:
 
--  How can I transmit arbitrary frames at any time?
--  How can I feed received frames into another application?
+- How can I transmit arbitrary frames at any time?
+- How can I feed received frames into another application?
 
 Obviously, we have both the KISS and AGW interfaces used by many applications.  However, there is a
 significant amount of effort to develop the client application side of these interfaces.  "kissutil" provides
